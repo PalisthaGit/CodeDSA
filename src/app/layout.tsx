@@ -1,0 +1,70 @@
+import type { Metadata, Viewport } from "next";
+import { Patrick_Hand } from "next/font/google";
+import "./globals.css";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+
+const patrickHand = Patrick_Hand({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-patrick-hand",
+  display: "swap",
+});
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://dsanotes.com"),
+  title: "DSANotes — Learn DSA step by step, for free",
+  description:
+    "Learn data structures and algorithms step by step. Clear explanations, interactive visualizers, and a hand-holding approach until you truly get it. Free forever.",
+  keywords: [
+    "DSA",
+    "data structures",
+    "algorithms",
+    "learn DSA",
+    "DSA visualizer",
+    "free DSA course",
+    "beginner DSA",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "DSANotes — Learn DSA step by step, for free",
+    description:
+      "Learn data structures and algorithms step by step. Clear explanations, interactive visualizers, and a hand-holding approach until you truly get it. Free forever.",
+    type: "website",
+    url: "https://dsanotes.com",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DSANotes — Learn DSA step by step, for free",
+    description:
+      "Learn data structures and algorithms step by step. Clear explanations, interactive visualizers, and a hand-holding approach until you truly get it. Free forever.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" className={patrickHand.variable}>
+      {/* Google Analytics placeholder */}
+      <body className="min-h-screen flex flex-col bg-background text-text-primary">
+        <Navbar />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}

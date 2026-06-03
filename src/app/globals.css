@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #FEFEFE;
+  --color-pink-light: #FFD6E3;
+  --color-pink-border: #F4A7B9;
+  --color-pink-section: #FFF0F5;
+  --color-blue-light: #C8E8FF;
+  --color-blue-border: #90C8F0;
+  --color-blue-section: #EFF8FF;
+  --color-purple-light: #F5F0FF;
+  --color-purple-border: #EDE8F8;
+  --color-purple-text: #B8A0E8;
+  --color-yellow-light: #FFF9C4;
+  --color-yellow-border: #F0D060;
+  --color-yellow-text: #5A5020;
+  --color-green-light: #C8F0D8;
+  --color-green-border: #80D0A0;
+  --color-text-primary: #2D2D2D;
+  --color-text-secondary: #888888;
+  --color-text-muted: #CCCCCC;
+  --color-footer-bg: #FFF0F5;
+
+  --radius-notebook: 8px;
+  --radius-card: 12px;
+}
+
+*,
+html,
+body {
+  box-sizing: border-box;
+  font-family: var(--font-patrick-hand), cursive;
+  letter-spacing: 0.05em;
+}
+
+body {
+  background: #FEFEFE;
+  color: #2D2D2D;
+}
+
+.grid-hint {
+  background-image:
+    linear-gradient(rgba(180, 210, 255, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(180, 210, 255, 0.09) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
