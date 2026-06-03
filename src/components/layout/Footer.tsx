@@ -1,18 +1,14 @@
+import styles from './Footer.module.css'
+
 const FOOTER_LINKS = ['About', 'Contact', 'Privacy policy', 'Terms of use']
 
 export function Footer() {
   return (
-    <footer
-      style={{
-        background: '#FFF0F5',
-        borderTop: '1.5px solid #F4A7B9',
-        padding: '24px 32px',
-      }}
-    >
+    <footer className={styles.footer}>
       <div className="flex flex-col items-center gap-3 md:flex-row md:justify-between">
-        <span className="text-[22px]">
-          <span style={{ color: '#2D2D2D' }}>DSA</span>
-          <span style={{ color: '#90C8F0' }}>Notes</span>
+        <span className={styles.logoText}>
+          <span className={styles.logoDsa}>DSA</span>
+          <span className={styles.logoNotes}>Notes</span>
         </span>
 
         <div className="flex flex-wrap items-center justify-center gap-4">

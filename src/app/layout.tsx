@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Patrick_Hand } from "next/font/google";
+import { Patrick_Hand, Pacifico } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -8,6 +8,13 @@ const patrickHand = Patrick_Hand({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-patrick-hand",
+  display: "swap",
+});
+
+const pacifico = Pacifico({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-pacifico",
   display: "swap",
 });
 
@@ -58,8 +65,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={patrickHand.variable}>
-      {/* Google Analytics placeholder */}
+    <html lang="en" className={`${patrickHand.variable} ${pacifico.variable}`}>
       <body className="min-h-screen flex flex-col bg-background text-text-primary">
         <Navbar />
         <main className="flex-1">{children}</main>

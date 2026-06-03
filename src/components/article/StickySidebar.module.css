@@ -1,0 +1,56 @@
+.sticky {
+  position: sticky;
+  top: 96px;
+}
+
+.note {
+  background: var(--color-yellow-light);
+  border: 2px solid var(--color-yellow-border);
+  border-radius: 8px;
+  padding: 12px;
+  transform: rotate(0.5deg);
+  opacity: 0.9;
+  width: 160px;
+}
+
+.noteLabel {
+  font-family: var(--font-patrick-hand), cursive;
+  font-size: 11px;
+  color: var(--color-yellow-text);
+  margin: 0 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed var(--color-yellow-border);
+}
+
+.sectionList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sectionLink {
+  display: flex;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--color-sticky-link);
+  text-decoration: none;
+  line-height: 1.4;
+  transition: color 0.15s;
+}
+
+.sectionLink:hover {
+  color: var(--color-yellow-text);
+}
+
+.sectionLinkActive {
+  color: var(--color-yellow-text);
+  font-weight: 700;
+}
+
+.dash {
+  flex-shrink: 0;
+  opacity: 0.6;
+}

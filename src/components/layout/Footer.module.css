@@ -1,0 +1,17 @@
+.footer {
+  background: var(--color-footer-bg);
+  border-top: 1.5px solid var(--color-pink-border);
+  padding: 24px 32px;
+}
+
+.logoText {
+  font-size: 22px;
+}
+
+.logoDsa {
+  color: var(--color-text-primary);
+}
+
+.logoNotes {
+  color: var(--color-blue-border);
+}

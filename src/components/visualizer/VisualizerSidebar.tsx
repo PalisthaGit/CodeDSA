@@ -1,32 +1,39 @@
-import type { VisualizerItem } from "@/types";
-import { cn } from "@/lib/utils";
+import type { VisualizerCategory } from '@/lib/visualizers'
+import styles from './VisualizerSidebar.module.css'
 
 interface VisualizerSidebarProps {
-  items: VisualizerItem[];
+  categories: VisualizerCategory[]
+  activeId: string
+  onSelect: (id: string) => void
 }
 
-export function VisualizerSidebar({ items }: VisualizerSidebarProps) {
+export function VisualizerSidebar({ categories, activeId, onSelect }: VisualizerSidebarProps) {
   return (
-    <div className="rounded-card border border-purple-border bg-purple-light p-4">
-      <p className="mb-3 text-xs uppercase tracking-widest text-text-muted">
-        State
-      </p>
-      <ul className="space-y-1.5">
-        {items.map((item) => (
-          <li
-            key={item.id}
-            className={cn(
-              "flex items-center justify-between rounded-notebook px-3 py-1.5 text-sm transition-colors",
-              item.active && "bg-blue-light border border-blue-border",
-              item.highlighted && "bg-yellow-light border border-yellow-border",
-              !item.active && !item.highlighted && "bg-background border border-text-muted/20"
-            )}
-          >
-            <span className="text-text-primary">{item.label}</span>
-            <span className="text-text-secondary">{item.value}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+    <nav className={styles.sidebar}>
+      <p className={styles.sidebarLabel}>Visualizers</p>
+      {categories.map((cat, index) => (
+        <div key={cat.title} className={styles.category}>
+          {index > 0 && <div className={styles.divider} aria-hidden="true" />}
+          <p className={styles.categoryTitle}>{cat.title}</p>
+          <ul className={styles.itemList}>
+            {cat.items.map(item => {
+              const isActive = item.id === activeId
+              return (
+                <li key={item.id}>
+                  <button
+                    type="button"
+                    className={`${styles.item} ${isActive ? styles.itemActive : ''}`}
+                    onClick={() => onSelect(item.id)}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    {item.title}
+                  </button>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      ))}
+    </nav>
+  )
 }

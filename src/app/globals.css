@@ -20,6 +20,18 @@
   --color-text-secondary: #888888;
   --color-text-muted: #CCCCCC;
   --color-footer-bg: #FFF0F5;
+  --color-sidebar-bg: #F9F7FF;
+  --color-pink-active: #FFE4ED;
+  --color-article-link-text: #7A6010;
+  --color-code-bg: #F8F6FF;
+  --color-code-border: #E0D8FF;
+  --color-code-text: #5040A0;
+  --color-purple-bar: #E8C8FF;
+  --color-indicator-active: #5B9BD5;
+  --color-info-yellow-label: #C0A020;
+  --color-info-pink-label: #C06080;
+  --color-info-blue-label: #4A90C0;
+  --color-sticky-link: #7A7020;
 
   --radius-notebook: 8px;
   --radius-card: 12px;
@@ -34,8 +46,8 @@ body {
 }
 
 body {
-  background: #FEFEFE;
-  color: #2D2D2D;
+  background: var(--color-background);
+  color: var(--color-text-primary);
 }
 
 .grid-hint {
