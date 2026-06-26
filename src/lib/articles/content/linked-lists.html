@@ -1,0 +1,307 @@
+<p class="articleP">Before you start, try using this visualizer to understand how a linked list works.</p>
+<div data-visualizer="linked-list"></div>
+<p class="articleP">Now let us learn in detail what a linked list is.</p>
+
+<h2 id="what-is-a-linked-list" class="articleH2">What is a linked list?</h2>
+<p class="articleP">A linked list is a collection of nodes. Each node has two things:</p>
+<ul style="font-size: 19px; line-height: 1.85; color: var(--color-text-primary); margin: 0 0 22px; padding-left: 28px;">
+  <li>The data — the value you want to store</li>
+  <li>A pointer — where the next node is</li>
+</ul>
+<p class="articleP">You create a node, and when you need another one you just create it and connect them together.</p>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<p class="articleP">With arrays you need to decide the size at the beginning of the program. With a linked list you do not have to decide anything upfront. You just add a new node whenever you need one and the linked list keeps growing.</p>
+<p class="articleP">Now let us see how to create a linked list.</p>
+
+<h2 id="how-to-create-a-node" class="articleH2">How to create a node</h2>
+<p class="articleP">Give this visualizer a try before reading.</p>
+<div data-visualizer="linked-list-create"></div>
+<p class="articleP">You know a node consists of two things — data and the address of the next node. For that let us use a struct to define it. A struct is just a way to group related variables together under one name.</p>
+<pre class="codeBlock"><code>struct Node {
+    int data;
+    Node* next;
+};</code></pre>
+<p class="articleP"><code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">data</code> holds the value you want to store. <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">next</code> holds the address of the next node.</p>
+<div class="infoBox infoBoxYellow">
+  <span class="infoBoxLabel">Note</span>
+  <div class="infoBoxText">We write <code style="font-family: 'Courier New', monospace; color: var(--color-code-text);">Node*</code> and not just <code style="font-family: 'Courier New', monospace; color: var(--color-code-text);">Node</code> because <code style="font-family: 'Courier New', monospace; color: var(--color-code-text);">next</code> is a pointer. A pointer does not hold the value itself, it holds the address of where that value lives in memory.</div>
+</div>
+<p class="articleP">Now let us create a node:</p>
+<pre class="codeBlock"><code>Node* p = new Node;</code></pre>
+<p class="articleP"><code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">new Node</code> creates the node in memory and <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">p</code> holds the address of that node.</p>
+<p class="articleP">Now let us add data to it and set the next pointer:</p>
+<pre class="codeBlock"><code>p->data = 10;
+p->next = nullptr;</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<p class="articleP"><code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">p-&gt;data = 10</code> stores the value 10 in the node. <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">p-&gt;next = nullptr</code> means this node is not pointing to any next node yet. <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">nullptr</code> just means nothing.</p>
+<p class="articleP">Here is how creating a node looks:</p>
+<pre class="codeBlock"><code>struct Node {
+    int data;
+    Node* next;
+};
+
+Node* p = new Node;
+p->data = 10;
+p->next = nullptr;</code></pre>
+
+<h2 id="adding-a-node" class="articleH2">Adding a node</h2>
+<p class="articleP">Play around with this visualizer first.</p>
+<div data-visualizer="linked-list-add"></div>
+<p class="articleP">We already know how to create a node. Let us create our first node:</p>
+<pre class="codeBlock"><code>Node* node1 = new Node;
+node1->data = 10;
+node1->next = nullptr;</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<p class="articleP">Now let us create one more node:</p>
+<pre class="codeBlock"><code>Node* node2 = new Node;
+node2->data = 20;
+node2->next = nullptr;</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<p class="articleP">Right now these two nodes exist in memory but they are not connected. To connect them we just store the address of node2 inside the next part of node1:</p>
+<pre class="codeBlock"><code>node1->next = node2;</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<p class="articleP">Now node1 knows where node2 is. That is how you connect two nodes.</p>
+<p class="articleP">Here is how adding and connecting two nodes looks:</p>
+<pre class="codeBlock"><code>Node* node1 = new Node;
+node1->data = 10;
+node1->next = nullptr;
+
+Node* node2 = new Node;
+node2->data = 20;
+node2->next = nullptr;
+
+node1->next = node2;</code></pre>
+
+<h2 id="head-and-tail" class="articleH2">Head and tail</h2>
+<p class="articleP">Every linked list has a starting point. That starting point is called the <strong>head</strong>. The head is just a pointer that points to the first node in the list.</p>
+<p class="articleP">The last node in the list is called the <strong>tail</strong>. Since there is no node after the tail, its <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">next</code> is set to <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">nullptr</code>.</p>
+<pre class="codeBlock"><code>Node* head = node1;</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<p class="articleP"><code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">head</code> points to node1. node1 points to node2. node2 points to <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">nullptr</code> because it is the last node.</p>
+<div class="infoBox infoBoxPink">
+  <span class="infoBoxLabel">Important</span>
+  <div class="infoBoxText">If you ever lose the head pointer you lose the entire list. There is no way to get back to the beginning. So always keep track of <code style="font-family: 'Courier New', monospace; color: var(--color-code-text);">head</code>.</div>
+</div>
+
+<h2 id="traversing-a-linked-list" class="articleH2">Traversing a linked list</h2>
+<p class="articleP">Before we start, try this visualizer to see how traversal works.</p>
+<div data-visualizer="linked-list-traverse"></div>
+<p class="articleP">Traversing means going through every node in the list one by one. You have to start from the head node and go through each node one by one until you reach the end.</p>
+<p class="articleP">To traverse we use a pointer called <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">current</code> and start it at the head:</p>
+<pre class="codeBlock"><code>Node* current = head;</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<p class="articleP">Now we will print the current node:</p>
+<pre class="codeBlock"><code>cout &lt;&lt; current->data &lt;&lt; "\n";</code></pre>
+<p class="articleP">And then <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">current</code> will move to the next node:</p>
+<pre class="codeBlock"><code>current = current->next;</code></pre>
+<p class="articleP">We keep doing this until <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">current</code> does not point to anything, which means we have reached the end of the list:</p>
+<pre class="codeBlock"><code>while (current != nullptr) {
+    cout &lt;&lt; current->data &lt;&lt; "\n";
+    current = current->next;
+}</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<div class="infoBox infoBoxBlue">
+  <span class="infoBoxLabel">Time complexity</span>
+  <div class="infoBoxText">If there are n nodes it takes n steps. So the time complexity is O(n).</div>
+</div>
+
+<h2 id="inserting-a-node" class="articleH2">Inserting a node</h2>
+
+<h3 id="at-the-beginning" style="font-family: var(--font-patrick-hand), cursive; font-size: 24px; font-weight: 400; letter-spacing: 0.05em; color: var(--color-text-primary); margin: 28px 0 12px;">At the beginning</h3>
+<p class="articleP">Play with this visualizer to see how inserting at the beginning works.</p>
+<div data-visualizer="linked-list-insert-begin"></div>
+<p class="articleP">To insert a node at the beginning let us first create a new node:</p>
+<pre class="codeBlock"><code>Node* newNode = new Node;
+newNode->data = 5;
+newNode->next = nullptr;</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<p class="articleP">Now we will add this to the beginning of the list. For that we simply make the new node point to the current head. This way the new node knows where the rest of the list is:</p>
+<pre class="codeBlock"><code>newNode->next = head;</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<p class="articleP">Now since the first node has changed we just make <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">head</code> point to the new node:</p>
+<pre class="codeBlock"><code>head = newNode;</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<div class="infoBox infoBoxPink">
+  <span class="infoBoxLabel">Important</span>
+  <div class="infoBoxText">Always point <code style="font-family: 'Courier New', monospace; color: var(--color-code-text);">newNode</code> to <code style="font-family: 'Courier New', monospace; color: var(--color-code-text);">head</code> first before updating <code style="font-family: 'Courier New', monospace; color: var(--color-code-text);">head</code>. If you do it the other way you will lose the entire list.</div>
+</div>
+<p class="articleP">Here is how inserting at the beginning looks:</p>
+<pre class="codeBlock"><code>Node* newNode = new Node;
+newNode->data = 5;
+newNode->next = head;
+head = newNode;</code></pre>
+<div class="infoBox infoBoxBlue">
+  <span class="infoBoxLabel">Time complexity</span>
+  <div class="infoBoxText">No matter how many nodes are in the list this always takes one step. So the time complexity is O(1).</div>
+</div>
+
+<h3 id="at-a-specific-position" style="font-family: var(--font-patrick-hand), cursive; font-size: 24px; font-weight: 400; letter-spacing: 0.05em; color: var(--color-text-primary); margin: 28px 0 12px;">At a specific position</h3>
+<p class="articleP">Try this visualizer before reading.</p>
+<div data-visualizer="linked-list-insert-pos"></div>
+<p class="articleP">To insert a node at a specific position we first need to walk to the node just before where we want to insert. Let us say we want to insert after the second node.</p>
+<p class="articleP">First we create a new node:</p>
+<pre class="codeBlock"><code>Node* newNode = new Node;
+newNode->data = 15;
+newNode->next = nullptr;</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<p class="articleP">Now we need to reach the second node. We are just traversing the list but stopping there:</p>
+<pre class="codeBlock"><code>Node* current = head;
+for (int i = 0; i &lt; 2; i++) {
+    current = current->next;
+}</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<p class="articleP">Now <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">current</code> is at the second node. We first point <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">newNode</code> to <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">current-&gt;next</code> so the new node knows where the rest of the list is:</p>
+<pre class="codeBlock"><code>newNode->next = current->next;</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<p class="articleP">Now we make <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">current</code> point to the new node:</p>
+<pre class="codeBlock"><code>current->next = newNode;</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<div class="infoBox infoBoxPink">
+  <span class="infoBoxLabel">Important</span>
+  <div class="infoBoxText">Always point <code style="font-family: 'Courier New', monospace; color: var(--color-code-text);">newNode</code> to <code style="font-family: 'Courier New', monospace; color: var(--color-code-text);">current-&gt;next</code> first before updating <code style="font-family: 'Courier New', monospace; color: var(--color-code-text);">current-&gt;next</code>. If you do it the other way you will lose the rest of the list.</div>
+</div>
+<p class="articleP">Here is how inserting at a specific position looks:</p>
+<pre class="codeBlock"><code>Node* newNode = new Node;
+newNode->data = 15;
+newNode->next = current->next;
+current->next = newNode;</code></pre>
+<div class="infoBox infoBoxBlue">
+  <span class="infoBoxLabel">Time complexity</span>
+  <div class="infoBoxText">We have to walk to the position first. If there are n nodes it takes n steps. So the time complexity is O(n).</div>
+</div>
+
+<h2 id="removing-a-node" class="articleH2">Removing a node</h2>
+
+<h3 id="from-the-beginning" style="font-family: var(--font-patrick-hand), cursive; font-size: 24px; font-weight: 400; letter-spacing: 0.05em; color: var(--color-text-primary); margin: 28px 0 12px;">From the beginning</h3>
+<p class="articleP">Give this visualizer a try before we start.</p>
+<div data-visualizer="linked-list-remove-begin"></div>
+<p class="articleP">To remove the first node we just make <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">head</code> point to the second node:</p>
+<pre class="codeBlock"><code>head = head->next;</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<p class="articleP">That is it. The first node is now disconnected from the list and <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">head</code> is pointing to the second node which is now the new first node.</p>
+<div class="infoBox infoBoxBlue">
+  <span class="infoBoxLabel">Time complexity</span>
+  <div class="infoBoxText">No matter how many nodes are in the list this always takes one step. So the time complexity is O(1).</div>
+</div>
+
+<h3 id="from-the-end" style="font-family: var(--font-patrick-hand), cursive; font-size: 24px; font-weight: 400; letter-spacing: 0.05em; color: var(--color-text-primary); margin: 28px 0 12px;">From the end</h3>
+<p class="articleP">Play around with this visualizer first.</p>
+<div data-visualizer="linked-list-remove-end"></div>
+<p class="articleP">To remove the last node we need to walk to the second last node and set its <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">next</code> to <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">nullptr</code>.</p>
+<p class="articleP">First we start at the head and walk until we reach the second last node:</p>
+<pre class="codeBlock"><code>Node* current = head;
+while (current->next->next != nullptr) {
+    current = current->next;
+}</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<p class="articleP">Now <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">current</code> is at the second last node. We just set its <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">next</code> to <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">nullptr</code>:</p>
+<pre class="codeBlock"><code>current->next = nullptr;</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<p class="articleP">The last node is now disconnected from the list.</p>
+<div class="infoBox infoBoxBlue">
+  <span class="infoBoxLabel">Time complexity</span>
+  <div class="infoBoxText">We have to walk to the end of the list. If there are n nodes it takes n steps. So the time complexity is O(n).</div>
+</div>
+
+<h3 id="from-a-specific-position" style="font-family: var(--font-patrick-hand), cursive; font-size: 24px; font-weight: 400; letter-spacing: 0.05em; color: var(--color-text-primary); margin: 28px 0 12px;">From a specific position</h3>
+<p class="articleP">Try this visualizer to see how it works before reading.</p>
+<div data-visualizer="linked-list-remove-pos"></div>
+<p class="articleP">To remove a node from a specific position we need to walk to the node just before it and make it skip over the node we want to remove.</p>
+<p class="articleP">Let us say we want to remove the third node. We first walk to the second node:</p>
+<pre class="codeBlock"><code>Node* current = head;
+for (int i = 0; i &lt; 2; i++) {
+    current = current->next;
+}</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<p class="articleP">Now <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">current</code> is at the second node. We just make <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">current</code> point to the node after the one we want to remove:</p>
+<pre class="codeBlock"><code>current->next = current->next->next;</code></pre>
+<div style="border: 2px dashed var(--color-purple-border); border-radius: 8px; padding: 40px 20px; text-align: center; margin: 0 0 22px; color: var(--color-text-muted); font-size: 13px; letter-spacing: 0.02em;">Image coming soon</div>
+<p class="articleP">The third node is now disconnected from the list. Nobody is pointing to it anymore.</p>
+<div class="infoBox infoBoxBlue">
+  <span class="infoBoxLabel">Time complexity</span>
+  <div class="infoBoxText">We have to walk to the position first. If there are n nodes it takes n steps. So the time complexity is O(n).</div>
+</div>
+
+<h2 id="complete-linked-list-code" class="articleH2">Complete linked list code</h2>
+<pre class="codeBlock"><code>#include &lt;iostream&gt;
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void insertAtBeginning(Node*& head, int value) {
+    Node* newNode = new Node;
+    newNode->data = value;
+    newNode->next = head;
+    head = newNode;
+}
+
+void insertAtPosition(Node* head, int value, int position) {
+    Node* newNode = new Node;
+    newNode->data = value;
+    Node* current = head;
+    for (int i = 0; i &lt; position - 1; i++) {
+        current = current->next;
+    }
+    newNode->next = current->next;
+    current->next = newNode;
+}
+
+void removeFromBeginning(Node*& head) {
+    head = head->next;
+}
+
+void removeFromEnd(Node* head) {
+    Node* current = head;
+    while (current->next->next != nullptr) {
+        current = current->next;
+    }
+    current->next = nullptr;
+}
+
+void removeFromPosition(Node* head, int position) {
+    Node* current = head;
+    for (int i = 0; i &lt; position - 1; i++) {
+        current = current->next;
+    }
+    current->next = current->next->next;
+}
+
+void traverse(Node* head) {
+    Node* current = head;
+    while (current != nullptr) {
+        cout &lt;&lt; current->data &lt;&lt; "\n";
+        current = current->next;
+    }
+}
+
+int main() {
+    Node* node1 = new Node;
+    node1->data = 10;
+    node1->next = nullptr;
+
+    Node* node2 = new Node;
+    node2->data = 20;
+    node2->next = nullptr;
+
+    Node* node3 = new Node;
+    node3->data = 30;
+    node3->next = nullptr;
+
+    node1->next = node2;
+    node2->next = node3;
+
+    Node* head = node1;
+
+    insertAtBeginning(head, 5);
+    insertAtPosition(head, 15, 2);
+    removeFromBeginning(head);
+    removeFromEnd(head);
+    removeFromPosition(head, 2);
+
+    traverse(head);
+
+    return 0;
+}</code></pre>

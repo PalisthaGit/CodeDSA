@@ -3,6 +3,7 @@ import { Patrick_Hand, Pacifico } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { MobileSidebarProvider } from "@/lib/MobileSidebarContext";
 
 const patrickHand = Patrick_Hand({
   weight: "400",
@@ -67,8 +68,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${patrickHand.variable} ${pacifico.variable}`}>
       <body className="min-h-screen flex flex-col bg-background text-text-primary">
-        <Navbar />
-        <main className="flex-1">{children}</main>
+        <MobileSidebarProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+        </MobileSidebarProvider>
         <Footer />
       </body>
     </html>

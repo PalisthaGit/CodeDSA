@@ -1,5 +1,3 @@
-import styles from './InfoBox.module.css'
-
 type InfoBoxVariant = 'yellow' | 'pink' | 'blue'
 
 interface InfoBoxProps {
@@ -13,11 +11,17 @@ const LABELS: Record<InfoBoxVariant, string> = {
   blue: '📌 Remember this',
 }
 
+const CLASSES: Record<InfoBoxVariant, string> = {
+  yellow: 'infoBox infoBoxYellow',
+  pink: 'infoBox infoBoxPink',
+  blue: 'infoBox infoBoxBlue',
+}
+
 export function InfoBox({ variant, children }: InfoBoxProps) {
   return (
-    <div className={`${styles.infoBox} ${styles[variant]}`}>
-      <span className={styles.label}>{LABELS[variant]}</span>
-      <div className={styles.body}>{children}</div>
+    <div className={CLASSES[variant]}>
+      <span className="infoBoxLabel">{LABELS[variant]}</span>
+      <div className="infoBoxText">{children}</div>
     </div>
   )
 }

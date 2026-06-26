@@ -1,7 +1,6 @@
-@import "tailwindcss";
-
-@theme {
-  --color-background: #FEFEFE;
+:root {
+  --color-bg: #FEFEFE;
+  --color-white: #FFFFFF;
   --color-pink-light: #FFD6E3;
   --color-pink-border: #F4A7B9;
   --color-pink-section: #FFF0F5;
@@ -32,16 +31,6 @@
   --color-info-pink-label: #C06080;
   --color-info-blue-label: #4A90C0;
   --color-sticky-link: #7A7020;
-
   --radius-notebook: 8px;
   --radius-card: 12px;
 }
-
-@import '../styles/variables.css';
-@import '../styles/base.css';
-@import '../styles/components.css';
-@import '../styles/home.css';
-@import '../styles/article.css';
-@import '../styles/visualizer.css';
-@import '../styles/pages.css';
-@import '../styles/responsive.css';

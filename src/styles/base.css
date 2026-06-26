@@ -1,0 +1,32 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+* {
+  font-family: var(--font-patrick-hand), cursive;
+  letter-spacing: 0.05em;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+.gridHint {
+  background-image:
+    linear-gradient(rgba(180, 210, 255, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(180, 210, 255, 0.09) 1px, transparent 1px);
+  background-size: 32px 32px;
+}

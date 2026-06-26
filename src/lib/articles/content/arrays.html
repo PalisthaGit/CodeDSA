@@ -1,0 +1,390 @@
+<h2 id="before-anything" class="articleH2 articleH2First">Before anything, let me ask you something</h2>
+<p class="articleP">Before we learn about arrays, you can try using the visualizer to see how arrays work.</p>
+<div data-visualizer="all"></div>
+<p class="articleP">Let's learn arrays in a very simple way possible.</p>
+<p class="articleP">Think about going to school. Just you. You'd hop on your cycle and go.</p>
+<p class="articleP">Now imagine you and 40 friends are going together. You could each take your own cycle — 40 separate cycles, 40 separate trips. Or you could just take one bus.</p>
+<p class="articleP">Same idea in programming. If you have one value to store, you use a variable:</p>
+<pre class="codeBlock"><code>int var = 10;</code></pre>
+<p class="articleP">But if you have 10 different numbers to store? You could store them in 10 different variables. However you could also save them all in one variable — like taking a bus for 40 students instead of 40 separate cycles.</p>
+<p class="articleP">That one variable that holds everything together is called an array.</p>
+
+<h2 id="what-is-an-array" class="articleH2">What is an array?</h2>
+<p class="articleP">If you open your music app, what do you see? A playlist — songs stored in a row, one after another.</p>
+<div style="border: 1px solid var(--color-blue-border); border-radius: 8px; overflow: hidden; margin: 0 0 20px;">
+  <div style="background: var(--color-blue-light); padding: 8px 14px; font-size: 11px; letter-spacing: 0.08em; color: var(--color-info-blue-label);">PLAYLIST ARRAY</div>
+  <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+    <thead>
+      <tr style="background: var(--color-blue-section);">
+        <th style="width: 60px; padding: 8px 12px; text-align: center; border-bottom: 1px solid var(--color-blue-border); border-right: 1px solid var(--color-blue-border); font-weight: 600; color: var(--color-text-secondary);">index</th>
+        <th style="padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--color-blue-border); font-weight: 600; color: var(--color-text-secondary);">song</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 8px 12px; text-align: center; border-bottom: 1px solid var(--color-blue-section); border-right: 1px solid var(--color-blue-border); color: var(--color-info-blue-label); font-family: 'Courier New', monospace;">0</td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid var(--color-blue-section);">Blinding Lights — The Weeknd</td>
+      </tr>
+      <tr style="background: var(--color-blue-section);">
+        <td style="padding: 8px 12px; text-align: center; border-bottom: 1px solid var(--color-blue-border); border-right: 1px solid var(--color-blue-border); color: var(--color-info-blue-label); font-family: 'Courier New', monospace;">1</td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid var(--color-blue-border);">Levitating — Dua Lipa</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px; text-align: center; border-bottom: 1px solid var(--color-blue-section); border-right: 1px solid var(--color-blue-border); color: var(--color-info-blue-label); font-family: 'Courier New', monospace;">2</td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid var(--color-blue-section);">Stay — Kid LAROI</td>
+      </tr>
+      <tr style="background: var(--color-blue-section);">
+        <td style="padding: 8px 12px; text-align: center; border-bottom: 1px solid var(--color-blue-border); border-right: 1px solid var(--color-blue-border); color: var(--color-info-blue-label); font-family: 'Courier New', monospace;">3</td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid var(--color-blue-border);">Heat Waves — Glass Animals</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px; text-align: center; border-right: 1px solid var(--color-blue-border); color: var(--color-info-blue-label); font-family: 'Courier New', monospace;">4</td>
+        <td style="padding: 8px 12px;">Peaches — Justin Bieber</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<p class="articleP">That is an array. An array is a collection of items of the same type. Now let's see how to create one.</p>
+
+<h2 id="how-to-create-an-array" class="articleH2">How to create an array in C++?</h2>
+<p class="articleP">We create one like this:</p>
+<pre class="codeBlock"><code>datatype  arrayName[how many items]</code></pre>
+<p class="articleP">Let's create a playlist array:</p>
+<pre class="codeBlock"><code>string playlist[5] = {"Blinding Lights", "Levitating", "Stay", "Heat Waves", "Peaches"};</code></pre>
+<p class="articleP">This creates an array named <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">playlist</code> that stores strings and holds 5 of them. Let me break it down:</p>
+<dl style="margin: 0 0 20px; font-size: 14px; line-height: 1.7;">
+  <dt style="font-family: 'Courier New', monospace; color: var(--color-code-text); background: var(--color-code-bg); border: 1px solid var(--color-code-border); display: inline-block; padding: 1px 8px; border-radius: 4px; margin-top: 12px; margin-bottom: 4px;">string</dt>
+  <dd style="margin: 4px 0 8px 0; color: var(--color-text-primary); padding-left: 16px; border-left: 2px solid var(--color-purple-border);">The data type. We are storing song names — text — so we write <code style="font-family: 'Courier New', monospace; color: var(--color-code-text);">string</code>. Storing numbers? Write <code style="font-family: 'Courier New', monospace; color: var(--color-code-text);">int</code>.</dd>
+  <dt style="font-family: 'Courier New', monospace; color: var(--color-code-text); background: var(--color-code-bg); border: 1px solid var(--color-code-border); display: inline-block; padding: 1px 8px; border-radius: 4px; margin-top: 4px; margin-bottom: 4px;">playlist</dt>
+  <dd style="margin: 4px 0 8px 0; color: var(--color-text-primary); padding-left: 16px; border-left: 2px solid var(--color-purple-border);">The name of the array.</dd>
+  <dt style="font-family: 'Courier New', monospace; color: var(--color-code-text); background: var(--color-code-bg); border: 1px solid var(--color-code-border); display: inline-block; padding: 1px 8px; border-radius: 4px; margin-top: 4px; margin-bottom: 4px;">[5]</dt>
+  <dd style="margin: 4px 0 8px 0; color: var(--color-text-primary); padding-left: 16px; border-left: 2px solid var(--color-purple-border);">The <strong>size</strong> — total number of slots the computer reserves. This is fixed forever and cannot change.</dd>
+  <dt style="font-family: 'Courier New', monospace; color: var(--color-code-text); background: var(--color-code-bg); border: 1px solid var(--color-code-border); display: inline-block; padding: 1px 8px; border-radius: 4px; margin-top: 4px; margin-bottom: 4px;">{}</dt>
+  <dd style="margin: 4px 0 8px 0; color: var(--color-text-primary); padding-left: 16px; border-left: 2px solid var(--color-purple-border);">The songs we are adding. Each one goes into a slot, in order, left to right.</dd>
+</dl>
+<p class="articleP">Next, let's see how arrays are stored.</p>
+<div class="infoBox infoBoxYellow">
+  <span class="infoBoxLabel">Size vs Length</span>
+  <div class="infoBoxText"><strong>Size</strong> is the total number of slots the array has — decided when you create it, fixed forever. <strong>Length</strong> is how many of those slots are actually filled right now. An array with size 10 can have a length of 5 — 5 songs in it, 5 empty slots waiting.</div>
+</div>
+
+<h2 id="how-are-arrays-stored" class="articleH2">How are arrays stored in the computer?</h2>
+<p class="articleP">Think of your computer having this memory:</p>
+<pre class="codeBlock"><code>[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]</code></pre>
+<p class="articleP">Now, our array has a size of 5. So the computer searches for a place where 5 empty slots are available together. It finds one and stores all 5 songs there, like this:</p>
+<pre class="codeBlock"><code>[ ][ ][ ][Blinding Lights][Levitating][Stay][Heat Waves][Peaches][ ][ ][ ][ ]</code></pre>
+<p class="articleP">Now each slot has a number. That number is called an index. Five slots numbered 0 to 4. The first song is at index 0 — not 1.</p>
+<div style="display: flex; gap: 4px; margin: 0 0 20px; flex-wrap: wrap;">
+  <div style="border: 1.5px solid var(--color-blue-border); border-radius: 6px; padding: 10px 14px; text-align: center; background: var(--color-blue-section); flex: 1; min-width: 100px;">
+    <div style="font-size: 11px; color: var(--color-text-muted); margin-bottom: 6px; font-family: 'Courier New', monospace;">index 0</div>
+    <div style="font-size: 13px; color: var(--color-text-primary);">Blinding Lights</div>
+  </div>
+  <div style="border: 1.5px solid var(--color-blue-border); border-radius: 6px; padding: 10px 14px; text-align: center; background: var(--color-blue-section); flex: 1; min-width: 100px;">
+    <div style="font-size: 11px; color: var(--color-text-muted); margin-bottom: 6px; font-family: 'Courier New', monospace;">index 1</div>
+    <div style="font-size: 13px; color: var(--color-text-primary);">Levitating</div>
+  </div>
+  <div style="border: 1.5px solid var(--color-blue-border); border-radius: 6px; padding: 10px 14px; text-align: center; background: var(--color-blue-section); flex: 1; min-width: 100px;">
+    <div style="font-size: 11px; color: var(--color-text-muted); margin-bottom: 6px; font-family: 'Courier New', monospace;">index 2</div>
+    <div style="font-size: 13px; color: var(--color-text-primary);">Stay</div>
+  </div>
+  <div style="border: 1.5px solid var(--color-blue-border); border-radius: 6px; padding: 10px 14px; text-align: center; background: var(--color-blue-section); flex: 1; min-width: 100px;">
+    <div style="font-size: 11px; color: var(--color-text-muted); margin-bottom: 6px; font-family: 'Courier New', monospace;">index 3</div>
+    <div style="font-size: 13px; color: var(--color-text-primary);">Heat Waves</div>
+  </div>
+  <div style="border: 1.5px solid var(--color-blue-border); border-radius: 6px; padding: 10px 14px; text-align: center; background: var(--color-blue-section); flex: 1; min-width: 100px;">
+    <div style="font-size: 11px; color: var(--color-text-muted); margin-bottom: 6px; font-family: 'Courier New', monospace;">index 4</div>
+    <div style="font-size: 13px; color: var(--color-text-primary);">Peaches</div>
+  </div>
+</div>
+
+<h2 id="access-a-specific-element" class="articleH2">Access a specific element in an array</h2>
+<div data-visualizer="access"></div>
+<p class="articleP">Sometimes you don't want to play the whole playlist. You want one specific song. You just tap it and it plays directly.</p>
+<p class="articleP">Same in arrays. You can access any element directly using its index number. Index starts at 0, not 1. To access any element you just do:</p>
+<pre class="codeBlock"><code>arrayName[index]</code></pre>
+<p class="articleP">So to access our playlist at index 0:</p>
+<pre class="codeBlock"><code>playlist[0]</code></pre>
+<p class="articleP">And to print it:</p>
+<pre class="codeBlock"><code>cout &lt;&lt; playlist[0];  // Blinding Lights</code></pre>
+<p class="articleP">Similarly, this is how you access all 5:</p>
+<pre class="codeBlock"><code>cout &lt;&lt; playlist[0];  // Blinding Lights
+cout &lt;&lt; playlist[1];  // Levitating
+cout &lt;&lt; playlist[2];  // Stay
+cout &lt;&lt; playlist[3];  // Heat Waves
+cout &lt;&lt; playlist[4];  // Peaches</code></pre>
+<p class="articleP">So to access Stay it is one step. To access Peaches it is one step. Even if there were 1000 songs it would still be one step — because we know exactly where the song is. We just give the index and the computer goes directly there.</p>
+<div class="infoBox infoBoxBlue">
+  <span class="infoBoxLabel">Time complexity</span>
+  <div class="infoBoxText">Accessing any element by index is O(1) — constant time. No matter how many elements the array has, it always takes one step. We know the index, so we go directly there.</div>
+</div>
+
+<h2 id="update-an-element" class="articleH2">Update an element</h2>
+<div data-visualizer="update"></div>
+<p class="articleP">Say you want to update a song. Your playlist currently looks like this:</p>
+<div style="display: flex; gap: 4px; margin: 0 0 16px; flex-wrap: wrap;">
+  <div style="border: 1.5px solid var(--color-blue-border); border-radius: 6px; padding: 10px 14px; text-align: center; background: var(--color-blue-section); flex: 1; min-width: 100px;">
+    <div style="font-size: 11px; color: var(--color-text-muted); margin-bottom: 6px; font-family: 'Courier New', monospace;">index 0</div>
+    <div style="font-size: 13px;">Blinding Lights</div>
+  </div>
+  <div style="border: 1.5px solid var(--color-blue-border); border-radius: 6px; padding: 10px 14px; text-align: center; background: var(--color-blue-section); flex: 1; min-width: 100px;">
+    <div style="font-size: 11px; color: var(--color-text-muted); margin-bottom: 6px; font-family: 'Courier New', monospace;">index 1</div>
+    <div style="font-size: 13px;">Levitating</div>
+  </div>
+  <div style="border: 1.5px solid var(--color-pink-border); border-radius: 6px; padding: 10px 14px; text-align: center; background: var(--color-pink-section); flex: 1; min-width: 100px;">
+    <div style="font-size: 11px; color: var(--color-text-muted); margin-bottom: 6px; font-family: 'Courier New', monospace;">index 2</div>
+    <div style="font-size: 13px;">Stay</div>
+  </div>
+  <div style="border: 1.5px solid var(--color-blue-border); border-radius: 6px; padding: 10px 14px; text-align: center; background: var(--color-blue-section); flex: 1; min-width: 100px;">
+    <div style="font-size: 11px; color: var(--color-text-muted); margin-bottom: 6px; font-family: 'Courier New', monospace;">index 3</div>
+    <div style="font-size: 13px;">Heat Waves</div>
+  </div>
+  <div style="border: 1.5px solid var(--color-blue-border); border-radius: 6px; padding: 10px 14px; text-align: center; background: var(--color-blue-section); flex: 1; min-width: 100px;">
+    <div style="font-size: 11px; color: var(--color-text-muted); margin-bottom: 6px; font-family: 'Courier New', monospace;">index 4</div>
+    <div style="font-size: 13px;">Peaches</div>
+  </div>
+</div>
+<p class="articleP">You just go to its index and overwrite it:</p>
+<pre class="codeBlock"><code>playlist[2] = "Shape of You";</code></pre>
+<p class="articleP">Now your playlist looks like this — Stay is now replaced with Shape of You. One step. We go directly to the index and change it.</p>
+<div class="infoBox infoBoxBlue">
+  <span class="infoBoxLabel">Time complexity</span>
+  <div class="infoBoxText">Updating any element is O(1) — constant time. Whether the array has 100 songs or 1000 songs, it is always one step. We know the index and we go directly there.</div>
+</div>
+
+<h2 id="traversal" class="articleH2">Traversal — going through every element</h2>
+<div data-visualizer="traverse"></div>
+<p class="articleP">Sometimes you don't choose a song. You just hit play and every song plays one by one on auto mode. Going through each element one by one is called traversal. To traverse we just loop through each element:</p>
+<pre class="codeBlock"><code>for(int i = 0; i &lt; n; i++){
+    cout &lt;&lt; playlist[i] &lt;&lt; "\n";
+}</code></pre>
+<dl style="margin: 0 0 20px; font-size: 14px; line-height: 1.7;">
+  <dt style="font-family: 'Courier New', monospace; color: var(--color-code-text); background: var(--color-code-bg); border: 1px solid var(--color-code-border); display: inline-block; padding: 1px 8px; border-radius: 4px; margin-top: 12px; margin-bottom: 4px;">int i = 0</dt>
+  <dd style="margin: 4px 0 8px 0; color: var(--color-text-primary); padding-left: 16px; border-left: 2px solid var(--color-purple-border);">Start at index 0. The first slot.</dd>
+  <dt style="font-family: 'Courier New', monospace; color: var(--color-code-text); background: var(--color-code-bg); border: 1px solid var(--color-code-border); display: inline-block; padding: 1px 8px; border-radius: 4px; margin-top: 4px; margin-bottom: 4px;">i &lt; n</dt>
+  <dd style="margin: 4px 0 8px 0; color: var(--color-text-primary); padding-left: 16px; border-left: 2px solid var(--color-purple-border);">Keep going while i is less than n. Here n is the <strong>length</strong> — how many slots are filled. We visit 0, 1, 2 ... n-1 and stop. The empty slots after that are not our songs.</dd>
+  <dt style="font-family: 'Courier New', monospace; color: var(--color-code-text); background: var(--color-code-bg); border: 1px solid var(--color-code-border); display: inline-block; padding: 1px 8px; border-radius: 4px; margin-top: 4px; margin-bottom: 4px;">i++</dt>
+  <dd style="margin: 4px 0 8px 0; color: var(--color-text-primary); padding-left: 16px; border-left: 2px solid var(--color-purple-border);">After each element, move to the next index.</dd>
+</dl>
+<pre class="codeBlock"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+int main(){
+    string playlist[5] = {"Blinding Lights", "Levitating", "Stay", "Heat Waves", "Peaches"};
+    int n = 5;
+    for(int i = 0; i &lt; n; i++){
+        cout &lt;&lt; playlist[i] &lt;&lt; "\n";
+    }
+    return 0;
+}
+// Blinding Lights
+// Levitating
+// Stay
+// Heat Waves
+// Peaches</code></pre>
+<div class="infoBox infoBoxBlue">
+  <span class="infoBoxLabel">Time complexity</span>
+  <div class="infoBoxText">To access each song we take one step per song. One song — one step. Five songs — five steps. If there are n elements, it takes n steps. That is why the time complexity of traversal is O(n).</div>
+</div>
+
+<h2 id="remove-last-element" class="articleH2">Remove last element</h2>
+<div data-visualizer="remove"></div>
+<p class="articleP">Say you want to remove a song. You delete it right? However in programming it does not work like that. We cannot delete a slot. The <strong>size</strong> is fixed — the slots are always there. So what we do is just overwrite the last filled slot with an empty value and reduce our <strong>length</strong>.</p>
+<pre class="codeBlock"><code>playlist[4] = "";
+n--;</code></pre>
+<p class="articleP">That is it. Peaches is gone. We do <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">n--</code> to reduce the length — now our array has 4 songs instead of 5. The size is still 5. The slot is still there, but we treat it as empty.</p>
+<dl style="margin: 0 0 20px; font-size: 14px; line-height: 1.7;">
+  <dt style="font-family: 'Courier New', monospace; color: var(--color-code-text); background: var(--color-code-bg); border: 1px solid var(--color-code-border); display: inline-block; padding: 1px 8px; border-radius: 4px; margin-top: 12px; margin-bottom: 4px;">playlist[4] = ""</dt>
+  <dd style="margin: 4px 0 8px 0; color: var(--color-text-primary); padding-left: 16px; border-left: 2px solid var(--color-purple-border);">We overwrite the last slot with an empty value. Peaches is gone.</dd>
+  <dt style="font-family: 'Courier New', monospace; color: var(--color-code-text); background: var(--color-code-bg); border: 1px solid var(--color-code-border); display: inline-block; padding: 1px 8px; border-radius: 4px; margin-top: 4px; margin-bottom: 4px;">n--</dt>
+  <dd style="margin: 4px 0 8px 0; color: var(--color-text-primary); padding-left: 16px; border-left: 2px solid var(--color-purple-border);">We reduce the <strong>length</strong> by 1. The size stays the same — we just tell our code there are now 4 songs, not 5.</dd>
+</dl>
+<pre class="codeBlock"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+int main(){
+    string playlist[10] = {"Blinding Lights", "Levitating", "Stay", "Heat Waves", "Peaches"};
+    int n = 5;
+    playlist[n - 1] = "";
+    n--;
+    for(int i = 0; i &lt; n; i++){
+        cout &lt;&lt; playlist[i] &lt;&lt; "\n";
+    }
+    return 0;
+}
+// Blinding Lights
+// Levitating
+// Stay
+// Heat Waves</code></pre>
+<div class="infoBox infoBoxBlue">
+  <span class="infoBoxLabel">Time complexity</span>
+  <div class="infoBoxText">To remove the last element it is one step only. If there were 100 songs it would still be one step. It is always one step no matter what. So the time complexity is O(1).</div>
+</div>
+
+<h2 id="remove-from-any-index" class="articleH2">Remove from any index</h2>
+<div data-visualizer="add"></div>
+<p class="articleP">Say you want to remove Stay — which is at index 2. You cannot just overwrite it with empty and call it done — because now you have a gap in the middle:</p>
+<pre class="codeBlock"><code>[Blinding Lights][Levitating][  ][Heat Waves][Peaches]
+        0              1       2       3           4</code></pre>
+<p class="articleP">So what we do is shift everything after it one step to the left:</p>
+<pre class="codeBlock"><code>for(int i = 2; i &lt; n-1; i++){
+    playlist[i] = playlist[i+1];
+}
+playlist[n-1] = "";
+n--;</code></pre>
+<dl style="margin: 0 0 20px; font-size: 14px; line-height: 1.7;">
+  <dt style="font-family: 'Courier New', monospace; color: var(--color-code-text); background: var(--color-code-bg); border: 1px solid var(--color-code-border); display: inline-block; padding: 1px 8px; border-radius: 4px; margin-top: 12px; margin-bottom: 4px;">playlist[i] = playlist[i+1]</dt>
+  <dd style="margin: 4px 0 8px 0; color: var(--color-text-primary); padding-left: 16px; border-left: 2px solid var(--color-purple-border);">Each element moves one step to the left.</dd>
+  <dt style="font-family: 'Courier New', monospace; color: var(--color-code-text); background: var(--color-code-bg); border: 1px solid var(--color-code-border); display: inline-block; padding: 1px 8px; border-radius: 4px; margin-top: 4px; margin-bottom: 4px;">playlist[n-1] = ""</dt>
+  <dd style="margin: 4px 0 8px 0; color: var(--color-text-primary); padding-left: 16px; border-left: 2px solid var(--color-purple-border);">The last slot is now empty so we overwrite it.</dd>
+  <dt style="font-family: 'Courier New', monospace; color: var(--color-code-text); background: var(--color-code-bg); border: 1px solid var(--color-code-border); display: inline-block; padding: 1px 8px; border-radius: 4px; margin-top: 4px; margin-bottom: 4px;">n--</dt>
+  <dd style="margin: 4px 0 8px 0; color: var(--color-text-primary); padding-left: 16px; border-left: 2px solid var(--color-purple-border);">We reduce the <strong>length</strong> by 1. The size stays the same.</dd>
+</dl>
+<div style="display: flex; gap: 12px; margin: 0 0 20px; flex-wrap: wrap;">
+  <div style="flex: 1; min-width: 200px;">
+    <div style="font-size: 12px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 8px; letter-spacing: 0.04em;">Before</div>
+    <div style="display: flex; flex-direction: column; gap: 3px;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="width: 54px; text-align: right; font-family: 'Courier New', monospace; font-size: 11px; color: var(--color-text-muted); flex-shrink: 0;">index 0</span>
+        <span style="flex: 1; background: var(--color-blue-section); border: 1px solid var(--color-blue-border); border-radius: 4px; padding: 5px 10px; font-size: 13px;">Blinding Lights</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="width: 54px; text-align: right; font-family: 'Courier New', monospace; font-size: 11px; color: var(--color-text-muted); flex-shrink: 0;">index 1</span>
+        <span style="flex: 1; background: var(--color-blue-section); border: 1px solid var(--color-blue-border); border-radius: 4px; padding: 5px 10px; font-size: 13px;">Levitating</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="width: 54px; text-align: right; font-family: 'Courier New', monospace; font-size: 11px; color: var(--color-text-muted); flex-shrink: 0;">index 2</span>
+        <span style="flex: 1; background: var(--color-pink-section); border: 1px solid var(--color-pink-border); border-radius: 4px; padding: 5px 10px; font-size: 13px;">Stay</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="width: 54px; text-align: right; font-family: 'Courier New', monospace; font-size: 11px; color: var(--color-text-muted); flex-shrink: 0;">index 3</span>
+        <span style="flex: 1; background: var(--color-blue-section); border: 1px solid var(--color-blue-border); border-radius: 4px; padding: 5px 10px; font-size: 13px;">Heat Waves</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="width: 54px; text-align: right; font-family: 'Courier New', monospace; font-size: 11px; color: var(--color-text-muted); flex-shrink: 0;">index 4</span>
+        <span style="flex: 1; background: var(--color-blue-section); border: 1px solid var(--color-blue-border); border-radius: 4px; padding: 5px 10px; font-size: 13px;">Peaches</span>
+      </div>
+    </div>
+  </div>
+  <div style="flex: 1; min-width: 200px;">
+    <div style="font-size: 12px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 8px; letter-spacing: 0.04em;">After</div>
+    <div style="display: flex; flex-direction: column; gap: 3px;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="width: 54px; text-align: right; font-family: 'Courier New', monospace; font-size: 11px; color: var(--color-text-muted); flex-shrink: 0;">index 0</span>
+        <span style="flex: 1; background: var(--color-blue-section); border: 1px solid var(--color-blue-border); border-radius: 4px; padding: 5px 10px; font-size: 13px;">Blinding Lights</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="width: 54px; text-align: right; font-family: 'Courier New', monospace; font-size: 11px; color: var(--color-text-muted); flex-shrink: 0;">index 1</span>
+        <span style="flex: 1; background: var(--color-blue-section); border: 1px solid var(--color-blue-border); border-radius: 4px; padding: 5px 10px; font-size: 13px;">Levitating</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="width: 54px; text-align: right; font-family: 'Courier New', monospace; font-size: 11px; color: var(--color-text-muted); flex-shrink: 0;">index 2</span>
+        <span style="flex: 1; background: var(--color-blue-section); border: 1px solid var(--color-blue-border); border-radius: 4px; padding: 5px 10px; font-size: 13px;">Heat Waves</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="width: 54px; text-align: right; font-family: 'Courier New', monospace; font-size: 11px; color: var(--color-text-muted); flex-shrink: 0;">index 3</span>
+        <span style="flex: 1; background: var(--color-blue-section); border: 1px solid var(--color-blue-border); border-radius: 4px; padding: 5px 10px; font-size: 13px;">Peaches</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="width: 54px; text-align: right; font-family: 'Courier New', monospace; font-size: 11px; color: var(--color-text-muted); flex-shrink: 0;">index 4</span>
+        <span style="flex: 1; background: var(--color-purple-light); border: 1px solid var(--color-purple-border); border-radius: 4px; padding: 5px 10px; font-size: 13px; color: var(--color-text-muted);">ignored</span>
+      </div>
+    </div>
+  </div>
+</div>
+<pre class="codeBlock"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+int main(){
+    string playlist[10] = {"Blinding Lights", "Levitating", "Stay", "Heat Waves", "Peaches"};
+    int n = 5;
+    for(int i = 2; i &lt; n - 1; i++){
+        playlist[i] = playlist[i + 1];
+    }
+    playlist[n - 1] = "";
+    n--;
+    for(int i = 0; i &lt; n; i++){
+        cout &lt;&lt; playlist[i] &lt;&lt; "\n";
+    }
+    return 0;
+}
+// Blinding Lights
+// Levitating
+// Heat Waves
+// Peaches</code></pre>
+<div class="infoBox infoBoxBlue">
+  <span class="infoBoxLabel">Time complexity</span>
+  <div class="infoBoxText">To remove from any index we have to shift all elements after it. If we had 100 songs and removed the first one we would have to shift 99 elements. If there are n songs it would take n steps. So the time complexity is O(n) — linear.</div>
+</div>
+
+<h2 id="adding-at-the-end" class="articleH2">Adding an element at the end · O(1)</h2>
+<p class="articleP">Before we write the code — one important thing to understand first.</p>
+<p class="articleP">In C++, an array has a fixed <strong>size</strong>. <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">string playlist[5]</code> means size 5 forever. So if you want to add songs later you need to plan ahead. Declare the array bigger than you currently need. In practice — just double it. Have 5 songs today? Declare size 10. This gives you room to grow.</p>
+<p class="articleP">We keep a variable <code style="background: var(--color-code-bg); border: 1px solid var(--color-code-border); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--color-code-text);">n</code> that tracks the <strong>length</strong> — how many slots are actually filled. The size is 10 but the length starts at 5. The other 5 slots are just sitting there empty and waiting.</p>
+<pre class="codeBlock"><code>[Blinding Lights][Levitating][Stay][Heat Waves][Peaches][  ][  ][  ][  ][  ]
+        0              1        2       3           4      5    6    7    8    9</code></pre>
+<p class="articleP">Now to add a song we just place it at index n — which is always the next empty slot:</p>
+<pre class="codeBlock"><code>playlist[n] = "Montero";
+n++;</code></pre>
+<dl style="margin: 0 0 20px; font-size: 14px; line-height: 1.7;">
+  <dt style="font-family: 'Courier New', monospace; color: var(--color-code-text); background: var(--color-code-bg); border: 1px solid var(--color-code-border); display: inline-block; padding: 1px 8px; border-radius: 4px; margin-top: 12px; margin-bottom: 4px;">playlist[n]</dt>
+  <dd style="margin: 4px 0 8px 0; color: var(--color-text-primary); padding-left: 16px; border-left: 2px solid var(--color-purple-border);">n is the <strong>length</strong> — how many slots are filled. Since index starts at 0, index n is always the next empty one. Length 5 means next empty is at index 5.</dd>
+  <dt style="font-family: 'Courier New', monospace; color: var(--color-code-text); background: var(--color-code-bg); border: 1px solid var(--color-code-border); display: inline-block; padding: 1px 8px; border-radius: 4px; margin-top: 4px; margin-bottom: 4px;">n++</dt>
+  <dd style="margin: 4px 0 8px 0; color: var(--color-text-primary); padding-left: 16px; border-left: 2px solid var(--color-purple-border);">Increase the length by 1. Without this n stays wrong and your next song overwrites this one.</dd>
+</dl>
+<pre class="codeBlock"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+int main(){
+    string playlist[10] = {"Blinding Lights", "Levitating", "Stay", "Heat Waves", "Peaches"};
+    int n = 5;
+    playlist[n] = "Montero";
+    n++;
+    for(int i = 0; i &lt; n; i++){
+        cout &lt;&lt; playlist[i] &lt;&lt; "\n";
+    }
+    return 0;
+}
+// Blinding Lights
+// Levitating
+// Stay
+// Heat Waves
+// Peaches
+// Montero</code></pre>
+<div class="infoBox infoBoxBlue">
+  <span class="infoBoxLabel">Time complexity</span>
+  <div class="infoBoxText">One write. One step. No matter how many songs are already there — adding at the end is always one step. So the time complexity is O(1) — constant.</div>
+</div>
+<div class="infoBox infoBoxYellow">
+  <span class="infoBoxLabel">Good to know</span>
+  <div class="infoBoxText">If you don't want to worry about size at all, you can use a vector. It grows automatically as you add more elements. But that is a topic for another day.</div>
+</div>
+
+<h2 id="adding-at-specific-index" class="articleH2">Adding an element at a specific index · O(n)</h2>
+<p class="articleP">Say you want to add Montero at index 2 — right between Levitating and Stay.</p>
+<p class="articleP">But remember — the size is fixed. You cannot just magically create a new slot in the middle. So always plan ahead and declare a bigger size than you currently need:</p>
+<pre class="codeBlock"><code>string playlist[10] = {"Blinding Lights", "Levitating", "Stay", "Heat Waves", "Peaches"};
+int n = 5;</code></pre>
+<p class="articleP">Size is 10. Length is 5 — 5 songs filled, 5 empty slots waiting at the end. Now we have room.</p>
+<p class="articleP">Now — you cannot just place Montero at index 2 directly. Stay is already sitting there. If you do that Stay is gone forever. So what do we do? We make room first. We pick up everything from index 2 onwards and shift it one step to the right:</p>
+<pre class="codeBlock"><code>[Blinding Lights][Levitating][Stay][Heat Waves][Peaches][  ]
+                                ↓        ↓          ↓
+[Blinding Lights][Levitating][  ][Stay][Heat Waves][Peaches]</code></pre>
+<p class="articleP">Now index 2 is empty and waiting. We place Montero right there. Nobody got overwritten. Nobody got lost. Everything is clean. In code:</p>
+<pre class="codeBlock"><code>for(int i = n; i &gt; 2; i--){
+    playlist[i] = playlist[i - 1];
+}
+playlist[2] = "Montero";
+n++;
+for(int i = 0; i &lt; n; i++){
+    cout &lt;&lt; playlist[i] &lt;&lt; "\n";
+}
+// Blinding Lights
+// Levitating
+// Montero
+// Stay
+// Heat Waves
+// Peaches</code></pre>
+<div class="infoBox infoBoxBlue">
+  <span class="infoBoxLabel">Time complexity</span>
+  <div class="infoBoxText">To add at index 2 we shifted 3 songs. If the array had 100 songs and we added at index 2 we would shift 98 songs. The more songs there are the more shifting we do. So the time complexity is O(n) — linear.</div>
+</div>

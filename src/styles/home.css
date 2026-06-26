@@ -13,7 +13,7 @@
   gap: 56px;
 }
 
-.heroText {
+.heroLeft {
   flex: 1;
   max-width: 580px;
 }
@@ -39,13 +39,13 @@
   letter-spacing: 0.05em;
 }
 
-.highlightPink {
+.heroHighlightPink {
   background: var(--color-pink-light);
   border-radius: 4px;
   padding: 0 4px;
 }
 
-.highlightBlue {
+.heroHighlightBlue {
   background: var(--color-blue-light);
   border-radius: 4px;
   padding: 0 4px;
@@ -60,51 +60,13 @@
   letter-spacing: 0.05em;
 }
 
-.heroButtons {
+.heroBtns {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
 }
 
-.btnPrimary {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-patrick-hand), cursive;
-  font-size: 15px;
-  letter-spacing: 0.05em;
-  background: var(--color-pink-light);
-  border: 1.5px solid var(--color-pink-border);
-  color: var(--color-text-primary);
-  border-radius: var(--radius-notebook);
-  padding: 10px 24px;
-  text-decoration: none;
-  transition: background 0.15s ease;
-}
-
-.btnPrimary:hover {
-  background: var(--color-pink-border);
-}
-
-.btnSecondary {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-patrick-hand), cursive;
-  font-size: 15px;
-  letter-spacing: 0.05em;
-  background: var(--color-blue-light);
-  border: 1.5px solid var(--color-blue-border);
-  color: var(--color-text-primary);
-  border-radius: var(--radius-notebook);
-  padding: 10px 24px;
-  text-decoration: none;
-  transition: background 0.15s ease;
-}
-
-.btnSecondary:hover {
-  background: var(--color-blue-border);
-}
-
-/* Email subscription */
+/* ===== EMAIL SUBSCRIPTION ===== */
 
 .emailRow {
   margin-top: 28px;
@@ -133,7 +95,7 @@
   border: 1.5px solid var(--color-purple-border);
   border-radius: 8px;
   outline: none;
-  background: var(--color-background);
+  background: var(--color-bg);
   color: var(--color-text-primary);
   width: 220px;
 }
@@ -151,31 +113,39 @@
   font-size: 14px;
   letter-spacing: 0.05em;
   padding: 8px 18px;
+  min-height: 44px; /* mobile tap target */
   background: var(--color-pink-light);
   border: 1.5px solid var(--color-pink-border);
   border-radius: 8px;
   color: var(--color-text-primary);
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .emailBtn:hover {
   background: var(--color-pink-border);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(244, 167, 185, 0.35);
 }
 
-/* Visualizer preview card */
+.emailBtn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
 
-.visualizerPreview {
+/* ===== VISUALIZER PREVIEW CARD ===== */
+
+.visPreview {
   width: 272px;
   flex-shrink: 0;
-  background: var(--color-background);
+  background: var(--color-bg);
   border: 1.5px solid var(--color-purple-border);
   border-radius: var(--radius-card);
   padding: 20px 20px 16px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
 }
 
-.vizLabel {
+.visPreviewLabel {
   display: block;
   font-size: 11px;
   color: var(--color-text-muted);
@@ -183,33 +153,33 @@
   margin-bottom: 16px;
 }
 
-.vizBarsWrapper {
+.visBars {
   display: flex;
   align-items: flex-end;
   gap: 8px;
   height: 120px;
 }
 
-.vizBar {
+.visBar {
   flex: 1;
   border-radius: 4px 4px 0 0;
 }
 
-.barH60 { height: 60%; }
-.barH90 { height: 90%; }
-.barH45 { height: 45%; }
-.barH75 { height: 75%; }
-.barH55 { height: 55%; }
-.barH80 { height: 80%; }
+.visBarH60 { height: 60%; }
+.visBarH90 { height: 90%; }
+.visBarH45 { height: 45%; }
+.visBarH75 { height: 75%; }
+.visBarH55 { height: 55%; }
+.visBarH80 { height: 80%; }
 
-.barPink   { background: var(--color-pink-light);   border: 1px solid var(--color-pink-border); }
-.barBlue   { background: var(--color-blue-light);   border: 1px solid var(--color-blue-border); }
-.barPurple { background: var(--color-purple-light); border: 1px solid var(--color-purple-border); }
-.barGreen  { background: var(--color-green-light);  border: 1px solid var(--color-green-border); }
-.barYellow { background: var(--color-yellow-light); border: 1px solid var(--color-yellow-border); }
-.barAccent { background: var(--color-pink-border);  border: 1px solid var(--color-pink-section); }
+.visBarPink   { background: var(--color-pink-light);   border: 1px solid var(--color-pink-border); }
+.visBarBlue   { background: var(--color-blue-light);   border: 1px solid var(--color-blue-border); }
+.visBarPurple { background: var(--color-purple-light); border: 1px solid var(--color-purple-border); }
+.visBarGreen  { background: var(--color-green-light);  border: 1px solid var(--color-green-border); }
+.visBarYellow { background: var(--color-yellow-light); border: 1px solid var(--color-yellow-border); }
+.visBarAccent { background: var(--color-pink-border);  border: 1px solid var(--color-pink-section); }
 
-.vizFooter {
+.visCaption {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -218,26 +188,26 @@
   border-top: 1px solid var(--color-purple-border);
 }
 
-.vizStep {
+.visCaptionStep {
   font-size: 11px;
   color: var(--color-text-muted);
   letter-spacing: 0.05em;
 }
 
-.vizDots {
+.visCaptionDots {
   display: flex;
   gap: 4px;
   align-items: center;
 }
 
-.vizDot {
+.visCaptionDot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: var(--color-purple-border);
 }
 
-.vizDotActive {
+.visCaptionDotActive {
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -257,7 +227,7 @@
   padding: 0 32px;
 }
 
-.howItWorksLabel {
+.sectionTag {
   font-size: 13px;
   color: var(--color-purple-text);
   letter-spacing: 0.08em;
@@ -288,7 +258,7 @@
   letter-spacing: 0.05em;
 }
 
-.stepCards {
+.steps {
   display: flex;
   gap: 16px;
 }
@@ -310,7 +280,7 @@
   border: 1.5px solid var(--color-blue-border);
 }
 
-.stepNumber {
+.stepNum {
   display: block;
   font-size: 28px;
   color: var(--color-text-muted);
@@ -395,17 +365,17 @@
   opacity: 0.5;
 }
 
-.articleCount {
+.sectionCount {
   font-size: 12px;
   color: var(--color-text-muted);
   white-space: nowrap;
   letter-spacing: 0.05em;
 }
 
-/* Topic list */
+/* ===== TOPIC LIST ===== */
 
 .topicList {
-  background: var(--color-background);
+  background: var(--color-bg);
   border: 1px solid var(--color-purple-border);
   border-radius: var(--radius-notebook);
   overflow: hidden;
@@ -416,20 +386,26 @@
   align-items: center;
   gap: 12px;
   padding: 14px 16px;
+  min-height: 44px; /* mobile tap target */
   border-bottom: 1px solid var(--color-purple-border);
+  transition: background-color 0.15s ease;
+}
+
+.topicRow:hover {
+  background: var(--color-purple-light);
 }
 
 .topicRowLast {
   border-bottom: none;
 }
 
-.checkbox {
+.topicCheckbox {
   width: 14px;
   height: 14px;
   flex-shrink: 0;
   border: 1.5px solid var(--color-pink-border);
   border-radius: 3px;
-  background: var(--color-background);
+  background: var(--color-bg);
 }
 
 .topicInfo {
@@ -440,42 +416,16 @@
   min-width: 0;
 }
 
-.topicTitle {
+.topicName {
   font-size: 14px;
   color: var(--color-text-primary);
   letter-spacing: 0.05em;
 }
 
-.topicReadTime {
+.topicSubtitle {
   font-size: 11px;
   color: var(--color-text-secondary);
   letter-spacing: 0.05em;
-}
-
-/* Pills */
-
-.pillVisualizer {
-  flex-shrink: 0;
-  font-size: 11px;
-  letter-spacing: 0.05em;
-  background: var(--color-blue-light);
-  border: 1px solid var(--color-blue-border);
-  border-radius: 20px;
-  padding: 2px 9px;
-  color: var(--color-text-primary);
-  white-space: nowrap;
-}
-
-.pillComingSoon {
-  flex-shrink: 0;
-  font-size: 11px;
-  letter-spacing: 0.05em;
-  background: var(--color-purple-light);
-  border: 1px solid var(--color-purple-border);
-  border-radius: 20px;
-  padding: 2px 9px;
-  color: var(--color-purple-text);
-  white-space: nowrap;
 }
 
 .topicArrow {
@@ -483,78 +433,4 @@
   font-size: 14px;
   color: var(--color-text-muted);
   letter-spacing: 0;
-}
-
-/* ===== RESPONSIVE ===== */
-
-@media (max-width: 768px) {
-  .heroInner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-  }
-
-  .heroTitle {
-    font-size: 30px;
-  }
-
-  .visualizerPreview {
-    display: none;
-  }
-
-  .stepCards {
-    flex-direction: column;
-  }
-
-  .promiseTitle {
-    font-size: 22px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero {
-    padding: 48px 0 56px;
-  }
-
-  .heroInner,
-  .howItWorksInner,
-  .topicSectionInner {
-    padding: 0 20px;
-  }
-
-  .emailFields {
-    flex-direction: column;
-  }
-
-  .emailInput {
-    width: 100%;
-  }
-
-  .heroTitle {
-    font-size: 26px;
-  }
-
-  .heroDesc {
-    font-size: 15px;
-  }
-
-  .howItWorks {
-    padding: 44px 0;
-  }
-
-  .promiseBox {
-    padding: 20px;
-  }
-
-  .promiseTitle {
-    font-size: 20px;
-  }
-
-  .topicSection {
-    padding: 36px 0;
-  }
-
-  .sectionTitle {
-    font-size: 17px;
-  }
 }

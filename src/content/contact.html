@@ -1,0 +1,29 @@
+<span class="contactBadge">Company</span>
+<h1 class="contactTitle">Say hello 👋</h1>
+<p class="contactSubtitle">
+  Found a mistake in an article? Have a suggestion? Just want to say hi?
+  We read every message and try to respond within 2–3 business days.
+</p>
+
+<div class="contactFormWrapper">
+  <form action="https://formspree.io/f/mdavnjoo" method="POST">
+    <input type="hidden" name="_subject" value="New message from DSANotes" />
+
+    <div class="contactFormField">
+      <label for="name" class="contactFormLabel">Name</label>
+      <input id="name" type="text" name="name" placeholder="Your name" required class="contactFormInput" />
+    </div>
+
+    <div class="contactFormField">
+      <label for="email" class="contactFormLabel">Email</label>
+      <input id="email" type="email" name="email" placeholder="you@example.com" required class="contactFormInput" />
+    </div>
+
+    <div class="contactFormField">
+      <label for="message" class="contactFormLabel">Message</label>
+      <textarea id="message" name="message" placeholder="What's on your mind?" required class="contactFormTextarea"></textarea>
+    </div>
+
+    <button type="submit" class="contactFormButton">Send Message →</button>
+  </form>
+</div>

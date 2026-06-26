@@ -20,6 +20,7 @@ export const sections: Section[] = [
     color: 'pink',
     topics: [
       { title: 'What is DSA and why does it matter?', slug: 'what-is-dsa', readTime: '5 min', hasVisualizer: false, comingSoon: false },
+      { title: 'Why do you even need DSA?', slug: 'why-learn-dsa', readTime: '4 min', hasVisualizer: false, comingSoon: false },
       { title: 'How to think like a programmer', slug: 'think-like-programmer', readTime: '6 min', hasVisualizer: false, comingSoon: false },
       { title: 'Big O notation — how we measure speed', slug: 'big-o-notation', readTime: '8 min', hasVisualizer: false, comingSoon: false },
     ],

@@ -12,6 +12,12 @@ export type VisualizerCategory = {
 
 export const visualizerCategories: VisualizerCategory[] = [
   {
+    title: 'Data structures',
+    items: [
+      { id: 'array', title: 'Array', category: 'Data structures', articleSlug: 'arrays' },
+    ],
+  },
+  {
     title: 'Sorting',
     items: [
       { id: 'bubble-sort', title: 'Bubble sort', category: 'Sorting', articleSlug: 'bubble-sort' },
@@ -32,6 +38,13 @@ export const visualizerCategories: VisualizerCategory[] = [
       { id: 'prims', title: "Prim's", category: 'Graph algorithms', articleSlug: 'prims' },
       { id: 'tarjans', title: "Tarjan's", category: 'Graph algorithms', articleSlug: 'tarjans' },
       { id: 'kosarajus', title: "Kosaraju's", category: 'Graph algorithms', articleSlug: 'kosarajus' },
+    ],
+  },
+  {
+    title: 'Searching',
+    items: [
+      { id: 'linear-search', title: 'Linear search', category: 'Searching', articleSlug: 'linear-search' },
+      { id: 'binary-search', title: 'Binary search', category: 'Searching', articleSlug: 'binary-search' },
     ],
   },
   {

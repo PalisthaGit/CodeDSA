@@ -1,42 +1,48 @@
 import Link from 'next/link'
 import { sections } from '@/lib/topics'
-import styles from './TOCSidebar.module.css'
+import { getAllArticleSlugs } from '@/lib/articles'
 
 interface TOCSidebarProps {
   activeSlug: string
 }
 
 export function TOCSidebar({ activeSlug }: TOCSidebarProps) {
+  const validSlugs = new Set(getAllArticleSlugs())
+
   return (
-    <nav className={styles.sidebar}>
-      <p className={styles.allTopicsLabel}>All topics</p>
-      {sections.map(section => (
-        <div key={section.id} className={styles.chapter}>
-          <p className={styles.chapterTitle}>{section.title}</p>
-          <ul className={styles.topicList}>
-            {section.topics.map(topic => {
-              const isActive = topic.slug === activeSlug
-              return (
-                <li
-                  key={topic.slug}
-                  className={`${styles.topicItem} ${isActive ? styles.topicItemActive : ''}`}
-                >
-                  <span
-                    className={`${styles.indicator} ${isActive ? styles.indicatorActive : styles.indicatorEmpty}`}
-                    aria-hidden="true"
-                  />
-                  <Link
-                    href={`/learn/${topic.slug}`}
-                    className={`${styles.topicName} ${isActive ? styles.topicNameActive : ''}`}
+    <nav className="tocSidebar">
+      <p className="tocLabel">All topics</p>
+      {sections.map(section => {
+        const availableTopics = section.topics.filter(topic => validSlugs.has(topic.slug))
+        if (availableTopics.length === 0) return null
+        return (
+          <div key={section.id} className="tocChapter">
+            <p className="tocChapterTitle">{section.title}</p>
+            <ul className="tocList">
+              {availableTopics.map(topic => {
+                const isActive = topic.slug === activeSlug
+                return (
+                  <li
+                    key={topic.slug}
+                    className={`tocItem${isActive ? ' tocItemActive' : ''}`}
                   >
-                    {topic.title}
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      ))}
+                    <span
+                      className={`tocCircle${isActive ? ' tocItemDone' : ''}`}
+                      aria-hidden="true"
+                    />
+                    <Link
+                      href={`/learn/${topic.slug}`}
+                      className={`tocItemName${isActive ? ' tocItemNameActive' : ''}`}
+                    >
+                      {topic.title}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        )
+      })}
     </nav>
   )
 }

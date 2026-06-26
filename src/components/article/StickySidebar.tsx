@@ -1,19 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import type { ArticleSection } from '@/lib/articles'
-import styles from './StickySidebar.module.css'
+import type { ArticleHeading } from '@/lib/articles'
 
 interface StickySidebarProps {
-  sections: ArticleSection[]
+  headings: ArticleHeading[]
 }
 
-export function StickySidebar({ sections }: StickySidebarProps) {
+export function StickySidebar({ headings }: StickySidebarProps) {
   const [activeId, setActiveId] = useState<string>('')
-
-  const headings = sections
-    .filter(s => s.type === 'h2')
-    .map(s => ({ id: s.id, heading: s.content ?? '' }))
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,18 +31,18 @@ export function StickySidebar({ sections }: StickySidebarProps) {
   }, [headings])
 
   return (
-    <aside className={styles.sticky}>
-      <div className={styles.note}>
-        <p className={styles.noteLabel}>On this page</p>
-        <ul className={styles.sectionList}>
+    <aside className="stickySidebar">
+      <div className="stickyNote">
+        <p className="stickyLabel">On this page</p>
+        <ul className="stickyList">
           {headings.map(heading => (
             <li key={heading.id}>
               <a
                 href={`#${heading.id}`}
-                className={`${styles.sectionLink} ${activeId === heading.id ? styles.sectionLinkActive : ''}`}
+                className={`stickyItem${activeId === heading.id ? ' stickyItemActive' : ''}`}
               >
-                <span className={styles.dash}>—</span>
-                {heading.heading}
+                <span className="stickyDash">—</span>
+                {heading.text}
               </a>
             </li>
           ))}

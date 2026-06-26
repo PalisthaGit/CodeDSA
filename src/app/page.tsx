@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { sections } from '@/lib/topics'
-import styles from './page.module.css'
 
 export const metadata: Metadata = {
   title: 'DSANotes — Learn DSA free, step by step',
@@ -27,95 +26,95 @@ export const metadata: Metadata = {
 }
 
 const VIZ_BARS = [
-  { heightClass: styles.barH60, colorClass: styles.barPink },
-  { heightClass: styles.barH90, colorClass: styles.barBlue },
-  { heightClass: styles.barH45, colorClass: styles.barPurple },
-  { heightClass: styles.barH75, colorClass: styles.barGreen },
-  { heightClass: styles.barH55, colorClass: styles.barYellow },
-  { heightClass: styles.barH80, colorClass: styles.barAccent },
+  { heightClass: 'visBarH60', colorClass: 'visBarPink' },
+  { heightClass: 'visBarH90', colorClass: 'visBarBlue' },
+  { heightClass: 'visBarH45', colorClass: 'visBarPurple' },
+  { heightClass: 'visBarH75', colorClass: 'visBarGreen' },
+  { heightClass: 'visBarH55', colorClass: 'visBarYellow' },
+  { heightClass: 'visBarH80', colorClass: 'visBarAccent' },
 ]
 
 export default function HomePage() {
   return (
     <>
-      <section aria-label="Hero" className={`${styles.hero} grid-hint`}>
-        <div className={styles.heroInner}>
-          <div className={styles.heroText}>
-            <span className={styles.heroTag}>free &amp; beginner friendly</span>
-            <h1 className={styles.heroTitle}>
+      <section aria-label="Hero" className="hero gridHint">
+        <div className="heroInner">
+          <div className="heroLeft">
+            <span className="heroTag">free &amp; beginner friendly</span>
+            <h1 className="heroTitle">
               We hold your hand through{' '}
-              <span className={styles.highlightPink}>every</span>
+              <span className="heroHighlightPink">every</span>
               {' '}DSA concept,{' '}
-              <span className={styles.highlightBlue}>step by step.</span>
+              <span className="heroHighlightBlue">step by step.</span>
             </h1>
-            <p className={styles.heroDesc}>
+            <p className="heroDesc">
               No jumps. No what is this moments. Just clear friendly explanations
               and interactive visualizations until you truly get it.
             </p>
-            <nav aria-label="Primary actions" className={styles.heroButtons}>
-              <Link href="/learn" className={styles.btnPrimary}>
+            <nav aria-label="Primary actions" className="heroBtns">
+              <Link href="/learn" className="btnPink">
                 Start learning
               </Link>
-              <Link href="/visualizer" className={styles.btnSecondary}>
+              <Link href="/visualizer" className="btnBlue">
                 Open visualizer
               </Link>
             </nav>
 
-            <div className={styles.emailRow}>
-              <span className={styles.emailLabel}>Get notified when new articles drop →</span>
-              <div className={styles.emailFields}>
+            <div className="emailRow">
+              <span className="emailLabel">Get notified when new articles drop →</span>
+              <div className="emailFields">
                 <input
                   type="email"
                   placeholder="your@email.com"
-                  className={styles.emailInput}
+                  className="emailInput"
                 />
-                <button type="button" className={styles.emailBtn}>Subscribe</button>
+                <button type="button" className="emailBtn">Subscribe</button>
               </div>
             </div>
           </div>
 
-          <div className={styles.visualizerPreview} aria-hidden="true">
-            <span className={styles.vizLabel}>visualizer</span>
-            <div className={styles.vizBarsWrapper}>
+          <div className="visPreview" aria-hidden="true">
+            <span className="visPreviewLabel">visualizer</span>
+            <div className="visBars">
               {VIZ_BARS.map((bar, i) => (
-                <div key={i} className={`${styles.vizBar} ${bar.heightClass} ${bar.colorClass}`} />
+                <div key={i} className={`visBar ${bar.heightClass} ${bar.colorClass}`} />
               ))}
             </div>
-            <div className={styles.vizFooter}>
-              <span className={styles.vizStep}>step 3 of 8</span>
-              <span className={styles.vizDots}>
-                <span className={styles.vizDotActive} />
-                <span className={styles.vizDot} />
-                <span className={styles.vizDot} />
+            <div className="visCaption">
+              <span className="visCaptionStep">step 3 of 8</span>
+              <span className="visCaptionDots">
+                <span className="visCaptionDotActive" />
+                <span className="visCaptionDot" />
+                <span className="visCaptionDot" />
               </span>
             </div>
           </div>
         </div>
       </section>
 
-      <section aria-label="How it works" className={styles.howItWorks}>
-        <div className={styles.howItWorksInner}>
-          <p className={styles.howItWorksLabel}>How it works</p>
-          <div className={styles.promiseBox}>
-            <h2 className={styles.promiseTitle}>Every article = one oh I get it moment.</h2>
-            <p className={styles.promiseDesc}>
+      <section aria-label="How it works" className="howItWorks">
+        <div className="howItWorksInner">
+          <p className="sectionTag">How it works</p>
+          <div className="promiseBox">
+            <h2 className="promiseTitle">Every article = one oh I get it moment.</h2>
+            <p className="promiseDesc">
               We write every article like a patient friend sitting next to you — no
               jumps, no confusion, until it actually clicks.
             </p>
           </div>
-          <div className={styles.stepCards}>
-            <article className={styles.stepCardPink}>
-              <span className={styles.stepNumber}>01</span>
-              <h3 className={styles.stepTitle}>Read the article</h3>
-              <p className={styles.stepDesc}>
+          <div className="steps">
+            <article className="stepCardPink">
+              <span className="stepNum">01</span>
+              <h3 className="stepTitle">Read the article</h3>
+              <p className="stepDesc">
                 Written like a patient friend sitting next to you. No textbook
                 voice, ever.
               </p>
             </article>
-            <article className={styles.stepCardBlue}>
-              <span className={styles.stepNumber}>02</span>
-              <h3 className={styles.stepTitle}>Watch it move</h3>
-              <p className={styles.stepDesc}>
+            <article className="stepCardBlue">
+              <span className="stepNum">02</span>
+              <h3 className="stepTitle">Watch it move</h3>
+              <p className="stepDesc">
                 See the algorithm run step by step in the interactive visualizer.
               </p>
             </article>
@@ -127,43 +126,39 @@ export default function HomePage() {
         <section
           key={section.id}
           aria-label={section.title}
-          className={`${styles.topicSection} ${
-            section.color === 'pink' ? styles.topicSectionPink : styles.topicSectionBlue
-          }`}
+          className={`topicSection ${section.color === 'pink' ? 'topicSectionPink' : 'topicSectionBlue'}`}
         >
-          <div className={styles.topicSectionInner}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>{section.title}</h2>
-              <div className={styles.sectionLine} aria-hidden="true" />
-              <span className={styles.articleCount}>
+          <div className="topicSectionInner">
+            <div className="sectionHeader">
+              <h2 className="sectionTitle">{section.title}</h2>
+              <div className="sectionLine" aria-hidden="true" />
+              <span className="sectionCount">
                 {section.topics.length} articles
               </span>
             </div>
-            <div className={styles.topicList}>
+            <div className="topicList">
               {section.topics.map((topic, idx) => (
                 <div
                   key={topic.slug}
-                  className={`${styles.topicRow} ${
-                    idx === section.topics.length - 1 ? styles.topicRowLast : ''
-                  }`}
+                  className={`topicRow${idx === section.topics.length - 1 ? ' topicRowLast' : ''}`}
                 >
-                  <div className={styles.checkbox} aria-hidden="true" />
-                  <div className={styles.topicInfo}>
-                    <span className={styles.topicTitle}>{topic.title}</span>
+                  <div className="topicCheckbox" aria-hidden="true" />
+                  <div className="topicInfo">
+                    <span className="topicName">{topic.title}</span>
                     {!topic.comingSoon && (
-                      <span className={styles.topicReadTime}>
+                      <span className="topicSubtitle">
                         {topic.readTime} read
                       </span>
                     )}
                   </div>
                   {topic.hasVisualizer && !topic.comingSoon && (
-                    <span className={styles.pillVisualizer}>visualizer</span>
+                    <span className="pillBlue">visualizer</span>
                   )}
                   {topic.comingSoon && (
-                    <span className={styles.pillComingSoon}>coming soon</span>
+                    <span className="pillSoon">coming soon</span>
                   )}
                   {!topic.comingSoon && (
-                    <span className={styles.topicArrow} aria-hidden="true">
+                    <span className="topicArrow" aria-hidden="true">
                       →
                     </span>
                   )}

@@ -1,124 +1,93 @@
-'use client'
-
-import { useState } from 'react'
 import Link from 'next/link'
-import {
-  visualizerCategories,
-  findVisualizer,
-  DEFAULT_VISUALIZER_ID,
-} from '@/lib/visualizers'
+import type { Visualizer } from '@/lib/visualizers'
+import { visualizerCategories } from '@/lib/visualizers'
 import { VisualizerSidebar } from './VisualizerSidebar'
-import styles from './VisualizerLayout.module.css'
+import { VisualizerMobileSelect } from './VisualizerMobileSelect'
+import { ArrayVisualizer } from './ArrayVisualizer'
+import { LinearSearchVisualizer } from './LinearSearchVisualizer'
+import { BinarySearchVisualizer } from './BinarySearchVisualizer'
 
-const BUBBLE_SORT_CODE = `function bubbleSort(arr) {
-  for i from 0 to n-1 {
-    for j from 0 to n-i-2 {
-      if arr[j] > arr[j+1] {
-        swap arr[j] and arr[j+1]
-      }
-    }
-  }
-}`
+interface Props {
+  active: Visualizer
+  articleSlugs: string[]
+}
 
-export function VisualizerLayout() {
-  const [activeId, setActiveId] = useState(DEFAULT_VISUALIZER_ID)
-  const active = findVisualizer(activeId) ?? findVisualizer(DEFAULT_VISUALIZER_ID)!
+export function VisualizerLayout({ active, articleSlugs }: Props) {
+  const hasArticle = articleSlugs.includes(active.articleSlug)
 
   return (
-    <div className={styles.wrapper}>
-      {/* Mobile dropdown — hidden above 768px */}
-      <div className={styles.mobileDropdownRow}>
-        <select
-          className={styles.mobileDropdown}
-          value={activeId}
-          onChange={(e) => setActiveId(e.target.value)}
-          aria-label="Select visualizer"
-        >
-          {visualizerCategories.map(cat => (
-            <optgroup key={cat.title} label={cat.title}>
-              {cat.items.map(item => (
-                <option key={item.id} value={item.id}>
-                  {item.title}
-                </option>
-              ))}
-            </optgroup>
-          ))}
-        </select>
-      </div>
+    <div className="visualizerLayout">
+      <VisualizerMobileSelect categories={visualizerCategories} activeId={active.id} />
 
-      <div className={styles.grid}>
-        {/* Left sidebar */}
-        <aside className={styles.sidebarCol}>
+      <div className="vizGrid">
+        <aside className="visualizerSidebar">
           <VisualizerSidebar
             categories={visualizerCategories}
-            activeId={activeId}
-            onSelect={setActiveId}
+            activeId={active.id}
           />
         </aside>
 
-        {/* Main area */}
-        <main className={styles.mainCol}>
-          {/* Breadcrumb */}
-          <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-            <Link href="/visualizer" className={styles.breadcrumbLink}>
+        <main className="visualizerMain">
+          <nav className="breadcrumb" aria-label="Breadcrumb">
+            <Link href="/visualizer" className="breadcrumbLink">
               Visualizer
             </Link>
-            <span className={styles.breadcrumbSep}>·</span>
-            <span className={styles.breadcrumbCategory}>{active.category}</span>
-            <span className={styles.breadcrumbSep}>·</span>
-            <span className={styles.breadcrumbCurrent}>{active.title}</span>
+            <span className="breadcrumbSep">·</span>
+            <span className="breadcrumbSection">{active.category}</span>
+            <span className="breadcrumbSep">·</span>
+            <span className="breadcrumbCurrent">{active.title}</span>
           </nav>
 
-          {/* Header */}
-          <div className={styles.header}>
-            <p className={styles.categoryLabel}>{active.category}</p>
-            <h1 className={styles.title}>{active.title}</h1>
-            <Link
-              href={`/learn/${active.articleSlug}`}
-              className={styles.articleLink}
-            >
-              read the article on {active.title.toLowerCase()}
-            </Link>
+          <div className="visualizerHeader">
+            <p className="visualizerTag">{active.category}</p>
+            <h1 className="visualizerTitle">{active.title}</h1>
+            {hasArticle && (
+              <Link
+                href={`/learn/${active.articleSlug}`}
+                className="readArticleLink"
+              >
+                read the article on {active.title.toLowerCase()}
+              </Link>
+            )}
           </div>
 
-          {/* Visualizer card */}
-          <div className={styles.vizCard}>
-            <p className={styles.vizCardLabel}>{active.title.toLowerCase()}</p>
+          {active.id === 'array' ? (
+            <ArrayVisualizer />
+          ) : active.id === 'linear-search' ? (
+            <LinearSearchVisualizer />
+          ) : active.id === 'binary-search' ? (
+            <BinarySearchVisualizer />
+          ) : (
+            <div className="visualizerCard">
+              <p className="visualizerCardLabel">{active.title.toLowerCase()}</p>
 
-            {/* Placeholder bars — always bubble sort until visualizer logic lands */}
-            <div className={styles.barsContainer} aria-hidden="true">
-              <div className={`${styles.bar} ${styles.barColor1} ${styles.barH1}`} />
-              <div className={`${styles.bar} ${styles.barColor2} ${styles.barH2}`} />
-              <div className={`${styles.bar} ${styles.barColor3} ${styles.barH3}`} />
-              <div className={`${styles.bar} ${styles.barColor4} ${styles.barH4}`} />
-              <div className={`${styles.bar} ${styles.barColor5} ${styles.barH5}`} />
-              <div className={`${styles.bar} ${styles.barColor6} ${styles.barH6}`} />
-              <div className={`${styles.bar} ${styles.barColor7} ${styles.barH7}`} />
+              <div className="placeholderBars" aria-hidden="true">
+                <div className="placeholderBar placeholderBarC1 placeholderBarH1" />
+                <div className="placeholderBar placeholderBarC2 placeholderBarH2" />
+                <div className="placeholderBar placeholderBarC3 placeholderBarH3" />
+                <div className="placeholderBar placeholderBarC4 placeholderBarH4" />
+                <div className="placeholderBar placeholderBarC5 placeholderBarH5" />
+                <div className="placeholderBar placeholderBarC6 placeholderBarH6" />
+                <div className="placeholderBar placeholderBarC7 placeholderBarH7" />
+              </div>
+
+              <div className="statusBar">
+                — click play to start the visualization —
+              </div>
+
+              <div className="visControls">
+                <button type="button" className="visBtnPlay">
+                  ▶ Play
+                </button>
+                <button type="button" className="visBtnStep">
+                  Next step
+                </button>
+                <button type="button" className="visBtnReset">
+                  Reset
+                </button>
+              </div>
             </div>
-
-            {/* Status bar */}
-            <div className={styles.statusBar}>
-              — click play to start the visualization —
-            </div>
-
-            {/* Controls */}
-            <div className={styles.controls}>
-              <button type="button" className={styles.btnPlay}>
-                ▶ Play
-              </button>
-              <button type="button" className={styles.btnStep}>
-                Next step
-              </button>
-              <button type="button" className={styles.btnReset}>
-                Reset
-              </button>
-            </div>
-
-            {/* Pseudocode */}
-            <pre className={styles.codeBlock}>
-              <code>{BUBBLE_SORT_CODE}</code>
-            </pre>
-          </div>
+          )}
         </main>
       </div>
     </div>

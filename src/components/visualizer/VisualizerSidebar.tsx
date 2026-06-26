@@ -1,33 +1,31 @@
+import Link from 'next/link'
 import type { VisualizerCategory } from '@/lib/visualizers'
-import styles from './VisualizerSidebar.module.css'
 
 interface VisualizerSidebarProps {
   categories: VisualizerCategory[]
   activeId: string
-  onSelect: (id: string) => void
 }
 
-export function VisualizerSidebar({ categories, activeId, onSelect }: VisualizerSidebarProps) {
+export function VisualizerSidebar({ categories, activeId }: VisualizerSidebarProps) {
   return (
-    <nav className={styles.sidebar}>
-      <p className={styles.sidebarLabel}>Visualizers</p>
+    <nav className="visSidebar">
+      <p className="visualizerSidebarLabel">Visualizers</p>
       {categories.map((cat, index) => (
-        <div key={cat.title} className={styles.category}>
-          {index > 0 && <div className={styles.divider} aria-hidden="true" />}
-          <p className={styles.categoryTitle}>{cat.title}</p>
-          <ul className={styles.itemList}>
+        <div key={cat.title} className="visCategory">
+          {index > 0 && <div className="visDivider" aria-hidden="true" />}
+          <p className="visCategoryTitle">{cat.title}</p>
+          <ul className="visItemList">
             {cat.items.map(item => {
               const isActive = item.id === activeId
               return (
                 <li key={item.id}>
-                  <button
-                    type="button"
-                    className={`${styles.item} ${isActive ? styles.itemActive : ''}`}
-                    onClick={() => onSelect(item.id)}
+                  <Link
+                    href={`/visualizer/${item.id}`}
+                    className={`visItem${isActive ? ' visItemActive' : ''}`}
                     aria-current={isActive ? 'page' : undefined}
                   >
                     {item.title}
-                  </button>
+                  </Link>
                 </li>
               )
             })}

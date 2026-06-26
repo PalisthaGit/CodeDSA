@@ -1,0 +1,76 @@
+<h2 id="the-guessing-game" class="articleH2 articleH2First">The guessing game</h2>
+<p class="articleP">Let's learn binary search today. And honestly once you see it, you will wonder how you never thought of it yourself. It is that natural.</p>
+<div data-visualizer="binary-search"></div>
+<p class="articleP">Okay so you have probably played this game as a kid. I am thinking of a number and it is somewhere in here:</p>
+<pre class="codeBlock"><code>3, 7, 12, 19, 24, 31, 38, 45, 52, 61, 74, 88</code></pre>
+<p class="articleP">You do not know which one. But you know it is somewhere in this list.</p>
+<p class="articleP">Now you guess the middle. Which is 31. I say too high.</p>
+<p class="articleP">Now you know something. It is not 31. And it is not anything above 31 either. So your world just got smaller:</p>
+<pre class="codeBlock"><code>3, 7, 12, 19, 24</code></pre>
+<p class="articleP">You guess the middle again. Which is 12. I say too low.</p>
+<p class="articleP">Everything below 12 is also gone now:</p>
+<pre class="codeBlock"><code>19, 24</code></pre>
+<p class="articleP">You guess 19. Too high. One left:</p>
+<pre class="codeBlock"><code>24</code></pre>
+<p class="articleP">Found it.</p>
+<p class="articleP">See what just happened? Every guess you threw away half. You never went one by one. And your world kept getting smaller and smaller until there was only one place left to look.</p>
+<p class="articleP">That is binary search.</p>
+<div class="infoBox infoBoxYellow">
+  <span class="infoBoxLabel">💡 One thing you need</span>
+  <div class="infoBoxText">The list has to be sorted. When I said too high, you knew to look left because the numbers are in order. If they were all over the place that would not work. Binary search only works on a sorted list.</div>
+</div>
+
+<h2 id="how-it-works-in-code" class="articleH2">How it works in code</h2>
+<p class="articleP">Say we have our numbers:</p>
+<pre class="codeBlock"><code>int arr[] = {3, 7, 12, 19, 24, 31, 38, 45, 52, 61, 74, 88};</code></pre>
+<p class="articleP">We want to find 24.</p>
+<p class="articleP">The code needs to remember where it is looking. So we give it two things. Where it starts and where it ends.</p>
+<pre class="codeBlock"><code>int left = 0;
+int right = n - 1;</code></pre>
+<p class="articleP">Left starts at the very first number. Right starts at the very last.</p>
+<p class="articleP">Now we keep going as long as there is still something to look at. Every guess the window gets smaller. At some point left and right meet. And when they cross, the window is gone. Nothing left to look at.</p>
+<pre class="codeBlock"><code>while (left &lt;= right)</code></pre>
+<p class="articleP">Each time we look at the middle of whatever is left.</p>
+<pre class="codeBlock"><code>int mid = left + (right - left) / 2;</code></pre>
+<p class="articleP">We check. Is this the number?</p>
+<pre class="codeBlock"><code>if (arr[mid] == target)
+    return mid;</code></pre>
+<p class="articleP">Found it. Done.</p>
+<p class="articleP">Too high? Right moves in. Everything above mid is gone.</p>
+<pre class="codeBlock"><code>else if (arr[mid] &gt; target)
+    right = mid - 1;</code></pre>
+<p class="articleP">Too low? Left moves in. Everything below mid is gone.</p>
+<pre class="codeBlock"><code>else
+    left = mid + 1;</code></pre>
+<p class="articleP">And when left crosses right, there is nothing left to look at. The number was never there.</p>
+<pre class="codeBlock"><code>return -1;</code></pre>
+<p class="articleP">And here is the whole thing together:</p>
+<pre class="codeBlock"><code>int binarySearch(int arr[], int n, int target) {
+    int left = 0;
+    int right = n - 1;
+
+    while (left &lt;= right) {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid] == target)
+            return mid;
+        else if (arr[mid] &gt; target)
+            right = mid - 1;
+        else
+            left = mid + 1;
+    }
+
+    return -1;
+}</code></pre>
+
+<h2 id="how-fast-is-it" class="articleH2">How fast is it?</h2>
+<p class="articleP">With linear search, 1000 numbers meant 1000 steps in the worst case. With binary search, 1000 numbers takes about 10 steps. A million numbers takes about 20 steps. You are halving every single time so the steps stay tiny even when the list gets huge.</p>
+<div class="infoBox infoBoxBlue">
+  <span class="infoBoxLabel">Time complexity</span>
+  <div class="infoBoxText">That is why we say binary search is O(log n). Every step you throw away half. The list can grow enormously but the number of steps barely moves.</div>
+</div>
+
+<h2 id="when-to-use" class="articleH2">When to use binary search</h2>
+<p class="articleP">When your list is large and sorted. That is really it. If you have a million numbers and you are searching through them again and again, binary search is the one you want.</p>
+<p class="articleP">But if your list is unsorted, you cannot use it directly. You would need to sort first. And sorting takes time. So if you are only searching once, sometimes linear search is still the simpler choice. It depends on the situation.</p>
+<p class="articleP">And that is binary search. Simple idea, powerful result. Just like that number guessing game you played as a kid, you were already doing it. You just did not know it had a name.</p>

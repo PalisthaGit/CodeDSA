@@ -1,0 +1,52 @@
+<h2 id="what-is-linear-search" class="articleH2 articleH2First">What is linear search?</h2>
+<p class="articleP">Let's learn linear search today. And I will explain it so simply that you will understand it right away. Trust me, it is that easy.</p>
+<div data-visualizer="linear-search"></div>
+<p class="articleP">So you know those old tape recorders your parents or grandparents used to have? You were probably not even born then and that is okay. A tape recorder was basically your Spotify back in the day. The only thing it could do was play, pause, go forward and go backward. That is it.</p>
+<p class="articleP">Now say there are 100 songs on it and you want to hear a specific one. You cannot just tap it like you do on Spotify. You press play from the very first song. Not your song. Go one forward. Still not it. One more. Still not it. You keep going, one song at a time, until you finally reach the one you wanted.</p>
+<p class="articleP">That is it. That is linear search. You go through everything one by one until you find what you are looking for.</p>
+<p class="articleP">And here is something nice about programming. Most things mean exactly what they sound like in English. Linear means in a straight line, one after another. So linear search simply means searching in a straight line. You will find this a lot as you go further. When in doubt just think about what the word means and you will often be right.</p>
+<div class="infoBox infoBoxYellow">
+  <span class="infoBoxLabel">💡 Good to know</span>
+  <div class="infoBoxText">Linear search just means searching in a straight line — one item at a time, from start to finish, until you find what you are looking for.</div>
+</div>
+
+<h2 id="how-it-works-in-code" class="articleH2">How it works in code</h2>
+<p class="articleP">Say our tape has these songs:</p>
+<pre class="codeBlock"><code>string songs[8] = {
+    "Blinding Lights", "Levitating", "Stay", "Heat Waves",
+    "Peaches", "Watermelon Sugar", "Bad Guy", "Sunflower"
+};</code></pre>
+<p class="articleP">We want to find Heat Waves. So we start from the beginning and go one by one until we find it.</p>
+<p class="articleP">First we go through every song, one by one.</p>
+<pre class="codeBlock"><code>for (int i = 0; i &lt; n; i++)</code></pre>
+<p class="articleP">Now at each song we ask, is this the one I am looking for?</p>
+<pre class="codeBlock"><code>if (arr[i] == target)</code></pre>
+<p class="articleP">If yes, we return it. We found it, we are done.</p>
+<pre class="codeBlock"><code>return i;</code></pre>
+<p class="articleP">And if we go through everything and find nothing, we simply return -1. Our way of saying, it is not here.</p>
+<pre class="codeBlock"><code>return -1;</code></pre>
+<p class="articleP">And here is the whole thing together:</p>
+<pre class="codeBlock"><code>int linearSearch(string arr[], int n, string target) {
+    for (int i = 0; i &lt; n; i++) {
+        if (arr[i] == target) {
+            return i;
+        }
+    }
+    return -1;
+}</code></pre>
+
+<h2 id="best-and-worst-case" class="articleH2">Best case and worst case</h2>
+<p class="articleP">Now there are two situations worth knowing about.</p>
+<p class="articleP">The best case is when your song is the very first one. You check once and you are done. One step, no matter how many songs there are.</p>
+<p class="articleP">The worst case is when your song is the last one, or not there at all. You have to go through everything. If there are 1000 songs you check 1000 times. The number of steps grows with the size of the list.</p>
+<div class="infoBox infoBoxBlue">
+  <span class="infoBoxLabel">Time complexity</span>
+  <div class="infoBoxText">That is why we say linear search is O(n). As the list grows, the steps grow with it, together, in a straight line.</div>
+</div>
+
+<h2 id="when-to-use" class="articleH2">When to use linear search</h2>
+<p class="articleP">So when do you actually use linear search?</p>
+<p class="articleP">When your list is small. Say you have 10 contacts in your phone. Just go through them one by one, it will be done before you even think about it. No need to do anything fancy for 10 items.</p>
+<p class="articleP">And when your list is unsorted. If the items are all over the place with no order, linear search does not mind. It just goes through everything anyway.</p>
+<p class="articleP">But say you have a million songs and you are searching through them hundreds of times a day. Going one by one through a million songs every single time is going to be slow. In that case you sort the list once, and then use binary search. Sorting happens one time. But searching happens hundreds of times. So it is worth it.</p>
+<p class="articleP">And that is exactly what binary search is. Instead of going one by one, it cuts the list in half every single step. We will get to that next — <a href="/learn/binary-search" style="color: var(--color-info-blue-label); text-decoration: none; border-bottom: 1px solid var(--color-blue-border);">Binary search — cut it in half</a>.</p>
