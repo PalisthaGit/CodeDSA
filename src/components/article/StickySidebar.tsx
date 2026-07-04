@@ -32,20 +32,22 @@ export function StickySidebar({ headings }: StickySidebarProps) {
 
   return (
     <aside className="stickySidebar">
-      <div className="stickyNote">
-        <p className="stickyLabel">On this page</p>
-        <ul className="stickyList">
-          {headings.map(heading => (
-            <li key={heading.id}>
-              <a
-                href={`#${heading.id}`}
-                className={`stickyItem${activeId === heading.id ? ' stickyItemActive' : ''}`}
-              >
-                <span className="stickyDash">—</span>
-                {heading.text}
-              </a>
-            </li>
-          ))}
+      <div className="onThisPage">
+        <p className="onThisPageLabel">On this page</p>
+        <ul className="onThisPageList">
+          {headings.map((heading, i) => {
+            const isActive = activeId === heading.id
+            return (
+              <li key={heading.id}>
+                <a
+                  href={`#${heading.id}`}
+                  className={`onThisPageItem${isActive ? ' onThisPageItemActive' : ''}`}
+                >
+                  {heading.text}
+                </a>
+              </li>
+            )
+          })}
         </ul>
       </div>
     </aside>

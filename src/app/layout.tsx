@@ -70,7 +70,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-background text-text-primary">
         <MobileSidebarProvider>
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 pt-[52px]">{children}</main>
         </MobileSidebarProvider>
         <Footer />
       </body>

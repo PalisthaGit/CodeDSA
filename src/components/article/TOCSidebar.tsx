@@ -4,6 +4,7 @@ import { getAllArticleSlugs } from '@/lib/articles'
 
 interface TOCSidebarProps {
   activeSlug: string
+  chapterSlug: string
 }
 
 export function TOCSidebar({ activeSlug }: TOCSidebarProps) {
@@ -11,38 +12,34 @@ export function TOCSidebar({ activeSlug }: TOCSidebarProps) {
 
   return (
     <nav className="tocSidebar">
-      <p className="tocLabel">All topics</p>
-      {sections.map(section => {
-        const availableTopics = section.topics.filter(topic => validSlugs.has(topic.slug))
-        if (availableTopics.length === 0) return null
-        return (
-          <div key={section.id} className="tocChapter">
-            <p className="tocChapterTitle">{section.title}</p>
-            <ul className="tocList">
-              {availableTopics.map(topic => {
-                const isActive = topic.slug === activeSlug
-                return (
-                  <li
-                    key={topic.slug}
-                    className={`tocItem${isActive ? ' tocItemActive' : ''}`}
-                  >
-                    <span
-                      className={`tocCircle${isActive ? ' tocItemDone' : ''}`}
-                      aria-hidden="true"
-                    />
+      <p className="tocSidebarLabel">Learn</p>
+      {sections.map((section, index) => (
+        <div key={section.id} className="tocSection">
+          {index > 0 && <div className="tocDivider" aria-hidden="true" />}
+          <p className="tocSectionTitle">{section.title}</p>
+          <ul className="tocList">
+            {section.topics.map(topic => {
+              const isActive = topic.slug === activeSlug
+              const available = validSlugs.has(topic.slug)
+              return (
+                <li key={topic.slug}>
+                  {available ? (
                     <Link
                       href={`/learn/${topic.slug}`}
-                      className={`tocItemName${isActive ? ' tocItemNameActive' : ''}`}
+                      className={`tocItem${isActive ? ' tocItemActive' : ''}`}
+                      aria-current={isActive ? 'page' : undefined}
                     >
                       {topic.title}
                     </Link>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        )
-      })}
+                  ) : (
+                    <span className="tocItemDisabled">{topic.title}</span>
+                  )}
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      ))}
     </nav>
   )
 }

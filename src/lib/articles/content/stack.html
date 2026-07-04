@@ -1,0 +1,405 @@
+<p class="articleP">Before you start, try using this visualizer to understand how a stack works.</p>
+<div data-visualizer="stack"></div>
+
+<p class="articleP">Now let us learn in detail what a stack is.</p>
+
+<h2 id="what-is-a-stack" class="articleH2">What is a Stack?</h2>
+
+<p class="articleP">Imagine there is a stack of plates in your kitchen. Every time you wash a plate, you place it on top of the stack.</p>
+
+<img src="/stack.png" alt="Stack of plates" class="articleImg" />
+
+
+<p class="articleP">Now someone asks you for a plate. Which plate do you give them?</p>
+
+<p class="articleP">The plate on the very top.</p>
+
+<p class="articleP">A little later, someone asks for another plate. Again, you give them the new top plate.</p>
+
+<p class="articleP">Now imagine someone says, <strong>"Can I have the blue plate?"</strong></p>
+
+<p class="articleP">Can you take it out directly?</p>
+
+<p class="articleP">No. There are other plates sitting on top of it. First, you need to remove all the plates above it. Only then can you reach the blue plate.</p>
+
+<img src="/stack-blue-plate.png" alt="Blue plate inside the stack" class="articleImg" />
+
+
+<p class="articleP">A stack works exactly the same way. You can only add or remove elements from the top.</p>
+
+<p class="articleP">That is why a stack follows the <strong>Last In, First Out (LIFO)</strong> rule. The last element added to the stack is always the first one to come out.</p>
+
+<h2 id="why-can-we-only-use-the-top" class="articleH2">Why can we only use the top?</h2>
+
+<p class="articleP">You might be wondering why we cannot remove an element from the middle.</p>
+
+<p class="articleP">Think about the stack of plates again. If you try to pull out a plate from the middle, every plate above it would fall.</p>
+
+<p class="articleP">That is why we always remove the top plate first.</p>
+
+
+<p class="articleP">The same rule applies to a stack. Every element below the top is blocked by the elements above it. That is why every operation happens from the top.</p>
+
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Remember</span>
+<div class="infoBoxText">
+A stack always works from one end only. That end is called the <code style="font-family:'Courier New',monospace;color:var(--color-code-text);">top</code>.
+</div>
+</div>
+
+<p class="articleP">Now that you know what a stack is, let us learn the operations we can perform on it.</p>
+
+<ul style="font-size:19px;line-height:1.85;color:var(--color-text-primary);margin:0 0 22px;padding-left:28px;">
+<li>Push</li>
+<li>Pop</li>
+<li>Peek</li>
+<li>Is Empty</li>
+<li>Size</li>
+</ul>
+
+<p class="articleP">Do not worry. We will learn each one step by step.</p>
+
+<h2 id="how-to-create-a-stack" class="articleH2">How to create a Stack</h2>
+
+<p class="articleP">Give this visualizer a try before reading.</p>
+
+<div data-visualizer="stack-create"></div>
+
+<p class="articleP">Before we can perform any operations, we first need to create a stack.</p>
+
+<p class="articleP">In C++, we can create one like this.</p>
+
+<pre class="codeBlock"><code>stack&lt;int&gt; st;</code></pre>
+
+<p class="articleP"><code style="background:var(--color-code-bg);border:1px solid var(--color-code-border);border-radius:4px;padding:1px 5px;font-family:'Courier New',monospace;font-size:13px;color:var(--color-code-text);">stack&lt;int&gt;</code> creates a stack that stores integers.</p>
+
+<p class="articleP">If you want to store strings, you would write:</p>
+
+<pre class="codeBlock"><code>stack&lt;string&gt; st;</code></pre>
+
+<p class="articleP">If you want to store characters, you would write:</p>
+
+<pre class="codeBlock"><code>stack&lt;char&gt; st;</code></pre>
+
+<p class="articleP">The type inside the angle brackets tells C++ what kind of data the stack will store.</p>
+
+<p class="articleP"><code style="background:var(--color-code-bg);border:1px solid var(--color-code-border);border-radius:4px;padding:1px 5px;font-family:'Courier New',monospace;font-size:13px;color:var(--color-code-text);">st</code> is simply the name of our stack. You can name it anything you like.</p>
+
+<p class="articleP">Right now our stack is empty.</p>
+
+<img src="/empty-stack.png" alt="Empty stack" class="articleImg" />
+
+<p class="articleP">Now let us add our first element using the Push operation.</p>
+
+<h2 id="push" class="articleH2">Push</h2>
+
+<p class="articleP">Before we start, try this visualizer to see how Push works.</p>
+
+<div data-visualizer="stack-push"></div>
+
+<p class="articleP">To add an element to a stack, we use the <code style="background:var(--color-code-bg);border:1px solid var(--color-code-border);border-radius:4px;padding:1px 5px;font-family:'Courier New',monospace;font-size:13px;color:var(--color-code-text);">push()</code> function.</p>
+
+<pre class="codeBlock"><code>st.push(10);</code></pre>
+
+<p class="articleP">This adds <code style="background:var(--color-code-bg);border:1px solid var(--color-code-border);border-radius:4px;padding:1px 5px;font-family:'Courier New',monospace;font-size:13px;color:var(--color-code-text);">10</code> to the top of the stack.</p>
+
+<p class="articleP">Since our stack was empty, <code style="background:var(--color-code-bg);border:1px solid var(--color-code-border);border-radius:4px;padding:1px 5px;font-family:'Courier New',monospace;font-size:13px;color:var(--color-code-text);">10</code> becomes the first element.</p>
+
+<img src="/stack-add-ten.png" alt="Push 10 onto the stack" class="articleImg" />
+
+
+<p class="articleP">Now let us add a few more elements.</p>
+
+<pre class="codeBlock"><code>st.push(20);
+st.push(30);
+st.push(40);</code></pre>
+
+<p class="articleP">Each time we call <code style="background:var(--color-code-bg);border:1px solid var(--color-code-border);border-radius:4px;padding:1px 5px;font-family:'Courier New',monospace;font-size:13px;color:var(--color-code-text);">push()</code>, the new element is placed on the top of the stack.</p>
+
+<img src="/stack-add-10-20-30-40.png" alt="Stack after pushing 10, 20, 30, and 40" class="articleImg" />
+
+
+<p class="articleP">Now let us push one more element.</p>
+
+<pre class="codeBlock"><code>st.push(50);</code></pre>
+
+<img src="/stack-add-50.png" alt="Stack after pushing 50" class="articleImg" />
+
+<p class="articleP">Notice that every new element is always added to the top of the stack.</p>
+
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Time complexity</span>
+<div class="infoBoxText">
+To push an element, we simply place it on the top of the stack. We do not have to move any other elements or search for a position. Whether the stack has 1 element or 1,000 elements, it always takes one step. So the time complexity of Push is <code style="font-family:'Courier New',monospace;color:var(--color-code-text);">O(1)</code>.
+</div>
+</div>
+
+<p class="articleP">Now our stack has a few elements. Let us see how to remove one.</p>
+
+<h2 id="pop" class="articleH2">Pop</h2>
+
+<p class="articleP">Before we start, try this visualizer to see how the Pop operation works.</p>
+
+<div data-visualizer="stack-pop"></div>
+
+<p class="articleP">To remove an element from a stack, we use the <code style="background:var(--color-code-bg);border:1px solid var(--color-code-border);border-radius:4px;padding:1px 5px;font-family:'Courier New',monospace;font-size:13px;color:var(--color-code-text);">pop()</code> function.</p>
+
+<p class="articleP">Suppose our stack looks like this.</p>
+
+<pre class="codeBlock"><code>Top
+50
+40
+30
+20
+10</code></pre>
+
+<p class="articleP">We can remove the top element by writing:</p>
+
+<pre class="codeBlock"><code>st.pop();</code></pre>
+
+<p class="articleP">This removes the top element from the stack.</p>
+
+<p class="articleP">In this case, <code style="background:var(--color-code-bg);border:1px solid var(--color-code-border);border-radius:4px;padding:1px 5px;font-family:'Courier New',monospace;font-size:13px;color:var(--color-code-text);">50</code> is removed because it is on the top.</p>
+
+<img src="/stack-pop-50.png" alt="Pop the top element" class="articleImg" />
+
+
+<p class="articleP">Our stack now looks like this.</p>
+
+<pre class="codeBlock"><code>Top
+40
+30
+20
+10</code></pre>
+
+<p class="articleP">Notice that <code style="background:var(--color-code-bg);border:1px solid var(--color-code-border);border-radius:4px;padding:1px 5px;font-family:'Courier New',monospace;font-size:13px;color:var(--color-code-text);">pop()</code> always removes the top element.</p>
+
+<p class="articleP">We cannot remove an element from the middle or the bottom of the stack.</p>
+
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Time complexity</span>
+<div class="infoBoxText">
+To remove an element, we simply remove the top element from the stack. We do not have to search through the stack or move any other elements. Whether the stack has 5 elements or 5,000 elements, it still takes one step. So the time complexity of Pop is <code style="font-family:'Courier New',monospace;color:var(--color-code-text);">O(1)</code>.
+</div>
+</div>
+
+<p class="articleP">Now that we know how to remove elements, let us learn how to view the top element without removing it.</p>
+
+<h2 id="peek" class="articleH2">Peek</h2>
+
+<p class="articleP">Before we start, try this visualizer to see how the Peek operation works.</p>
+
+<div data-visualizer="stack-peek"></div>
+
+<p class="articleP">Sometimes we only want to see the top element without removing it.</p>
+
+<p class="articleP">For that, we use the <code style="background:var(--color-code-bg);border:1px solid var(--color-code-border);border-radius:4px;padding:1px 5px;font-family:'Courier New',monospace;font-size:13px;color:var(--color-code-text);">top()</code> function.</p>
+
+<pre class="codeBlock"><code>st.top();</code></pre>
+
+<p class="articleP">Suppose our stack looks like this.</p>
+
+<pre class="codeBlock"><code>Top
+40
+30
+20
+10</code></pre>
+
+<p class="articleP">Calling <code style="background:var(--color-code-bg);border:1px solid var(--color-code-border);border-radius:4px;padding:1px 5px;font-family:'Courier New',monospace;font-size:13px;color:var(--color-code-text);">st.top()</code> returns <code style="background:var(--color-code-bg);border:1px solid var(--color-code-border);border-radius:4px;padding:1px 5px;font-family:'Courier New',monospace;font-size:13px;color:var(--color-code-text);">40</code> because it is the top element.</p>
+
+<img src="/stack-peek-40.png" alt="Peek at the top element" class="articleImg" />
+
+<p class="articleP">Notice that nothing is removed.</p>
+
+<p class="articleP">Our stack still looks exactly the same.</p>
+
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Time complexity</span>
+<div class="infoBoxText">
+To view the top element, we simply look at the top of the stack. We do not remove anything or search through the stack. Whether the stack has 10 elements or 10,000 elements, it always takes one step. So the time complexity of Peek is <code style="font-family:'Courier New',monospace;color:var(--color-code-text);">O(1)</code>.
+</div>
+</div>
+
+<p class="articleP">Now let us learn how to check whether our stack is empty.</p>
+
+<h2 id="is-empty" class="articleH2">Is Empty</h2>
+
+<p class="articleP">Before we start, try this visualizer to see how the Is Empty operation works.</p>
+
+<div data-visualizer="stack-empty"></div>
+
+<p class="articleP">Imagine you have removed every element from the stack.</p>
+
+<p class="articleP">How do you know if the stack is empty?</p>
+
+<p class="articleP">To check this, we use the <code style="background:var(--color-code-bg);border:1px solid var(--color-code-border);border-radius:4px;padding:1px 5px;font-family:'Courier New',monospace;font-size:13px;color:var(--color-code-text);">empty()</code> function.</p>
+
+<pre class="codeBlock"><code>st.empty();</code></pre>
+
+<p class="articleP">If the stack is empty, it returns <strong>true</strong>.</p>
+
+<p class="articleP">Otherwise, it returns <strong>false</strong>.</p>
+
+<img src="/stack-isempty.png" alt="Checking if the stack is empty" class="articleImg" />
+
+
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Time complexity</span>
+<div class="infoBoxText">
+To check whether a stack is empty, we simply check if it contains any elements. We do not need to go through the entire stack. Whether the stack has 0 elements or 1,000 elements, it always takes one step. So the time complexity of Is Empty is <code style="font-family:'Courier New',monospace;color:var(--color-code-text);">O(1)</code>.
+</div>
+</div>
+
+<p class="articleP">Now let us learn how to find the number of elements currently stored in the stack.</p>
+
+<h2 id="size" class="articleH2">Size</h2>
+
+<p class="articleP">Before we start, try this visualizer to see how the Size operation works.</p>
+
+<div data-visualizer="stack-size"></div>
+
+<p class="articleP">Sometimes we want to know how many elements are currently stored in the stack.</p>
+
+<p class="articleP">To find this, we use the <code style="background:var(--color-code-bg);border:1px solid var(--color-code-border);border-radius:4px;padding:1px 5px;font-family:'Courier New',monospace;font-size:13px;color:var(--color-code-text);">size()</code> function.</p>
+
+<pre class="codeBlock"><code>st.size();</code></pre>
+
+<p class="articleP">Suppose our stack looks like this.</p>
+
+<pre class="codeBlock"><code>Top
+40
+30
+20
+10</code></pre>
+
+<p class="articleP">Calling <code style="background:var(--color-code-bg);border:1px solid var(--color-code-border);border-radius:4px;padding:1px 5px;font-family:'Courier New',monospace;font-size:13px;color:var(--color-code-text);">st.size()</code> returns <code style="background:var(--color-code-bg);border:1px solid var(--color-code-border);border-radius:4px;padding:1px 5px;font-family:'Courier New',monospace;font-size:13px;color:var(--color-code-text);">4</code> because there are four elements in the stack.</p>
+
+<img src="/stack-size.png" alt="Stack size" class="articleImg" />
+
+
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Time complexity</span>
+<div class="infoBoxText">
+C++ already keeps track of the number of elements in the stack. We do not have to count them one by one. Whether the stack has 10 elements or 10,000 elements, it always takes one step. So the time complexity of Size is <code style="font-family:'Courier New',monospace;color:var(--color-code-text);">O(1)</code>.
+</div>
+</div>
+
+<h2 id="complete-stack-code" class="articleH2">Complete Stack Code</h2>
+
+<pre class="codeBlock"><code>#include &lt;iostream&gt;
+#include &lt;stack&gt;
+using namespace std;
+
+int main() {
+
+    stack&lt;int&gt; st;
+
+    st.push(10);
+    st.push(20);
+    st.push(30);
+    st.push(40);
+
+    cout &lt;&lt; "Top element: " &lt;&lt; st.top() &lt;&lt; "\n";
+
+    st.pop();
+
+    cout &lt;&lt; "Top after pop: " &lt;&lt; st.top() &lt;&lt; "\n";
+
+    cout &lt;&lt; "Size: " &lt;&lt; st.size() &lt;&lt; "\n";
+
+    if (st.empty()) {
+        cout &lt;&lt; "Stack is empty\n";
+    } else {
+        cout &lt;&lt; "Stack is not empty\n";
+    }
+
+    return 0;
+}</code></pre>
+
+<div class="infoBox infoBoxPink">
+<span class="infoBoxLabel">Important</span>
+<div class="infoBoxText">
+Remember that <code style="font-family:'Courier New',monospace;color:var(--color-code-text);">pop()</code> only removes the top element. It does <strong>not</strong> return it. If you want to use the value before removing it, first call <code style="font-family:'Courier New',monospace;color:var(--color-code-text);">top()</code>, then call <code style="font-family:'Courier New',monospace;color:var(--color-code-text);">pop()</code>.
+</div>
+</div>
+
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Summary</span>
+<div class="infoBoxText">
+A stack stores elements one on top of another. Every operation happens at the top of the stack, making Push, Pop, Peek, Is Empty, and Size all take <code style="font-family:'Courier New',monospace;color:var(--color-code-text);">O(1)</code> time. Because stacks follow the <strong>Last In, First Out (LIFO)</strong> rule, they are perfect for problems like Undo, browser history, function calls, and matching brackets.
+</div>
+</div>
+<h2 id="where-are-stacks-used" class="articleH2">Where are Stacks used?</h2>
+
+<p class="articleP">You might be wondering...</p>
+
+<p class="articleP"><strong>Where are stacks actually used?</strong></p>
+
+<p class="articleP">Stacks are used in many applications that you use every day. Even if you have never written a program before, you have probably used stacks without realizing it.</p>
+
+<h3 style="font-family: var(--font-patrick-hand), cursive; font-size: 24px; font-weight: 400; letter-spacing: 0.05em; color: var(--color-text-primary); margin: 28px 0 12px;">Undo</h3>
+
+<p class="articleP">Think about Microsoft Word, Canva, or Photoshop.</p>
+
+<p class="articleP">Every time you make a change, the application remembers it.</p>
+
+<p class="articleP">When you press <strong>Undo</strong>, it removes the most recent change first.</p>
+
+<p class="articleP">That is exactly how a stack works. The last action you perform is the first action that gets undone.</p>
+
+<img src="/stack-undo.png" alt="Undo operation using a stack" class="articleImg" />
+
+
+<h3 style="font-family: var(--font-patrick-hand), cursive; font-size: 24px; font-weight: 400; letter-spacing: 0.05em; color: var(--color-text-primary); margin: 28px 0 12px;">Browser Back Button</h3>
+
+<p class="articleP">Imagine you visit these pages.</p>
+
+<pre class="codeBlock"><code>Google
+↓
+YouTube
+↓
+Wikipedia</code></pre>
+
+<p class="articleP">When you press the Back button, which page do you return to?</p>
+
+<p class="articleP">You return to <strong>YouTube</strong> because it was the last page you visited.</p>
+
+<p class="articleP">If you press Back again, you return to <strong>Google</strong>.</p>
+
+<p class="articleP">The browser stores your history using a stack.</p>
+
+<img src="/stack-back.png" alt="Browser back button uses a stack" class="articleImg" />
+<h3 style="font-family: var(--font-patrick-hand), cursive; font-size: 24px; font-weight: 400; letter-spacing: 0.05em; color: var(--color-text-primary); margin: 28px 0 12px;">Function Calls</h3>
+
+<p class="articleP">Whenever one function calls another function, the computer remembers where it needs to return after the function finishes.</p>
+
+<p class="articleP">It does this using a stack.</p>
+
+<p class="articleP">The most recently called function always finishes first before returning to the previous function.</p>
+
+
+
+<h3 style="font-family: var(--font-patrick-hand), cursive; font-size: 24px; font-weight: 400; letter-spacing: 0.05em; color: var(--color-text-primary); margin: 28px 0 12px;">Matching Brackets</h3>
+
+<p class="articleP">Stacks are also used to check whether brackets are balanced.</p>
+
+<pre class="codeBlock"><code>( )   { }   [ ]</code></pre>
+
+<p class="articleP">Every opening bracket is pushed onto the stack.</p>
+
+<p class="p articleP">Whenever we find a closing bracket, we compare it with the opening bracket on the top of the stack.</p>
+
+<p class="articleP">If they match, we remove it from the stack and continue.</p>
+
+
+
+<div class="infoBox infoBoxYellow">
+<span class="infoBoxLabel">Remember</span>
+<div class="infoBoxText">
+Whenever you need to work with the <strong>most recently added item first</strong>, a stack is usually the right data structure.
+</div>
+</div>
+
+
+
+<p class="articleP">Great! Now that you understand stacks, it's time to learn about <strong>queues</strong>.</p>

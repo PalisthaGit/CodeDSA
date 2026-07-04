@@ -9,7 +9,7 @@ const content = applyCodeHighlighting(
 
 export const binarySearchArticle: Article = {
   slug: 'binary-search',
-  title: 'Binary search — cut it in half',
+  title: 'Binary Search',
   chapter: 'Searching and graphs',
   chapterSlug: 'searching-and-graphs',
   tagline: 'Once you see it, you will wonder how you never thought of it yourself. It is that natural.',

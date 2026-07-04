@@ -35,6 +35,14 @@
     max-width: none;
   }
 
+  .mobileTocToggleWrap {
+    display: block;
+    position: fixed;
+    top: 60px;
+    right: 16px;
+    z-index: 300;
+  }
+
   /* Visualizer layout — hide sidebar, show mobile select */
   .vizMobileRow {
     display: block;
@@ -102,6 +110,10 @@
 
   .articleMain {
     padding: 24px 24px 48px;
+  }
+
+  .articleCenter {
+    padding: 0;
   }
 
   /* Article typography */

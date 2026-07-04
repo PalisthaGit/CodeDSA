@@ -9,7 +9,7 @@ const content = applyCodeHighlighting(
 
 export const linearSearchArticle: Article = {
   slug: 'linear-search',
-  title: 'Linear Search — check everything one by one',
+  title: 'Linear Search',
   chapter: 'Searching and graphs',
   chapterSlug: 'searching-and-graphs',
   tagline: 'I will explain it so simply that you will understand it right away. Trust me, it is that easy.',

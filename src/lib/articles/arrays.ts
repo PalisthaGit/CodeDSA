@@ -9,7 +9,7 @@ const content = applyCodeHighlighting(
 
 export const arraysArticle: Article = {
   slug: 'arrays',
-  title: 'What is an Array in Programming',
+  title: 'Array',
   chapter: 'Data structures',
   chapterSlug: 'data-structures',
   tagline: 'From zero to fully understanding arrays — step by step, no experience needed.',

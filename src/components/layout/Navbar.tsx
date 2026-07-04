@@ -21,13 +21,13 @@ export function Navbar() {
   }, [pathname, setSidebarOpen])
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-purple-border bg-background">
+    <nav className="fixed top-0 left-0 right-0 z-50 w-full border-b border-purple-border bg-background">
       <div className="flex h-[52px] w-full items-center justify-between px-4 sm:px-8">
         {/* Left side: sidebar hamburger (learn pages only, hidden on desktop) + logo */}
         <div className="flex items-center gap-2">
           {isLearnPage && (
             <button
-              className="lg:hidden flex flex-col justify-center items-center w-9 h-9 gap-[5px] rounded-md hover:bg-purple-light transition-colors duration-200"
+              className="navHamburger flex-col justify-center items-center w-9 h-9 gap-[5px] rounded-md hover:bg-purple-light transition-colors duration-200"
               onClick={() => setSidebarOpen(o => !o)}
               aria-label="Open topics menu"
             >

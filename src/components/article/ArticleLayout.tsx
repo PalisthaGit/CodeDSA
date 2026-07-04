@@ -13,13 +13,13 @@ export function ArticleLayout({ articleData, children }: ArticleLayoutProps) {
   return (
     <div className="articleLayout">
       <div className="articleGrid">
-        <div className="articleSidebar">
-          <TOCSidebar activeSlug={articleData.slug} />
-        </div>
+        <aside className="articleSidebar">
+          <TOCSidebar activeSlug={articleData.slug} chapterSlug={articleData.chapterSlug} />
+        </aside>
 
         <main className="articleMain">
           <MobileArticleSidebar>
-            <TOCSidebar activeSlug={articleData.slug} />
+            <TOCSidebar activeSlug={articleData.slug} chapterSlug={articleData.chapterSlug} />
           </MobileArticleSidebar>
           {children}
           <NavButtons

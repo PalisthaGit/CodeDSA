@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { sections } from '@/lib/topics'
 import { getArticleData } from '@/lib/articles'
 import { ArticleLayout } from '@/components/article/ArticleLayout'
+import { MobileTOCToggle } from '@/components/article/MobileTOCToggle'
 import { ArrayVisualizer } from '@/components/visualizer/ArrayVisualizer'
 import { LinkedListVisualizer } from '@/components/visualizer/LinkedListVisualizer'
 import { LinearSearchVisualizer } from '@/components/visualizer/LinearSearchVisualizer'
@@ -94,20 +95,25 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <ArticleLayout articleData={article}>
-      <nav className="breadcrumb" aria-label="Breadcrumb">
-        <Link href="/learn" className="breadcrumbLink">Learn</Link>
-        <span className="breadcrumbSep">·</span>
-        <span className="breadcrumbSection">{article.chapter}</span>
-        <span className="breadcrumbSep">·</span>
-        <span className="breadcrumbCurrent">{article.title}</span>
-      </nav>
+      <div className="articleCenter">
+        <div className="articleHeader">
+          <div className="breadcrumbRow">
+            <nav className="breadcrumb" aria-label="Breadcrumb">
+              <Link href="/learn" className="breadcrumbLink">Learn</Link>
+              <span className="breadcrumbSep">·</span>
+              <span className="breadcrumbSection">{article.chapter}</span>
+              <span className="breadcrumbSep">·</span>
+              <span className="breadcrumbCurrent">{article.title}</span>
+            </nav>
+            <MobileTOCToggle headings={article.headings} />
+          </div>
+          <p className="articleTag">{article.chapter}</p>
+          <h1 className="articleTitle">{article.title}</h1>
+        </div>
 
-      <p className="readTime">{article.readTime} read</p>
-      <h1 className="articleTitle">{article.title}</h1>
-      <p className="articleTagline">{article.tagline}</p>
-
-      <div className="articleBody">
-        <ArticleContent content={article.content} />
+        <div className="articleBody">
+          <ArticleContent content={article.content} />
+        </div>
       </div>
     </ArticleLayout>
   )

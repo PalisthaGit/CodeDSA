@@ -7,13 +7,18 @@
 html,
 body,
 * {
-  font-family: var(--font-patrick-hand), cursive;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
   letter-spacing: 0.05em;
+}
+
+html {
+  overflow-x: clip;
 }
 
 body {
   background: var(--color-bg);
   color: var(--color-text-primary);
+  overflow-x: clip;
 }
 
 a {

@@ -2,6 +2,7 @@ import { whatIsDsaArticle } from './articles/what-is-dsa'
 import { whyLearnDsaArticle } from './articles/why-learn-dsa'
 import { arraysArticle } from './articles/arrays'
 import { linkedListsArticle } from './articles/linked-lists'
+import { stackArticle } from './articles/stack'
 import { linearSearchArticle } from './articles/linear-search'
 import { binarySearchArticle } from './articles/binary-search'
 
@@ -30,6 +31,7 @@ const articleRegistry: Record<string, Article> = {
   'why-learn-dsa': whyLearnDsaArticle,
   arrays: arraysArticle,
   'linked-lists': linkedListsArticle,
+  stack: stackArticle,
   'linear-search': linearSearchArticle,
   'binary-search': binarySearchArticle,
 }

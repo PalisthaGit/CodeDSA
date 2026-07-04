@@ -1,31 +1,58 @@
-<h2 id="so-what-even-is-dsa" class="articleH2 articleH2First">So what even is DSA?</h2>
-<p class="articleP">DSA stands for Data Structures and Algorithms. That sounds fancy but it is really just two things — how you store data, and how you work with it.</p>
-<p class="articleP">Think of it like a kitchen. A data structure is how you organize your kitchen — where the pots go, where the spices are, how the fridge is arranged. An algorithm is the recipe — the step by step process you follow to cook something.</p>
-<p class="articleP">A well organized kitchen makes cooking fast and easy. A messy one makes everything harder. Same idea in code.</p>
-<div class="infoBox infoBoxYellow">
-  <span class="infoBoxLabel">💡 Good to know</span>
-  <div class="infoBoxText">Data structures are how you store and organize data. Algorithms are the steps you follow to do something with that data. Together they make your code fast, clean, and smart.</div>
-</div>
+<p class="articleP">Have you noticed how every coding interview, every course, every roadmap keeps talking about DSA? DSA is genuinely important, and today you're going to learn what it actually means, in the simplest way possible.</p>
+<p class="articleP">Let's start with data structures.</p>
 
-<h2 id="why-does-it-matter" class="articleH2">Why does it matter?</h2>
-<p class="articleP">Here is the honest answer — you can write code without knowing DSA. Lots of people do. But at some point you will hit a wall.</p>
-<p class="articleP">Maybe your app slows down when it gets too many users. Maybe you cannot figure out how to solve a certain problem. Maybe you get stuck in a coding interview. That wall is usually a DSA wall.</p>
-<p class="articleP">Once you understand DSA, problems that felt impossible start feeling obvious. You start seeing patterns everywhere. You write code that actually scales.</p>
-<div class="infoBox infoBoxPink">
-  <span class="infoBoxLabel">⚠️ Common mistake</span>
-  <div class="infoBoxText">You do not need to memorize every algorithm. You need to understand the thinking behind them. That is what this site teaches.</div>
-</div>
+<h2 id="what-are-data-structures" class="articleH2 articleH2First">What are data structures?</h2>
+<p class="articleP">Data structures are just ways to organise and store data. Simple as that.</p>
+<p class="articleP">Say you have 5 data to store. Do you store all in one variable? No, you use an array to store it.</p>
+<img src="/array.png" alt="array" class="articleImg" />
 
-<h2 id="what-will-you-learn-here" class="articleH2">What will you learn here?</h2>
-<p class="articleP">We start with the basics — what arrays are, how linked lists work, why stacks and queues exist. Then we move to sorting, searching, and eventually graphs and advanced algorithms.</p>
-<p class="articleP">Every topic has a clear explanation written like a friend sitting next to you. And every algorithm has a visualizer so you can watch it happen, not just read about it.</p>
-<p class="articleP">By the end you will not just know DSA — you will actually understand it.</p>
-<div class="infoBox infoBoxBlue">
-  <span class="infoBoxLabel">📌 Remember this</span>
-  <div class="infoBoxText">Every article on this site ends with an oh I get it moment. That is the whole point. If you finish an article and you are still confused, that is on us — not you.</div>
-</div>
+<p class="articleP">Now, here's the thing. There are so many types of data structures out there, so do we really need all of them?</p>
+<p class="articleP">Let's understand this with an analogy.</p>
 
-<h2 id="how-long-will-this-take" class="articleH2">How long will this take?</h2>
-<p class="articleP">Honest answer — it depends on how deep you go. The foundations take a few weeks if you go through one article a day. The advanced stuff takes longer.</p>
-<p class="articleP">But here is what matters — you do not need to rush. Go at your own pace. Every article here is self contained. Read it, watch the visualizer, move on when you are ready.</p>
-<p class="articleP">There is no deadline. No pressure. Just learning, one step at a time.</p>
+<h3 id="the-water-bottle-and-the-glass" class="articleH3">The water bottle and the glass</h3>
+<p class="articleP">Imagine you have a water bottle and a glass sitting on your table. You could drink water from either one. Both work fine.</p>
+<img src="/water-bottle-vs-glass.png" alt="Water bottle for gym, glass for desk — same water, different container" class="articleImg" />
+<p class="articleP">But if you're heading to the gym, you grab the bottle, not the glass. Why? It seals shut, it survives being tossed in your bag, it moves with you.</p>
+<p class="articleP">If you're just sitting at your desk though, you'd reach for the glass instead. No reason to carry a bottle for that.</p>
+<p class="articleP">Same water. Different container. Different purpose.</p>
+
+<h3 id="now-bring-that-into-programming" class="articleH3">Now bring that into programming</h3>
+<p class="articleP">It works the exact same way in code. If we want everything in order and be able to go to any data instantly, we use one type of data structure for that.</p>
+<p class="articleP">But similarly, if we want to access the last element first, we use just one type of data structure for that.</p>
+<img src="/containers.png" alt="different container" class="articleImg" />
+<p class="articleP">And if we want something else, then there's a type built for that too.</p>
+<p class="articleP">That is why the choice of data structure matters. A wrong structure might still work, but it'll be slow and messy. So you should always pick the right one, which you'll eventually see clearly, because we will learn every one of these in detail.</p>
+
+<h2 id="what-are-algorithms" class="articleH2">What are algorithms?</h2>
+<p class="articleP">Algorithms are just a set of step by step instructions to do a task. Think about when you're cooking noodles.</p>
+<img src="/what-is-dsa-algorithm.png" alt="different container" class="articleImg" />
+
+<ol style="font-size: 19px; line-height: 1.85; color: var(--color-text-primary); margin: 0 0 22px; padding-left: 28px;">
+  <li>Boil water</li>
+  <li>Add noodles</li>
+  <li>Wait a few minutes</li>
+  <li>Serve it</li>
+  <li>Eat it</li>
+</ol>
+<p class="articleP">That's an algorithm too.</p>
+<p class="articleP">Similar to data structures, there are multiple algorithms. So why do we need so many? Let's answer that with an example.</p>
+
+<h3 id="think-about-train-bus-or-plane" class="articleH3">Think about train, bus, or plane</h3>
+<p class="articleP">Say you need to travel from your city to another one. You've got three options. Train, bus, or plane.</p>
+<img src="/what-is-dsa-which-algorithm.png" alt="which algorithm to choose" class="articleImg" />
+
+<p class="articleP">If money isn't really a concern and you just want to get there fast, you take the plane.</p>
+<p class="articleP">If you're trying to save cash and don't mind a longer ride, you take the bus.</p>
+<p class="articleP">If you want something in between, decent cost, decent time, you take the train.</p>
+<p class="articleP">None of these choices is wrong. It's just that your decision depends on what matters to you.</p>
+<p class="articleP">Algorithms work exactly like this. For the same problem, one algorithm might be fast but use more memory. Another might be slower but barely touch any memory at all. Neither one is "the best" algorithm on its own. It depends on what you're optimising for in that situation. Sometimes speed matters more. Sometimes memory matters more. You choose based on your constraints, the same way you'd choose your train, bus, or plane based on yours.</p>
+
+<h2 id="bringing-it-all-together" class="articleH2">Bringing it all together</h2>
+<p class="articleP">So let's recap.</p>
+<p class="articleP">Data structures are how you store and organise your data. Think of them as the container.</p>
+<p class="articleP">Algorithms are the steps you take to solve a problem using that data. Think of them as the plan.</p>
+<p class="articleP">Neither one works alone. You could pick the perfect data structure and still write a slow algorithm around it. Or you could write a brilliant algorithm and cripple it by storing your data the wrong way.</p>
+<p class="articleP">Together, data structures and algorithms work together to run a computer program.</p>
+
+<h2 id="whats-next" class="articleH2">What's next</h2>
+<p class="articleP">Now you know what DSA is. Next, we will learn why we should learn DSA. Though we've touched on it a little here, we'll go into detail in the next one.</p>

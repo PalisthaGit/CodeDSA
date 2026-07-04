@@ -9,7 +9,7 @@ const content = applyCodeHighlighting(
 
 export const linkedListsArticle: Article = {
   slug: 'linked-lists',
-  title: "Linked Lists — when arrays aren't enough",
+  title: 'Linked Lists',
   chapter: 'Data structures',
   chapterSlug: 'data-structures',
   tagline: 'Arrays need a fixed size upfront. Linked lists grow as you go — here is how they work.',
