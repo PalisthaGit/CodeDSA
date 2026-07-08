@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { sections } from '@/lib/topics'
+import SubscribeForm from '@/components/SubscribeForm'
 
 export const metadata: Metadata = {
   title: 'DSANotes — Learn DSA free, step by step',
@@ -62,14 +63,7 @@ export default function HomePage() {
 
             <div className="emailRow">
               <span className="emailLabel">Get notified when new articles drop →</span>
-              <div className="emailFields">
-                <input
-                  type="email"
-                  placeholder="your@email.com"
-                  className="emailInput"
-                />
-                <button type="button" className="emailBtn">Subscribe</button>
-              </div>
+              <SubscribeForm />
             </div>
           </div>
 

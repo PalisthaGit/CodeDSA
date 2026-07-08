@@ -1,9 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Patrick_Hand, Pacifico } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MobileSidebarProvider } from "@/lib/MobileSidebarContext";
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
 
 const patrickHand = Patrick_Hand({
   weight: "400",
@@ -58,6 +61,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ?? "",
+  },
 };
 
 export default function RootLayout({
@@ -73,6 +79,17 @@ export default function RootLayout({
           <main className="flex-1 pt-[52px]">{children}</main>
         </MobileSidebarProvider>
         <Footer />
+        {GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga-init" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}',{anonymize_ip:true});`}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );
