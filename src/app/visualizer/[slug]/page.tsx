@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${vis.title} Visualizer — DSANotes`,
     description: `Interactive step-by-step visualization of ${vis.title}. Watch the algorithm run and understand how it works.`,
+    alternates: { canonical: `/visualizer/${slug}` },
   }
 }
 

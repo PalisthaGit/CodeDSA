@@ -91,6 +91,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${article.title} — DSANotes`,
     description: article.tagline,
+    alternates: { canonical: `/learn/${slug}` },
     openGraph: {
       title: `${article.title} — DSANotes`,
       description: article.tagline,
@@ -104,8 +105,36 @@ export default async function ArticlePage({ params }: Props) {
 
   if (!article) notFound()
 
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'TechArticle',
+      headline: article.title,
+      description: article.tagline,
+      url: `https://dsanotes.com/learn/${slug}`,
+      author: { '@type': 'Organization', name: 'DSANotes', url: 'https://dsanotes.com' },
+      publisher: { '@type': 'Organization', name: 'DSANotes', url: 'https://dsanotes.com' },
+      mainEntityOfPage: `https://dsanotes.com/learn/${slug}`,
+      educationalLevel: 'beginner',
+      learningResourceType: 'Article',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://dsanotes.com' },
+        { '@type': 'ListItem', position: 2, name: 'Learn', item: 'https://dsanotes.com/learn' },
+        { '@type': 'ListItem', position: 3, name: article.title, item: `https://dsanotes.com/learn/${slug}` },
+      ],
+    },
+  ]
+
   return (
     <ArticleLayout articleData={article}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+      />
       <div className="articleCenter">
         <div className="articleHeader">
           <div className="breadcrumbRow">

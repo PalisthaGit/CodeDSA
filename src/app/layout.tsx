@@ -74,6 +74,23 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${patrickHand.variable} ${pacifico.variable}`}>
       <body className="min-h-screen flex flex-col bg-background text-text-primary">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'DSANotes',
+              url: 'https://dsanotes.com',
+              description: 'Learn data structures and algorithms step by step. Free forever.',
+              publisher: {
+                '@type': 'Organization',
+                name: 'DSANotes',
+                url: 'https://dsanotes.com',
+              },
+            }).replace(/</g, '\\u003c'),
+          }}
+        />
         <MobileSidebarProvider>
           <Navbar />
           <main className="flex-1 pt-[52px]">{children}</main>
