@@ -23,6 +23,6 @@ export const whyLearnDsaArticle: Article = {
   content,
   prevSlug: 'what-is-dsa',
   prevTitle: 'What is DSA and why does it matter?',
-  nextSlug: 'arrays',
-  nextTitle: 'What is an Array in Programming',
+  nextSlug: 'time-complexity',
+  nextTitle: 'What is Time Complexity?',
 }

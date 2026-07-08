@@ -421,7 +421,7 @@ export function LinkedListVisualizer({ op }: { op?: Op } = {}) {
             ) : (
               <>
                 {nodes.map((node, i) => (
-                  <div key={node.id} className="llNodeWrapper">
+                  <div key={String(node.id)} className="llNodeWrapper">
                     <div className="llNodeLabelRow">
                       {i === 0 && !isEmptyState && <span className="llLabelHead">head</span>}
                       {node.hl === 'current' && <span className="llLabelCurrent">current</span>}

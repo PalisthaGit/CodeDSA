@@ -6,6 +6,7 @@ import { VisualizerMobileSelect } from './VisualizerMobileSelect'
 import { ArrayVisualizer } from './ArrayVisualizer'
 import { LinearSearchVisualizer } from './LinearSearchVisualizer'
 import { BinarySearchVisualizer } from './BinarySearchVisualizer'
+import { StackVisualizer } from './StackVisualizer'
 
 interface Props {
   active: Visualizer
@@ -53,6 +54,8 @@ export function VisualizerLayout({ active, articleSlugs }: Props) {
 
           {active.id === 'array' ? (
             <ArrayVisualizer />
+          ) : active.id === 'stack' ? (
+            <StackVisualizer />
           ) : active.id === 'linear-search' ? (
             <LinearSearchVisualizer />
           ) : active.id === 'binary-search' ? (

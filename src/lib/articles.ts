@@ -1,8 +1,10 @@
 import { whatIsDsaArticle } from './articles/what-is-dsa'
 import { whyLearnDsaArticle } from './articles/why-learn-dsa'
+import { timeComplexityArticle } from './articles/time-complexity'
 import { arraysArticle } from './articles/arrays'
 import { linkedListsArticle } from './articles/linked-lists'
 import { stackArticle } from './articles/stack'
+import { queueArticle } from './articles/queue'
 import { linearSearchArticle } from './articles/linear-search'
 import { binarySearchArticle } from './articles/binary-search'
 
@@ -29,9 +31,12 @@ export type Article = {
 const articleRegistry: Record<string, Article> = {
   'what-is-dsa': whatIsDsaArticle,
   'why-learn-dsa': whyLearnDsaArticle,
+  'time-complexity': timeComplexityArticle,
   arrays: arraysArticle,
   'linked-lists': linkedListsArticle,
   stack: stackArticle,
+    queue: queueArticle,
+
   'linear-search': linearSearchArticle,
   'binary-search': binarySearchArticle,
 }

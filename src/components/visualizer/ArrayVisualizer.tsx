@@ -15,14 +15,14 @@ type CardAnim = {
 }
 
 const ARRAY_SIZE = 7
-const CARD_STEP = 100 // 90px card + 10px gap
+const CARD_STEP = 68 // 62px card + 6px gap
 
 const INITIAL_SLOTS: Slot[] = [
-  { value: 'Blinding Lights ' },
+  { value: 'Blinding Lights' },
   { value: 'Levitating' },
   { value: 'Stay' },
   { value: 'Heat Waves' },
-  { value: 'Peaches ' },
+  { value: 'Peaches' },
   { value: null },
   { value: null },
 ]
@@ -41,31 +41,31 @@ type PseudoLine = { text: string; indent: 0 | 1 | 2 }
 
 const PSEUDOCODE: Record<Operation, PseudoLine[]> = {
   access: [
-    { text: 'function access(array, index):', indent: 0 },
-    { text: 'return array[index]', indent: 1 },
+    { text: 'int access(int arr[], int i) {', indent: 0 },
+    { text: '  return arr[i];', indent: 0 },
   ],
   update: [
-    { text: 'function update(array, index, value):', indent: 0 },
-    { text: 'set array[index] to value', indent: 1 },
+    { text: 'void update(int arr[], int i, int v) {', indent: 0 },
+    { text: '  arr[i] = v;', indent: 0 },
   ],
   add: [
-    { text: 'function insert(array, length, index, value):', indent: 0 },
-    { text: 'loop i from (length - 1) down to index:', indent: 1 },
-    { text: 'copy array[i] to array[i + 1]', indent: 2 },
-    { text: 'set array[index] to value', indent: 1 },
-    { text: 'increase length by one', indent: 1 },
+    { text: 'void insert(int arr[], int& n, int i, int v) {', indent: 0 },
+    { text: '  for (int j = n-1; j >= i; j--)', indent: 0 },
+    { text: '    arr[j+1] = arr[j];', indent: 0 },
+    { text: '  arr[i] = v;', indent: 0 },
+    { text: '  n++;', indent: 0 },
   ],
   remove: [
-    { text: 'function remove(array, length, index):', indent: 0 },
-    { text: 'loop i from index up to (length - 2):', indent: 1 },
-    { text: 'copy array[i + 1] to array[i]', indent: 2 },
-    { text: 'clear array[length - 1]', indent: 1 },
-    { text: 'decrease length by one', indent: 1 },
+    { text: 'void remove(int arr[], int& n, int i) {', indent: 0 },
+    { text: '  for (int j = i; j < n-1; j++)', indent: 0 },
+    { text: '    arr[j] = arr[j+1];', indent: 0 },
+    { text: '  arr[n-1] = 0;', indent: 0 },
+    { text: '  n--;', indent: 0 },
   ],
   traverse: [
-    { text: 'function traverse(array, length):', indent: 0 },
-    { text: 'loop i from 0 to (length - 1):', indent: 1 },
-    { text: 'visit array[i]', indent: 2 },
+    { text: 'void traverse(int arr[], int n) {', indent: 0 },
+    { text: '  for (int i = 0; i < n; i++)', indent: 0 },
+    { text: '    visit(arr[i]);', indent: 0 },
   ],
 }
 
@@ -541,20 +541,60 @@ export function ArrayVisualizer({ operation = 'all' }: ArrayVisualizerProps) {
     }
   }
 
-  return (
-    <div className={`arrayVisOuter${embedded ? ' arrayVisOuterEmbedded' : ''}`}>
-      <div className={`arrayVis${embedded ? ' arrayVisEmbedded' : ''}`}>
-        {embedded && (
-          <p className="arrayVisEmbedLabel">{opCapitalized(operation as Operation)}</p>
-        )}
-
-        {!embedded && (
-          <div className="arrayVisHeader">
-            <h3 className="arrayVisTitle">array — fixed capacity</h3>
+  const cardRows = (
+    <div className="arrayVisCards">
+      {slots.map((slot, i) => (
+        <div key={i} className="arrayVisCardCol" style={getColStyle(i)}>
+          <div className={getCardClass(i)} style={getCardStyle(i)}>
+            {slot.value !== null
+              ? <span className="arrayVisCardValue">
+                  {slot.value.split(' ').map((word, wi, arr) => (
+                    <span key={wi}>{word}{wi < arr.length - 1 && <br />}</span>
+                  ))}
+                </span>
+              : <span className="arrayVisCardValueEmpty">—</span>
+            }
           </div>
-        )}
+          <div className="arrayVisIndex">[{i}]</div>
+        </div>
+      ))}
+    </div>
+  )
 
-        {!embedded && (
+  if (embedded) {
+    return (
+      <div className="arrayVisOuter arrayVisOuterEmbedded">
+        <div className="arrayVis arrayVisEmbedded">
+          <p className="arrayVisEmbedLabel">{opCapitalized(operation as Operation)}</p>
+          {cardRows}
+          <div className="arrayVisMeta">
+            <span className="arrayVisSizeBadge">length: <strong>{length}</strong></span>
+            <span className="arrayVisSizeBadge">size: <strong>{ARRAY_SIZE}</strong></span>
+          </div>
+          {renderControls()}
+          <div className="arrayVisNarration">
+            {narration ? (
+              <>
+                <span className="arrayVisNarrationText">{narration}</span>
+                {complexity && <span className="arrayVisComplexity">{complexity}</span>}
+              </>
+            ) : (
+              <span className="arrayVisNarrationPlaceholder">select an operation above</span>
+            )}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="arrayVis" style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box' }}>
+      <div className="arrayVisHeader">
+        <h3 className="arrayVisTitle">array — fixed capacity</h3>
+      </div>
+
+      <div className="arrayVisTopRow">
+        <div className="arrayVisMainSection">
           <div className="arrayVisOps">
             {ALL_OPS.map(op => (
               <button
@@ -567,45 +607,43 @@ export function ArrayVisualizer({ operation = 'all' }: ArrayVisualizerProps) {
               </button>
             ))}
           </div>
-        )}
+          {cardRows}
+          <div className="arrayVisMeta">
+            <span className="arrayVisSizeBadge">length: <strong>{length}</strong></span>
+            <span className="arrayVisSizeBadge">size: <strong>{ARRAY_SIZE}</strong></span>
+          </div>
+        </div>
 
-        <div className="arrayVisCards">
-          {slots.map((slot, i) => (
-            <div key={i} className="arrayVisCardCol" style={getColStyle(i)}>
-              <div className={getCardClass(i)} style={getCardStyle(i)}>
-                {slot.value !== null
-                  ? <span className="arrayVisCardValue">{slot.value}</span>
-                  : <span className="arrayVisCardValueEmpty">—</span>
-                }
+        <div className="arrayVisPseudo">
+          <p className="arrayVisPseudoLabel">CHOOSE AN OPERATION ↓</p>
+          <div className="arrayVisPseudoBody">
+            {PSEUDOCODE[currentOp].map((line, i) => (
+              <div
+                key={activeLine === i ? `active-${activeLinePulse}` : i}
+                className={`arrayVisPseudoLine${activeLine === i ? ' arrayVisPseudoLineActive' : ''}`}
+              >
+                <span className="arrayVisPseudoLineNum">{i + 1}</span>
+                <span className={`arrayVisPseudoLineText${line.indent > 0 ? ` indent${line.indent}` : ''}`}>
+                  {line.text}
+                </span>
               </div>
-              <div className="arrayVisIndex">[{i}]</div>
-            </div>
-          ))}
-        </div>
-
-        <div className="arrayVisMeta">
-          <span className="arrayVisSizeBadge">
-            length: <strong>{length}</strong>
-          </span>
-          <span className="arrayVisSizeBadge">
-            size: <strong>{ARRAY_SIZE}</strong>
-          </span>
-        </div>
-
-        {renderControls()}
-
-        <div className="arrayVisNarration">
-          {narration ? (
-            <>
-              <span className="arrayVisNarrationText">{narration}</span>
-              {complexity && <span className="arrayVisComplexity">{complexity}</span>}
-            </>
-          ) : (
-            <span className="arrayVisNarrationPlaceholder">select an operation above</span>
-          )}
+            ))}
+          </div>
         </div>
       </div>
 
+      {renderControls()}
+
+      <div className="arrayVisNarration">
+        {narration ? (
+          <>
+            <span className="arrayVisNarrationText">{narration}</span>
+            {complexity && <span className="arrayVisComplexity">{complexity}</span>}
+          </>
+        ) : (
+          <span className="arrayVisNarrationPlaceholder">select an operation above</span>
+        )}
+      </div>
     </div>
   )
 }

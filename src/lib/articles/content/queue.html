@@ -1,0 +1,488 @@
+<p class="articleP">Before anything, let me ask you something.</p>
+
+<p class="articleP">Before we learn about queues, try using the visualizer below and see if you can figure out how it works.</p>
+
+<div class="visualizerContainer">
+  <!-- Queue Visualizer -->
+</div>
+
+<p class="articleP">Now let's learn queues in the simplest way possible.</p>
+
+<p class="articleP">Imagine you're going to buy a movie ticket.</p>
+
+<p class="articleP">When you reach the ticket counter, you notice there are already five people waiting in line.</p>
+
+<p class="articleP">So, you join the back of the line and wait for your turn.</p>
+
+<p class="articleP">The first person in line buys their ticket and leaves.</p>
+
+<p class="articleP">Now, the second person moves to the front.</p>
+
+<p class="articleP">They buy their ticket and leave too.</p>
+
+<p class="articleP">This continues until everyone in front of you has bought their ticket.</p>
+
+<p class="articleP">Finally, you reach the front of the line and buy your ticket.</p>
+
+<img src="/movie-ticket-queue.png" alt="People waiting in line to buy movie tickets." class="articleImg" />
+
+<p class="articleP">A queue works exactly the same way.</p>
+
+<p class="articleP">New elements are always added to the <strong>back</strong> of the queue.</p>
+
+<p class="articleP">Elements are always removed from the <strong>front</strong> of the queue.</p>
+
+<p class="articleP">That is why a queue follows the <strong>First In, First Out (FIFO)</strong> rule.</p>
+
+<p class="articleP">The first element added to the queue is always the first one to come out.</p>
+
+<div class="infoBox infoBoxBlue">
+    <span class="infoBoxLabel">📌 Remember this</span>
+    <div class="infoBoxText">
+        A queue always follows the <strong>First In, First Out (FIFO)</strong> rule. The first element that enters the queue is always the first one to leave it.
+    </div>
+</div>
+
+<h2 id="what-is-a-queue" class="articleH2 articleH2First">What is a Queue?</h2>
+
+<p class="articleP">A queue is a data structure where elements are added at one end and removed from the other.</p>
+
+<p class="articleP">New elements are always added to the <strong>back</strong> of the queue.</p>
+
+<p class="articleP">Elements are always removed from the <strong>front</strong> of the queue.</p>
+
+<p class="articleP">Since the first element added is also the first one removed, a queue follows the <strong>First In, First Out (FIFO)</strong> rule.</p>
+
+<p class="articleP">Think of it just like waiting in line to buy a movie ticket.</p>
+
+<p class="articleP">The person who joins the line first gets served first, while everyone else waits for their turn.</p>
+
+<h2 id="why-only-front-and-back" class="articleH2">Why can we only add at the back and remove from the front?</h2>
+
+<p class="articleP">Imagine you're still waiting in line to buy a movie ticket.</p>
+
+<p class="articleP">Would it be fair if someone joined the line and went straight to the front?</p>
+
+<p class="articleP">Of course not.</p>
+
+<p class="articleP">Everyone has to wait for their turn.</p>
+
+<p class="articleP">That is why new people always join at the back of the line, while the person at the front gets served first.</p>
+
+<img src="/queue-line.png" alt="People joining the back of a queue while the front person is being served." class="articleImg" />
+
+<p class="articleP">A queue works the same way.</p>
+
+<p class="articleP">New elements are always added to the back of the queue.</p>
+
+<p class="articleP">Elements are always removed from the front of the queue.</p>
+
+<p class="articleP">This keeps the order fair, ensuring that the first element added is also the first one removed.</p>
+
+<div class="infoBox infoBoxYellow">
+    <span class="infoBoxLabel">💡 Good to know</span>
+    <div class="infoBoxText">
+        Unlike an array or vector, you cannot insert or remove elements from the middle of a queue. Everything happens only at the front or the back.
+    </div>
+</div>
+
+<h2 id="queue-operations" class="articleH2">Queue Operations</h2>
+
+<p class="articleP">Now that you know what a queue is, it's time to learn how to use one.</p>
+
+<p class="articleP">There are a few operations we can perform on a queue.</p>
+
+<ul class="articleList">
+    <li>Enqueue</li>
+    <li>Dequeue</li>
+    <li>Front</li>
+    <li>Is Empty</li>
+    <li>Size</li>
+</ul>
+
+<p class="articleP">Don't worry—we'll learn each one with simple examples and animations.</p>
+
+<p class="articleP">Let's start by creating our first queue.</p>
+
+<h2 id="creating-a-queue" class="articleH2">How to Create a Queue</h2>
+
+<p class="articleP">Before we can perform any operations, we first need to create a queue.</p>
+
+<p class="articleP">In C++, we can create one like this:</p>
+
+<pre><code>queue&lt;int&gt; q;</code></pre>
+
+<p class="articleP">Let's break it down.</p>
+
+<p class="articleP"><strong>queue&lt;int&gt;</strong></p>
+
+<p class="articleP">This creates a queue that stores integers.</p>
+
+<p class="articleP">If you want to store strings, you would write:</p>
+
+<pre><code>queue&lt;string&gt; q;</code></pre>
+
+<p class="articleP">If you want to store characters, you would write:</p>
+
+<pre><code>queue&lt;char&gt; q;</code></pre>
+
+<p class="articleP">The type inside <code>&lt; &gt;</code> tells C++ what kind of data the queue will store.</p>
+
+<p class="articleP"><strong>q</strong></p>
+
+<p class="articleP">This is simply the name of our queue. You can name it anything you like.</p>
+
+<p class="articleP">Right now, our queue is empty.</p>
+
+<p class="articleP">Now let's add our first element using the <strong>Enqueue</strong> operation.</p>
+
+<h2 id="enqueue" class="articleH2 articleH2First">Enqueue</h2>
+
+<p class="articleP">Before we start, try this visualizer to see how the Enqueue operation works.</p>
+
+<div class="visualizerContainer">
+  <!-- Enqueue Visualizer -->
+</div>
+
+<p class="articleP">Enqueue simply means adding an element to the queue.</p>
+
+<p class="articleP">In C++, we use the <code>push()</code> function to perform this operation.</p>
+
+<p class="articleP">For example, to add the value <code>10</code>, we write:</p>
+
+<pre><code>q.push(10);</code></pre>
+
+<p class="articleP">This adds <code>10</code> to the back of the queue.</p>
+
+<p class="articleP">Since our queue was empty, <code>10</code> becomes the first element.</p>
+
+<p class="articleP">Now let's add a few more elements.</p>
+
+<pre><code>q.push(20);
+q.push(30);
+q.push(40);</code></pre>
+
+<p class="articleP">Each time we call <code>push()</code>, the new element is added to the back of the queue.</p>
+
+<img src="/queue-enqueue-1.png" alt="Queue containing 10, 20, 30 and 40 with Front and Back labels." class="articleImg" />
+
+<p class="articleP">Now let's add one more element.</p>
+
+<pre><code>q.push(50);</code></pre>
+
+<p class="articleP">Our queue now looks like this.</p>
+
+<img src="/queue-enqueue-2.png" alt="Queue containing 10, 20, 30, 40 and 50 with Front and Back labels." class="articleImg" />
+
+<p class="articleP">Notice that every new element is always added to the back of the queue.</p>
+
+<div class="infoBox infoBoxBlue">
+    <span class="infoBoxLabel">📌 Remember this</span>
+    <div class="infoBoxText">
+        <code>push()</code> always adds a new element to the <strong>back</strong> of the queue. Existing elements never change their order.
+    </div>
+</div>
+
+<h3 class="articleH3">Time Complexity</h3>
+
+<p class="articleP">To add an element, we simply place it at the back of the queue.</p>
+
+<p class="articleP">We don't have to move any other elements or search for a position.</p>
+
+<p class="articleP">Whether the queue has 1 element or 1,000 elements, it always takes just one step.</p>
+
+<p class="articleP">That is why the time complexity of <strong>Enqueue</strong> is <strong>O(1)</strong>.</p>
+
+<p class="articleP">Great! Our queue now has a few elements. But queues aren't just for adding elements. Let's learn how to remove the first element using the <strong>Dequeue</strong> operation.</p>
+
+<h2 id="dequeue" class="articleH2">Dequeue</h2>
+
+<p class="articleP">Before we start, try this visualizer to see how the Dequeue operation works.</p>
+
+<div class="visualizerContainer">
+  <!-- Dequeue Visualizer -->
+</div>
+
+<p class="articleP">Dequeue simply means removing an element from the queue.</p>
+
+<p class="articleP">In C++, we use the <code>pop()</code> function to perform this operation.</p>
+
+<p class="articleP">Suppose our queue looks like this.</p>
+
+<img src="/queue-before-pop.png" alt="Queue containing 10, 20, 30, 40 and 50 before removing the front element." class="articleImg" />
+
+<p class="articleP">To remove the first element, we write:</p>
+
+<pre><code>q.pop();</code></pre>
+
+<p class="articleP">This removes <code>10</code> from the front of the queue.</p>
+
+<p class="articleP">Our queue now looks like this.</p>
+
+<img src="/queue-after-pop.png" alt="Queue containing 20, 30, 40 and 50 after removing the front element." class="articleImg" />
+
+<p class="articleP">Notice that <code>pop()</code> always removes the front element.</p>
+
+<p class="articleP">We cannot remove an element from the middle or the back of the queue.</p>
+
+<div class="infoBox infoBoxYellow">
+    <span class="infoBoxLabel">💡 Good to know</span>
+    <div class="infoBoxText">
+        Unlike a vector, a queue does not let you choose which element to remove. <code>pop()</code> always removes the element at the front.
+    </div>
+</div>
+
+<h3 class="articleH3">Time Complexity</h3>
+
+<p class="articleP">To remove an element, we simply remove the element at the front of the queue.</p>
+
+<p class="articleP">We don't have to search through the queue or move any other elements.</p>
+
+<p class="articleP">Whether the queue has 5 elements or 5,000 elements, it still takes just one step.</p>
+
+<p class="articleP">That is why the time complexity of <strong>Dequeue</strong> is <strong>O(1)</strong>.</p>
+
+<p class="articleP">Now that we know how to remove elements, let's learn how to view the first element without removing it.</p>
+
+<h2 id="front" class="articleH2">Front</h2>
+
+<p class="articleP">Before we start, try this visualizer to see how the Front operation works.</p>
+
+<div class="visualizerContainer">
+  <!-- Front Visualizer -->
+</div>
+
+<p class="articleP">Sometimes, we only want to see the first element in the queue without removing it.</p>
+
+<p class="articleP">For that, we use the <code>front()</code> function.</p>
+
+<p class="articleP">Suppose our queue looks like this.</p>
+
+<img src="/queue-front-before.png" alt="Queue containing 20, 30, 40 and 50." class="articleImg" />
+
+<p class="articleP">To view the first element, we write:</p>
+
+<pre><code>q.front();</code></pre>
+
+<p class="articleP">This returns the value <code>20</code>, which is the first element in the queue.</p>
+
+<p class="articleP">Notice that nothing is removed.</p>
+
+<p class="articleP">Our queue still looks exactly the same.</p>
+
+<img src="/queue-front-after.png" alt="Queue remains unchanged after calling front()." class="articleImg" />
+
+<p class="articleP">The <code>front()</code> function only lets us view the first element. It does not remove it.</p>
+
+<div class="infoBox infoBoxPink">
+    <span class="infoBoxLabel">⚠️ Common mistake</span>
+    <div class="infoBoxText">
+        Many beginners confuse <code>front()</code> with <code>pop()</code>. <code>front()</code> only returns the first element, while <code>pop()</code> actually removes it.
+    </div>
+</div>
+
+<h3 class="articleH3">Time Complexity</h3>
+
+<p class="articleP">To view the first element, we simply look at the front of the queue.</p>
+
+<p class="articleP">We don't remove anything or search through the queue.</p>
+
+<p class="articleP">Whether the queue has 10 elements or 10,000 elements, it always takes just one step.</p>
+
+<p class="articleP">That is why the time complexity of <strong>Front</strong> is <strong>O(1)</strong>.</p>
+
+<p class="articleP">Now let's learn how to check whether our queue is empty.</p>
+
+<h2 id="is-empty" class="articleH2 articleH2First">Is Empty</h2>
+
+<p class="articleP">Before we start, try this visualizer to see how the <strong>Is Empty</strong> operation works.</p>
+
+<div class="visualizerContainer">
+    <!-- Is Empty Visualizer -->
+</div>
+
+<p class="articleP">Before removing or viewing an element, it's always a good idea to check whether the queue is empty.</p>
+
+<p class="articleP">After all, you can't remove or view an element if the queue doesn't have any!</p>
+
+<p class="articleP">To do this, we use the <code>empty()</code> function.</p>
+
+<pre><code>q.empty();</code></pre>
+
+<p class="articleP">If the queue is empty, it returns <code>true</code>.</p>
+
+<p class="articleP">Otherwise, it returns <code>false</code>.</p>
+
+<p class="articleP">Suppose our queue looks like this.</p>
+
+<img src="/queue-is-empty-1.png" alt="Queue containing 20, 30, 40 and 50." class="articleImg" />
+
+<p class="articleP">If we write:</p>
+
+<pre><code>q.empty();</code></pre>
+
+<p class="articleP">It returns <code>false</code> because the queue still contains elements.</p>
+
+<p class="articleP">Now imagine we remove every element from the queue.</p>
+
+<img src="/queue-empty.png" alt="An empty queue." class="articleImg" />
+
+<p class="articleP">If we call:</p>
+
+<pre><code>q.empty();</code></pre>
+
+<p class="articleP">It returns <code>true</code> because the queue is now empty.</p>
+
+<p class="articleP">The <code>empty()</code> function only checks whether the queue is empty. It doesn't add or remove any elements.</p>
+
+<div class="infoBox infoBoxYellow">
+    <span class="infoBoxLabel">💡 Good to know</span>
+    <div class="infoBoxText">
+        Before calling <code>front()</code> or <code>pop()</code>, it's good practice to check <code>empty()</code> first. Trying to access an empty queue leads to undefined behavior.
+    </div>
+</div>
+
+<h3 class="articleH3">Time Complexity</h3>
+
+<p class="articleP">To check whether a queue is empty, we simply check if it contains any elements.</p>
+
+<p class="articleP">We don't need to go through the entire queue.</p>
+
+<p class="articleP">Whether the queue has 0 elements or 1,000 elements, it always takes just one step.</p>
+
+<p class="articleP">That is why the time complexity of <strong>Is Empty</strong> is <strong>O(1)</strong>.</p>
+
+<p class="articleP">Now let's learn how to find the number of elements currently stored in the queue.</p>
+
+<h2 id="size" class="articleH2">Size</h2>
+
+<p class="articleP">Before we start, try this visualizer to see how the <strong>Size</strong> operation works.</p>
+
+<div class="visualizerContainer">
+    <!-- Size Visualizer -->
+</div>
+
+<p class="articleP">Sometimes, we want to know how many elements are currently in the queue.</p>
+
+<p class="articleP">To find this, we use the <code>size()</code> function.</p>
+
+<pre><code>q.size();</code></pre>
+
+<p class="articleP">This returns the total number of elements in the queue.</p>
+
+<p class="articleP">For example, suppose our queue looks like this.</p>
+
+<img src="/queue-size-1.png" alt="Queue containing 20, 30, 40 and 50." class="articleImg" />
+
+<p class="articleP">If we write:</p>
+
+<pre><code>q.size();</code></pre>
+
+<p class="articleP">It returns <code>4</code> because there are four elements in the queue.</p>
+
+<p class="articleP">Now let's add one more element.</p>
+
+<pre><code>q.push(60);</code></pre>
+
+<p class="articleP">Our queue now looks like this.</p>
+
+<img src="/queue-size-2.png" alt="Queue containing 20, 30, 40, 50 and 60." class="articleImg" />
+
+<p class="articleP">If we call:</p>
+
+<pre><code>q.size();</code></pre>
+
+<p class="articleP">It returns <code>5</code>.</p>
+
+<p class="articleP">The <code>size()</code> function only tells us how many elements are in the queue. It doesn't add or remove any elements.</p>
+
+<div class="infoBox infoBoxBlue">
+    <span class="infoBoxLabel">📌 Remember this</span>
+    <div class="infoBoxText">
+        <code>size()</code> returns the current number of elements in the queue. It does not count them one by one every time you call it.
+    </div>
+</div>
+
+<h3 class="articleH3">Time Complexity</h3>
+
+<p class="articleP">To find the size of a queue, C++ already keeps track of the number of elements.</p>
+
+<p class="articleP">We don't have to count them one by one.</p>
+
+<p class="articleP">Whether the queue has 10 elements or 10,000 elements, it always takes just one step.</p>
+
+<p class="articleP">That is why the time complexity of <strong>Size</strong> is <strong>O(1)</strong>.</p>
+
+<div class="infoBox infoBoxBlue">
+    <span class="infoBoxLabel">📌 Remember this</span>
+    <div class="infoBoxText">
+        You've now learned all the basic operations of a queue: <strong>Enqueue</strong>, <strong>Dequeue</strong>, <strong>Front</strong>, <strong>Is Empty</strong>, and <strong>Size</strong>. With these five operations, you can solve many queue-based problems.
+    </div>
+</div>
+
+<h2 id="full-queue-code" class="articleH2">Full Queue Code</h2>
+
+<p class="articleP">Here's everything we've learned put together into one simple program.</p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+int main() {
+
+    queue&lt;int&gt; q;
+
+    q.push(10);
+    q.push(20);
+    q.push(30);
+    q.push(40);
+
+    cout &lt;&lt; "Front: " &lt;&lt; q.front() &lt;&lt; endl;
+    cout &lt;&lt; "Size: " &lt;&lt; q.size() &lt;&lt; endl;
+
+    q.pop();
+
+    cout &lt;&lt; "Front after pop: " &lt;&lt; q.front() &lt;&lt; endl;
+
+    if(q.empty()) {
+        cout &lt;&lt; "Queue is empty";
+    } else {
+        cout &lt;&lt; "Queue is not empty";
+    }
+
+    return 0;
+}
+</code></pre>
+
+<h2 id="where-queues-are-used" class="articleH2">Where Are Queues Used?</h2>
+
+<p class="articleP">You might be wondering...</p>
+
+<p class="articleP"><strong>Where are queues actually used?</strong></p>
+
+<p class="articleP">Queues are used in many applications you use every day.</p>
+
+<p class="articleP"><strong>Printer Queue</strong></p>
+
+<p class="articleP">Documents are printed in the same order they are sent to the printer.</p>
+
+<p class="articleP"><strong>Waiting in Line</strong></p>
+
+<p class="articleP">Whether it's buying movie tickets or checking out at a supermarket, the first person in line is served first.</p>
+
+<p class="articleP"><strong>Customer Support</strong></p>
+
+<p class="articleP">Customers are usually helped in the order they join the queue.</p>
+
+<p class="articleP"><strong>Task Scheduling</strong></p>
+
+<p class="articleP">Operating systems often process tasks in the order they are received.</p>
+
+<div class="infoBox infoBoxPink">
+    <span class="infoBoxLabel">⚠️ Worth knowing</span>
+    <div class="infoBoxText">
+        Queues are everywhere. Whenever something needs to be processed in the same order it arrives, a queue is usually the perfect data structure.
+    </div>
+</div>
+
+<p class="articleP">These are just a few examples. As you continue learning DSA, you'll discover many more places where queues are used.</p>

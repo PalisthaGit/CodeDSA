@@ -392,9 +392,9 @@
 .arrayVisCards {
   display: flex;
   flex-wrap: nowrap;
-  gap: 10px;
+  gap: 6px;
   margin-bottom: 12px;
-  overflow: hidden;
+  overflow-x: auto;
   padding-bottom: 4px;
 }
 
@@ -404,7 +404,7 @@
   align-items: center;
   gap: 4px;
   flex-shrink: 0;
-  width: 90px;
+  width: 62px;
 }
 
 .arrayVisCardCol .arrayVisIndex {
@@ -417,10 +417,10 @@
   justify-content: center;
   border: 1.5px solid var(--color-purple-border);
   border-radius: 6px;
-  width: 90px;
-  height: 65px;
-  min-width: 90px;
-  min-height: 65px;
+  width: 62px;
+  height: 50px;
+  min-width: 62px;
+  min-height: 50px;
   background: var(--color-code-bg);
   overflow: hidden;
   padding: 4px;
@@ -455,9 +455,9 @@
 }
 
 .arrayVisCardValue {
-  font-size: 11px;
+  font-size: 10px;
   font-family: var(--font-patrick-hand), cursive;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--color-text-primary);
   text-align: center;
   line-height: 1.3;
@@ -601,13 +601,26 @@
   display: flex;
 }
 
+.arrayVisTopRow {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.arrayVisMainSection {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+}
+
 /* ===== PSEUDOCODE PANEL ===== */
 
 .arrayVisPseudo {
   background: var(--color-code-bg);
-  border: 1.5px solid var(--color-code-border);
-  border-radius: var(--radius-card);
-  padding: 16px;
+  border: 1.5px solid var(--color-purple-border);
+  border-radius: 8px;
+  padding: 16px 18px;
   width: 260px;
   flex-shrink: 0;
   align-self: flex-start;
@@ -638,19 +651,19 @@
 }
 
 @keyframes pseudoLinePulse {
-  0%   { background-color: var(--color-yellow-border); border-left-color: var(--color-yellow-text); }
-  55%  { background-color: var(--color-yellow-light);  border-left-color: var(--color-yellow-border); }
-  100% { background-color: var(--color-yellow-light);  border-left-color: var(--color-yellow-border); }
+  0%   { background-color: rgba(83, 74, 183, 0.18); border-left-color: #534AB7; }
+  55%  { background-color: rgba(83, 74, 183, 0.08); border-left-color: rgba(83, 74, 183, 0.5); }
+  100% { background-color: rgba(83, 74, 183, 0.08); border-left-color: rgba(83, 74, 183, 0.5); }
 }
 
 .arrayVisPseudoLineActive {
-  background-color: var(--color-yellow-light);
-  border-left-color: var(--color-yellow-border);
+  background-color: rgba(83, 74, 183, 0.08);
+  border-left-color: rgba(83, 74, 183, 0.5);
   animation: pseudoLinePulse 0.35s ease forwards;
 }
 
 .arrayVisPseudoLineNum {
-  font-family: monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 10px;
   color: var(--color-text-muted);
   user-select: none;
@@ -660,18 +673,19 @@
 }
 
 .arrayVisPseudoLineText {
-  font-family: var(--font-patrick-hand), cursive;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 13px;
   color: var(--color-text-secondary);
-  line-height: 1.5;
+  line-height: 1.65;
+  letter-spacing: 0.02em;
 }
 
 .arrayVisPseudoLine.arrayVisPseudoLineActive .arrayVisPseudoLineNum {
-  color: var(--color-yellow-text);
+  color: #534AB7;
 }
 
 .arrayVisPseudoLine.arrayVisPseudoLineActive .arrayVisPseudoLineText {
-  color: var(--color-yellow-text);
+  color: #534AB7;
   font-weight: 600;
 }
 
@@ -1281,4 +1295,416 @@
   font-style: italic;
   font-family: var(--font-patrick-hand), cursive;
   font-size: 13px;
+}
+
+/* ===== STACK VISUALIZER ===== */
+
+.stackOpBtnActive {
+  background: var(--color-blue-section);
+  border-color: var(--color-blue-border);
+  color: #2A5070;
+}
+
+/* Outer row: U-container + label column */
+.stackLayout {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+/*
+ * U-shaped container: thick walls on left/bottom/right, open at top.
+ * flex-direction: column-reverse so the first node in the array (index 0)
+ * appears at the visual bottom and the last node (top of stack) floats up.
+ */
+.stackContainer {
+  width: 220px;
+  min-height: 300px;
+  border-left: 6px solid #8896A8;
+  border-bottom: 6px solid #8896A8;
+  border-right: 6px solid #8896A8;
+  border-top: none;
+  border-radius: 0 0 18px 18px;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  gap: 4px;
+  padding: 0 6px 6px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.stackContainerEmpty {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.stackEmptyText {
+  font-family: var(--font-patrick-hand), cursive;
+  font-size: 14px;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* Individual stack element */
+.stackNode {
+  width: 100%;
+  height: 44px;
+  flex-shrink: 0;
+  border: 1.5px solid var(--color-code-border);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-code-bg);
+  font-family: var(--font-patrick-hand), cursive;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  transition: background 0.25s, border-color 0.25s, color 0.25s;
+}
+
+.stackNodeValue {
+  pointer-events: none;
+}
+
+/* State colors */
+.stackNodeTop {
+  background: var(--color-blue-section);
+  border-color: var(--color-blue-border);
+  color: #2A5070;
+}
+
+.stackNodePushing {
+  background: var(--color-green-light);
+  border-color: var(--color-green-border);
+  color: #27500A;
+}
+
+.stackNodePopping {
+  background: #FFE0E0;
+  border-color: #F4A7A7;
+  color: #803030;
+}
+
+.stackNodePeeking {
+  background: var(--color-yellow-light);
+  border-color: var(--color-yellow-border);
+  color: var(--color-yellow-text);
+}
+
+.stackNodeActive {
+  background: var(--color-purple-light);
+  border-color: var(--color-purple-text);
+  color: #503080;
+}
+
+/* Thin column to the right that holds the "← top" badge */
+.stackLabelArea {
+  position: relative;
+  height: 300px;
+  width: 64px;
+  flex-shrink: 0;
+}
+
+/* "← top" badge pinned at the vertical midpoint of the topmost node */
+.stackTopLabel {
+  position: absolute;
+  left: 12px;
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #534AB7;
+  background: rgba(83, 74, 183, 0.12);
+  border: 1px solid rgba(83, 74, 183, 0.25);
+  border-radius: 3px;
+  padding: 2px 7px;
+  white-space: nowrap;
+}
+
+/* ===== DSRunner — code-step visualizer ===== */
+
+/* Desktop: stage left, code panel right */
+.dsrTopRow {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.dsrStageWrap {
+  flex-shrink: 0;
+}
+
+/* tube + label side by side */
+.dsrTubeRow {
+  display: flex;
+  align-items: flex-end;
+}
+
+/*
+ * U-shaped tube: always renders MAX_SLOTS fixed-height slots (top→bottom in DOM).
+ * Fixed height = 6×44 + 5×4 (gaps) + 6 (padding-bottom) + 6 (border-bottom) = 296px.
+ * overflow: visible so the drop-bounce can start above the open top.
+ */
+.dsrTube {
+  width: 220px;
+  height: 296px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-left:   6px solid #8896A8;
+  border-right:  6px solid #8896A8;
+  border-bottom: 6px solid #8896A8;
+  border-top: none;
+  border-radius: 0 0 18px 18px;
+  padding: 0 6px 6px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+/* Each slot: fixed 44px height — the key to zero layout shift */
+.dsrSlot {
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s, border-color 0.25s, color 0.25s;
+}
+
+.dsrSlotEmpty {
+  border: 1.5px dashed var(--color-purple-border);
+  background: transparent;
+  opacity: 0.4;
+}
+
+.dsrSlotFilled {
+  border: 1.5px solid var(--color-code-border);
+  background: var(--color-code-bg);
+  font-family: var(--font-patrick-hand), cursive;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.dsrSlotTop {
+  background: var(--color-blue-section);
+  border-color: var(--color-blue-border);
+  color: #2A5070;
+}
+
+/* Push: value bounces in from above */
+@keyframes dsrDrop {
+  0%   { transform: translateY(-52px); opacity: 0; }
+  55%  { transform: translateY(5px);   opacity: 1; }
+  75%  { transform: translateY(-3px); }
+  90%  { transform: translateY(2px); }
+  100% { transform: translateY(0);     opacity: 1; }
+}
+
+.dsrSlotDrop {
+  background: var(--color-green-light);
+  border-color: var(--color-green-border);
+  color: #27500A;
+  animation: dsrDrop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Pop: value flies up and out */
+@keyframes dsrFly {
+  0%   { transform: translateY(0);    opacity: 1; }
+  25%  { transform: translateY(-8px); opacity: 0.9; }
+  100% { transform: translateY(-70px); opacity: 0; }
+}
+
+.dsrSlotFly {
+  background: #FFE0E0;
+  border-color: #F4A7A7;
+  color: #803030;
+  animation: dsrFly 0.55s ease-in forwards;
+}
+
+/* Peek: top value pulses yellow */
+@keyframes dsrPulse {
+  0%   { transform: scale(1);    background: var(--color-blue-section);  border-color: var(--color-blue-border); }
+  30%  { transform: scale(1.06); background: var(--color-yellow-light);  border-color: var(--color-yellow-border); }
+  65%  { transform: scale(0.97); background: var(--color-yellow-light);  border-color: var(--color-yellow-border); }
+  100% { transform: scale(1);    background: var(--color-yellow-light);  border-color: var(--color-yellow-border); }
+}
+
+.dsrSlotPulse {
+  animation: dsrPulse 0.6s ease forwards;
+  color: var(--color-yellow-text);
+}
+
+.dsrSlotValue {
+  pointer-events: none;
+}
+
+/* Label column: holds the ← top badge */
+.dsrLabelCol {
+  position: relative;
+  height: 296px;
+  width: 64px;
+  flex-shrink: 0;
+}
+
+/* Size chip bump on change */
+@keyframes dsrBump {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.3); }
+  70%  { transform: scale(0.93); }
+  100% { transform: scale(1); }
+}
+
+.dsrSizeChip {
+  display: inline-block;
+}
+
+.dsrSizeBump {
+  animation: dsrBump 0.35s ease forwards;
+}
+
+/* Header row: title left, size badge right */
+.dsrHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Code panel: fixed height equal to the longest snippet */
+.dsrCodePanel {
+  flex: 1;
+  min-width: 0;
+  background: var(--color-code-bg);
+  border: 1.5px solid var(--color-code-border);
+  border-radius: var(--radius-card);
+  padding: 14px 16px;
+  box-sizing: border-box;
+}
+
+.dsrCodeLabel {
+  font-family: var(--font-patrick-hand), cursive;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--color-purple-text);
+  text-transform: uppercase;
+  margin: 0 0 12px;
+}
+
+/* Fixed height: 4 lines × 28px + 3 gaps × 2px = 118px — never changes */
+.dsrCodeLines {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  height: 118px;
+}
+
+.dsrCodeLine {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  border-left: 3px solid transparent;
+  background: transparent;
+  height: 26px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+@keyframes dsrCodePulse {
+  0%   { background-color: rgba(83, 74, 183, 0.18); border-left-color: #534AB7; }
+  55%  { background-color: rgba(83, 74, 183, 0.08); border-left-color: rgba(83, 74, 183, 0.5); }
+  100% { background-color: rgba(83, 74, 183, 0.08); border-left-color: rgba(83, 74, 183, 0.5); }
+}
+
+.dsrCodeLineActive {
+  background: rgba(83, 74, 183, 0.08);
+  border-left-color: rgba(83, 74, 183, 0.5);
+  animation: dsrCodePulse 0.35s ease forwards;
+}
+
+.dsrCodeLineNum {
+  font-family: monospace;
+  font-size: 10px;
+  color: var(--color-text-muted);
+  user-select: none;
+  min-width: 12px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.dsrCodeLineText {
+  font-family: monospace;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  white-space: pre;
+  line-height: 1.5;
+}
+
+.dsrCodeLineActive .dsrCodeLineNum {
+  color: #534AB7;
+}
+
+/* Reset icon button */
+.dsrResetBtn {
+  background: var(--color-code-bg);
+  border-color: var(--color-code-border);
+  color: var(--color-text-secondary);
+  font-size: 18px;
+  padding: 5px 12px;
+  line-height: 1;
+}
+
+/* ===== DSRunner responsive ===== */
+
+@media (max-width: 768px) {
+  .dsrTopRow {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dsrStageWrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dsrTubeRow {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .dsrLabelCol {
+    display: none;
+  }
+
+  .dsrTube {
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .dsrCodePanel {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* ===== StackVisualizer responsive ===== */
+
+@media (max-width: 640px) {
+  .stackLayout {
+    justify-content: center;
+  }
+
+  .stackContainer {
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    max-width: 340px;
+  }
 }

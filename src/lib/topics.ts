@@ -21,6 +21,7 @@ export const sections: Section[] = [
     topics: [
       { title: 'What is DSA and why does it matter?', slug: 'what-is-dsa', readTime: '5 min', hasVisualizer: false, comingSoon: false },
       { title: 'Why do you even need DSA?', slug: 'why-learn-dsa', readTime: '4 min', hasVisualizer: false, comingSoon: false },
+      { title: 'What is Time Complexity?', slug: 'time-complexity', readTime: '8 min', hasVisualizer: false, comingSoon: false },
       { title: 'How to think like a programmer', slug: 'think-like-programmer', readTime: '6 min', hasVisualizer: false, comingSoon: false },
       { title: 'Big O Notation', slug: 'big-o-notation', readTime: '8 min', hasVisualizer: false, comingSoon: false },
     ],
@@ -33,7 +34,7 @@ export const sections: Section[] = [
       { title: 'Array', slug: 'arrays', readTime: '10 min', hasVisualizer: true, comingSoon: false },
       { title: 'Linked Lists', slug: 'linked-lists', readTime: '8 min', hasVisualizer: true, comingSoon: false },
       { title: 'Stacks', slug: 'stack', readTime: '7 min', hasVisualizer: true, comingSoon: false },
-      { title: 'Queues', slug: 'queues', readTime: '7 min', hasVisualizer: true, comingSoon: false },
+      { title: 'Queues', slug: 'queue', readTime: '7 min', hasVisualizer: true, comingSoon: false },
       { title: 'Hash Maps', slug: 'hash-maps', readTime: '9 min', hasVisualizer: true, comingSoon: false },
       { title: 'Trees', slug: 'trees', readTime: '10 min', hasVisualizer: false, comingSoon: true },
       { title: 'Binary Search Trees', slug: 'binary-search-trees', readTime: '10 min', hasVisualizer: false, comingSoon: true },

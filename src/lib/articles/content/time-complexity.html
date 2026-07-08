@@ -1,0 +1,131 @@
+<p class="articleP">Did you know there's a way to measure how efficient your code is?</p>
+<p class="articleP">Imagine you and your friend are solving the same programming problem. You both write different code, and both programs produce the correct answer.</p>
+<p class="articleP">Now the question is... which code is better?</p>
+<p class="articleP">You might think, "That's easy! Just run both programs and see which one finishes first." But there's a problem.</p>
+<p class="articleP">The speed of a program doesn't depend only on the code. It also depends on many other factors, such as the computer you're using, the processor (CPU), the programming language, and other applications running in the background.</p>
+<p class="articleP">For example, the same program might finish in 1 second on one computer but 3 seconds on another.</p>
+<p class="articleP">So measuring a program using seconds isn't a fair way to compare algorithms.</p>
+<p class="articleP">Instead, developers measure how the number of steps an algorithm performs changes as the input size increases. This is called <strong>time complexity</strong>.</p>
+<p class="articleP">Think about counting numbers. If I ask you to count from 1 to 5, you'll finish almost instantly. But what if I ask you to count from 1 to 1,000,000? It'll take much longer because there are many more numbers to count.</p>
+<p class="articleP">Algorithms work in the same way. Some algorithms need only a few extra steps as the input grows, while others need significantly more.</p>
+<p class="articleP">To describe this growth, programmers use something called <strong>Big O notation</strong>. Big O is simply a way of describing how the number of steps grows as the input size grows.</p>
+<p class="articleP">In this lesson, you'll learn the four most common time complexities.</p>
+
+<h2 id="o1-constant-time" class="articleH2 articleH2First">O(1) — Constant Time</h2>
+<p class="articleP">Let's start with the simplest time complexity: O(1).</p>
+<p class="articleP">Imagine you have a box with 10 chocolates. Now your friend asks, "Can you give me the first chocolate?"</p>
+<p class="articleP">You simply open the box, pick the first chocolate, and hand it over. That took just one step.</p>
+<p class="articleP">Now let's make the box much bigger. Instead of 10 chocolates, imagine it contains 100 chocolates. Your friend asks the exact same question: "Can you give me the first chocolate?"</p>
+<p class="articleP">Does anything change? Not at all. You still open the box and pick the first chocolate. Even though the number of chocolates increased from 10 to 100, the number of steps stayed exactly the same.</p>
+<p class="articleP">What if the box had 1,000 chocolates? You'd still perform the same one step — pick the first chocolate.</p>
+<p class="articleP">This is called <strong>constant time</strong>, written as O(1). In O(1), the input size can grow, but the number of steps always stays the same.</p>
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Remember</span>
+<div class="infoBoxText">
+In O(1), no matter how large the input becomes, the number of steps never changes.
+</div>
+</div>
+
+<h2 id="on-linear-time" class="articleH2">O(n) — Linear Time</h2>
+<p class="articleP">Now let's look at O(n).</p>
+<p class="articleP">Imagine you own a small coffee shop. One morning, 10 customers walk in. For every customer, you always do the same three things:</p>
+<ol style="font-size:16.5px;line-height:1.85;color:var(--color-text-primary);margin:0 0 16px;padding-left:28px;">
+  <li>Take their order.</li>
+  <li>Make their coffee.</li>
+  <li>Serve their coffee.</li>
+</ol>
+<p class="articleP">That's 3 steps for each customer. So for 10 customers, you perform 30 steps.</p>
+<p class="articleP">The next day, your coffee shop goes viral! Now 100 customers walk in. Do you still perform only 30 steps? Of course not. Now you perform 300 steps.</p>
+<p class="articleP">What if n customers walk into your coffee shop? Since each customer requires 3 steps, you'll perform 3n steps.</p>
+<p class="articleP">Notice something interesting. As the number of customers increases, the number of steps increases at the same rate. If the number of customers doubles, the number of steps also doubles.</p>
+<p class="articleP">In Big O notation, we're not interested in the exact number of steps. We're interested in how the number of steps grows. Since 3n grows at the same rate as n, we ignore the constant 3 and simply write the time complexity as O(n).</p>
+<p class="articleP">This is called <strong>linear time</strong> because the number of steps grows linearly with the input size.</p>
+<div style="display:flex;flex-direction:column;gap:16px;margin:0 0 24px;">
+  <img src="/on-linear-time.png" alt="O(n) Linear Time — coffee shop example showing 3 steps per customer" style="width:100%;border-radius:12px;" />
+  <img src="/on-linear-growth.png" alt="O(n) Linear Growth graph showing steps increasing at a constant rate" style="width:100%;border-radius:12px;" />
+</div>
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Remember</span>
+<div class="infoBoxText">
+In O(n), as the input size increases, the number of steps also increases at the same rate.
+</div>
+</div>
+
+<h2 id="ologn-logarithmic-time" class="articleH2">O(log n) — Logarithmic Time</h2>
+<p class="articleP">Now let's look at O(log n).</p>
+<p class="articleP">Imagine you lose your glasses somewhere in your house. At first, you start searching randomly — under the bed, inside the wardrobe, behind the sofa.</p>
+<p class="articleP">After a while, you remember something. "Wait... I was upstairs the last time I was wearing my glasses!" Immediately, you stop searching downstairs. You've just eliminated half of the places you needed to search.</p>
+<p class="articleP">Then you remember something else. "I was studying in my bedroom." Now you can ignore all the other rooms upstairs and search only the bedroom. A few seconds later, you spot your glasses sitting on your study table.</p>
+<p class="articleP">Notice what happened. Instead of searching every possible place, each memory helped you eliminate a large part of the remaining search area. This is exactly how O(log n) works — rather than checking every item one by one, we repeatedly eliminate a large portion of the remaining data.</p>
+<p class="articleP">Let's look at a few examples:</p>
+<ul style="font-size:16.5px;line-height:1.85;color:var(--color-text-primary);margin:0 0 16px;padding-left:28px;">
+  <li>8 possible places → about 3 steps</li>
+  <li>16 possible places → about 4 steps</li>
+  <li>32 possible places → about 5 steps</li>
+</ul>
+<p class="articleP">Notice that every time the number of possible places doubles, the number of steps increases by only one.</p>
+<p class="articleP">Now imagine there are 1,000 possible places where your glasses could be. Would it take 1,000 steps to find them? Not at all. By eliminating half of the remaining places in every step, you would find your glasses in only about 10 steps.</p>
+<p class="articleP">That's why O(log n) is considered one of the fastest time complexities. Even when the input becomes much larger, the number of steps grows very slowly.</p>
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Remember</span>
+<div class="infoBoxText">
+In O(log n), we eliminate a large portion of the remaining data in every step, so the number of steps grows very slowly as the input size increases.
+</div>
+</div>
+
+<h2 id="on2-quadratic-time" class="articleH2">O(n²) — Quadratic Time</h2>
+<p class="articleP">Now let's look at O(n²).</p>
+<p class="articleP">Imagine you discover 5 treasure chests. Next to them, you find 5 keys. The problem is, you don't know which key opens which chest.</p>
+<p class="articleP">So you pick up the first chest and start trying the keys one by one until it opens. Then you move to the second chest and try all the keys again. Then the third. Then the fourth. And finally, the fifth.</p>
+<p class="articleP">For every chest, you may have to try every key.</p>
+<p class="articleP">Now imagine there are 100 treasure chests and 100 keys. For every new chest, you may have to try every key again. If there are n treasure chests and n keys, you'll perform up to n × n attempts. We write this as n².</p>
+<p class="articleP">Let's look at a few examples:</p>
+<ul style="font-size:16.5px;line-height:1.85;color:var(--color-text-primary);margin:0 0 16px;padding-left:28px;">
+  <li>5 chests → up to 25 attempts</li>
+  <li>10 chests → up to 100 attempts</li>
+  <li>100 chests → up to 10,000 attempts</li>
+</ul>
+<p class="articleP">Notice how quickly the number of attempts increases. When the number of chests doubles, the amount of work becomes much more than double. That's why algorithms with O(n²) work well for small inputs but can become very slow as the input size grows.</p>
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Remember</span>
+<div class="infoBoxText">
+In O(n²), for every input, you go through all the inputs again. As the input size grows, the number of steps grows much faster than the input itself.
+</div>
+</div>
+
+<h2 id="summary" class="articleH2">Summary</h2>
+<p class="articleP">You've just learned the four most common time complexities you'll see in Data Structures and Algorithms. Here's a quick recap.</p>
+<table style="width:100%;border-collapse:collapse;margin:0 0 28px;font-size:16px;line-height:1.7;">
+  <thead>
+    <tr style="background:var(--color-purple-light);">
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">Time Complexity</th>
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">Name</th>
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">Real-Life Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code style="font-family:'Courier New',monospace;color:var(--color-code-text);">O(1)</code></td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">Constant Time</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-secondary);">Picking the first chocolate from a box</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code style="font-family:'Courier New',monospace;color:var(--color-code-text);">O(log n)</code></td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">Logarithmic Time</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-secondary);">Finding your glasses by eliminating half the search area each time</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code style="font-family:'Courier New',monospace;color:var(--color-code-text);">O(n)</code></td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">Linear Time</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-secondary);">Serving customers in a coffee shop</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code style="font-family:'Courier New',monospace;color:var(--color-code-text);">O(n²)</code></td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">Quadratic Time</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-secondary);">Trying every key on every treasure chest</td>
+    </tr>
+  </tbody>
+</table>
+<p class="articleP">Remember, time complexity doesn't tell us exactly how many seconds an algorithm takes to run. Instead, it tells us how the number of steps grows as the input size grows.</p>
+<p class="articleP">When the input size is small, two different algorithms might seem equally fast. But as the input becomes larger, choosing the right algorithm can make a huge difference. That's why developers use Big O notation — it gives us a simple way to compare algorithms and understand how well they'll perform as the amount of data increases.</p>
+<p class="articleP">As you continue learning Data Structures and Algorithms, you'll keep seeing these time complexities again and again. Now that you understand what they mean, you'll have a much easier time understanding and comparing algorithms.</p>

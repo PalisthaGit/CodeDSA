@@ -15,6 +15,7 @@ export const visualizerCategories: VisualizerCategory[] = [
     title: 'Data structures',
     items: [
       { id: 'array', title: 'Array', category: 'Data structures', articleSlug: 'arrays' },
+      { id: 'stack', title: 'Stack', category: 'Data structures', articleSlug: 'stack' },
     ],
   },
   {

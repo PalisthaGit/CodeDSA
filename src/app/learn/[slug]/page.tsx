@@ -9,6 +9,7 @@ import { ArrayVisualizer } from '@/components/visualizer/ArrayVisualizer'
 import { LinkedListVisualizer } from '@/components/visualizer/LinkedListVisualizer'
 import { LinearSearchVisualizer } from '@/components/visualizer/LinearSearchVisualizer'
 import { BinarySearchVisualizer } from '@/components/visualizer/BinarySearchVisualizer'
+import { DSRunner } from '@/components/visualizer/DSRunner'
 
 type VisualizerOperation = 'all' | 'access' | 'update' | 'add' | 'remove' | 'traverse'
 
@@ -32,6 +33,16 @@ function ArticleContent({ content }: { content: string }) {
         ? <LinearSearchVisualizer key={match.index} />
         : vizId === 'binary-search'
           ? <BinarySearchVisualizer key={match.index} />
+          : vizId === 'stack' || vizId === 'stack-create' || vizId === 'stack-size'
+            ? <DSRunner key={match.index} op="all" />
+          : vizId === 'stack-push'
+            ? <DSRunner key={match.index} op="push" />
+          : vizId === 'stack-pop'
+            ? <DSRunner key={match.index} op="pop" />
+          : vizId === 'stack-peek'
+            ? <DSRunner key={match.index} op="peek" />
+          : vizId === 'stack-empty'
+            ? <DSRunner key={match.index} op="pop" startEmpty={true} />
           : vizId === 'linked-list'
             ? <LinkedListVisualizer key={match.index} />
             : vizId === 'linked-list-create'
