@@ -9,6 +9,7 @@ import { BinarySearchVisualizer } from './BinarySearchVisualizer'
 import { StackVisualizer } from './StackVisualizer'
 import { GraphVisualizer } from './GraphVisualizer'
 import { SortingVisualizer } from './SortingVisualizer'
+import { KMPVisualizer } from './KMPVisualizer'
 
 interface Props {
   active: Visualizer
@@ -66,6 +67,8 @@ export function VisualizerLayout({ active, articleSlugs }: Props) {
             <SortingVisualizer algorithmId={active.id} />
           ) : active.category === 'Graph algorithms' ? (
             <GraphVisualizer algorithm={active.id} />
+          ) : active.id === 'kmp' ? (
+            <KMPVisualizer />
           ) : (
             <div className="visualizerCard">
               <p className="visualizerCardLabel">{active.title.toLowerCase()}</p>

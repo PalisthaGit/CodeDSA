@@ -1057,6 +1057,217 @@
   font-weight: 600;
 }
 
+/* ===== KMP VISUALIZER ===== */
+
+.visCellBox.kmpMismatch {
+  background: #FFE0E0;
+  border-color: #F4A7A7;
+  color: #803030;
+}
+
+.visCellBox.kmpCandidate {
+  background: var(--color-blue-section);
+  border-color: var(--color-blue-border);
+  color: #2A5070;
+}
+
+.kmpPhaseTag {
+  display: inline-block;
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+.kmpPhasePreprocess {
+  background: var(--color-blue-section);
+  border: 1px solid var(--color-blue-border);
+  color: #185FA5;
+}
+
+.kmpPhaseSearch {
+  background: var(--color-green-light);
+  border: 1px solid var(--color-green-border);
+  color: #27500A;
+}
+
+.kmpScrollArea {
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.kmpRowGroup {
+  margin-bottom: 10px;
+  transition: opacity 0.3s;
+}
+
+.kmpRowDimmed {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.kmpRowLabel {
+  font-family: monospace;
+  font-size: 10px;
+  color: var(--color-purple-text);
+  letter-spacing: 0.06em;
+  margin-bottom: 2px;
+}
+
+/* ===== KMP FAILURE FUNCTION TABLE ===== */
+
+.kmpFailureSection {
+  margin: 4px 0 16px;
+  overflow-x: auto;
+}
+
+.kmpFailureLabel {
+  font-family: monospace;
+  font-size: 10px;
+  color: var(--color-purple-text);
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.kmpFailureGrid {
+  display: flex;
+  align-items: stretch;
+  border: 1.5px solid var(--color-code-border);
+  border-radius: 8px;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.kmpFailureLabelCol {
+  display: flex;
+  flex-direction: column;
+  border-right: 1.5px solid var(--color-code-border);
+  background: var(--color-code-bg);
+  flex-shrink: 0;
+}
+
+.kmpFailureLabelCell {
+  display: flex;
+  align-items: center;
+  padding: 4px 10px;
+  font-family: monospace;
+  font-size: 10px;
+  color: var(--color-purple-text);
+  border-bottom: 1px solid var(--color-code-border);
+  height: 26px;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.kmpFailureLabelCell:last-child {
+  border-bottom: none;
+}
+
+.kmpFailureValCol {
+  display: flex;
+  flex-direction: column;
+  width: 36px;
+  min-width: 36px;
+  border-right: 1px solid var(--color-code-border);
+  transition: background 0.25s;
+}
+
+.kmpFailureValCol:last-child {
+  border-right: none;
+}
+
+.kmpFailureValCol.kmpFailureActive {
+  background: var(--color-yellow-light);
+}
+
+.kmpFailureCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  border-bottom: 1px solid var(--color-code-border);
+  box-sizing: border-box;
+}
+
+.kmpFailureCell:last-child {
+  border-bottom: none;
+}
+
+.kmpFailureCellIdx {
+  font-family: monospace;
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+
+.kmpFailureCellChar {
+  font-family: var(--font-patrick-hand), cursive;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.kmpFailureCellVal {
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-code-text);
+}
+
+.kmpFailureCellVal.kmpFailurePending {
+  color: var(--color-text-muted);
+  font-weight: 400;
+  font-size: 11px;
+}
+
+/* ===== KMP CONTROLS ===== */
+
+.kmpControls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.kmpInputText {
+  width: 180px;
+}
+
+.kmpInputPattern {
+  width: 130px;
+}
+
+/* ===== KMP STATUS BOX ===== */
+
+.visStatusBox.kmpStatusBox {
+  flex-direction: column;
+  align-items: flex-start;
+  height: auto;
+  min-height: 58px;
+  font-style: normal;
+  gap: 4px;
+}
+
+.kmpStatusMsg {
+  font-size: 14px;
+  font-style: italic;
+}
+
+.kmpStatusMsg:only-child {
+  font-style: italic;
+}
+
+.kmpStatusSub {
+  font-family: monospace;
+  font-size: 11px;
+  opacity: 0.75;
+  font-style: normal;
+}
+
+/* ===== END KMP ===== */
+
 /* ===== END LINEAR SEARCH ===== */
 
 .arrayVisCppBlock {
