@@ -1,12 +1,13 @@
 'use client'
 
 import { useState, useRef, useMemo, useEffect } from 'react'
-import { selectionSortDefinition, bubbleSortDefinition, mergeSortDefinition, SortStep, SortElement } from './SortingVisualizer.logic'
+import { selectionSortDefinition, bubbleSortDefinition, mergeSortDefinition, quickSortDefinition, SortStep, SortElement } from './SortingVisualizer.logic'
 
 const REGISTRY: Record<string, typeof selectionSortDefinition> = {
   selection: selectionSortDefinition,
   bubble: bubbleSortDefinition,
   merge: mergeSortDefinition,
+  quick: quickSortDefinition,
 }
 
 const SPEEDS = [700, 350, 150, 60]
@@ -24,14 +25,15 @@ function randomValues(count = 8): number[] {
 
 function getBarClass(idx: number, step: SortStep | null): string {
   if (!step) return 'svBarDefault'
-  const { stepType, comparing = [], swapping = [], sorted = [], merging = [], activeSublistLeft = [], activeSublistRight = [] } = step
+  const { stepType, comparing = [], swapping = [], sorted = [], merging = [], activeSublistLeft = [], activeSublistRight = [], pivot } = step
   if (stepType === 'complete' || sorted.includes(idx)) return 'svBarSorted'
   if (merging.includes(idx)) return 'svBarSwapping'
   if (swapping.includes(idx)) return 'svBarSwapping'
+  if (idx === pivot) return 'svBarPivot'
   if (comparing.includes(idx)) {
     return comparing.length === 1 && step.isMajorStep ? 'svBarMin' : 'svBarComparing'
   }
-  if (stepType === 'divide' && (activeSublistLeft.includes(idx) || activeSublistRight.includes(idx))) return 'svBarComparing'
+  if ((stepType === 'divide' || stepType === 'partition') && (activeSublistLeft.includes(idx) || activeSublistRight.includes(idx))) return 'svBarComparing'
   return 'svBarDefault'
 }
 
@@ -146,6 +148,7 @@ export function SortingVisualizer({ algorithmId }: { algorithmId: string }) {
             ['svBarDefault', 'unsorted'],
             ['svBarComparing', 'comparing'],
             ['svBarMin', 'minimum'],
+            ['svBarPivot', 'pivot'],
             ['svBarSwapping', 'swapping'],
             ['svBarSorted', 'sorted'],
           ] as const

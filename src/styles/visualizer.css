@@ -2103,6 +2103,11 @@
   border-color: var(--color-blue-border);
 }
 
+.svBarPivot {
+  background: #FFF0CC;
+  border-color: #F5C842;
+}
+
 .svBarSwapping {
   background: #FFE0E0;
   border-color: #F4A7A7;

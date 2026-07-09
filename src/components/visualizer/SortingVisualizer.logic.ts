@@ -3,7 +3,7 @@ export interface SortElement {
   id: number
 }
 
-export type StepType = 'comparison' | 'swap' | 'sorted' | 'complete' | 'divide' | 'merge'
+export type StepType = 'comparison' | 'swap' | 'sorted' | 'complete' | 'divide' | 'merge' | 'partition'
 
 export interface SortStep {
   array: SortElement[]
@@ -14,6 +14,7 @@ export interface SortStep {
   merging?: number[]
   activeSublistLeft?: number[]
   activeSublistRight?: number[]
+  pivot?: number
   depth?: number
   isMajorStep?: boolean
   message: string
@@ -273,4 +274,120 @@ export const mergeSortDefinition: SortingAlgorithmDefinition = {
   key: 'merge',
   name: 'Merge Sort',
   func: mergeSort,
+}
+
+const quickSort = (array: SortElement[]): SortStep[] => {
+  const arr = array.map((e) => ({ ...e }))
+  const steps: SortStep[] = []
+  const sortedIndices = new Set<number>()
+
+  const snapshot = () => arr.map((e) => ({ ...e }))
+
+  const swap = (i: number, j: number) => {
+    ;[arr[i], arr[j]] = [{ ...arr[j] }, { ...arr[i] }]
+  }
+
+  const helper = (left: number, right: number, depth: number = 0) => {
+    if (left >= right) {
+      if (left === right) sortedIndices.add(left)
+      return
+    }
+
+    const pivotIndex = right
+    const pivotValue = arr[pivotIndex].value
+    const activeRange = Array.from({ length: right - left + 1 }, (_, i) => left + i)
+
+    steps.push({
+      array: snapshot(),
+      stepType: 'partition',
+      pivot: pivotIndex,
+      activeSublistLeft: activeRange,
+      activeSublistRight: activeRange,
+      sorted: [...sortedIndices],
+      depth,
+      isMajorStep: true,
+      message: `Depth ${depth}: pivot is ${pivotValue} at index ${pivotIndex}`,
+    })
+
+    let i = left
+    for (let j = left; j < right; j++) {
+      const [valJ, valPivot] = [arr[j].value, pivotValue]
+
+      steps.push({
+        array: snapshot(),
+        stepType: 'comparison',
+        comparing: [j, pivotIndex],
+        pivot: pivotIndex,
+        sorted: [...sortedIndices],
+        depth,
+        message: `Depth ${depth}: compare ${valJ} with pivot ${valPivot}`,
+      })
+
+      if (arr[j].value < pivotValue) {
+        if (i !== j) {
+          const [a, b] = [arr[i].value, arr[j].value]
+          swap(i, j)
+
+          steps.push({
+            array: snapshot(),
+            stepType: 'swap',
+            swapping: [i, j],
+            pivot: pivotIndex,
+            sorted: [...sortedIndices],
+            depth,
+            message: `Depth ${depth}: swap ${a} and ${b}`,
+          })
+        }
+        i++
+      }
+    }
+
+    if (i !== pivotIndex) {
+      const [a, b] = [arr[i].value, arr[pivotIndex].value]
+      swap(i, pivotIndex)
+
+      steps.push({
+        array: snapshot(),
+        stepType: 'swap',
+        swapping: [i, pivotIndex],
+        pivot: i,
+        sorted: [...sortedIndices],
+        depth,
+        message: `Depth ${depth}: place pivot ${b} at index ${i} (swapped with ${a})`,
+      })
+    }
+
+    sortedIndices.add(i)
+
+    steps.push({
+      array: snapshot(),
+      stepType: 'sorted',
+      sorted: [...sortedIndices],
+      pivot: i,
+      depth,
+      isMajorStep: true,
+      message: `Depth ${depth}: pivot ${pivotValue} is in its final position at index ${i}`,
+    })
+
+    helper(left, i - 1, depth + 1)
+    helper(i + 1, right, depth + 1)
+  }
+
+  helper(0, arr.length - 1)
+
+  steps.push({
+    array: snapshot(),
+    stepType: 'complete',
+    sorted: Array.from({ length: arr.length }, (_, i) => i),
+    isMajorStep: true,
+    message: 'Sorting complete!',
+  })
+
+  return steps
+}
+
+export const quickSortDefinition: SortingAlgorithmDefinition = {
+  key: 'quick',
+  name: 'Quick Sort',
+  func: quickSort,
 }
