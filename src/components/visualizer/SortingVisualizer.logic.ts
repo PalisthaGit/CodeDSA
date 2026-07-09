@@ -3,7 +3,7 @@ export interface SortElement {
   id: number
 }
 
-export type StepType = 'comparison' | 'swap' | 'sorted' | 'complete'
+export type StepType = 'comparison' | 'swap' | 'sorted' | 'complete' | 'divide' | 'merge'
 
 export interface SortStep {
   array: SortElement[]
@@ -11,6 +11,10 @@ export interface SortStep {
   comparing?: number[]
   swapping?: number[]
   sorted?: number[]
+  merging?: number[]
+  activeSublistLeft?: number[]
+  activeSublistRight?: number[]
+  depth?: number
   isMajorStep?: boolean
   message: string
 }
@@ -165,4 +169,108 @@ export const bubbleSortDefinition: SortingAlgorithmDefinition = {
   key: 'bubble',
   name: 'Bubble Sort',
   func: bubbleSort,
+}
+
+const mergeSort = (array: SortElement[]): SortStep[] => {
+  const arr = array.map((e) => ({ ...e }))
+  const steps: SortStep[] = []
+  const sortedIndices = new Set<number>()
+
+  const snapshot = () => arr.map((e) => ({ ...e }))
+
+  const mergeSortHelper = (left: number, right: number, depth: number = 0) => {
+    if (left >= right) return
+
+    const mid = Math.floor((left + right) / 2)
+
+    const activeSublistLeft = Array.from({ length: mid - left + 1 }, (_, i) => left + i)
+    const activeSublistRight = Array.from({ length: right - mid }, (_, i) => mid + 1 + i)
+
+    steps.push({
+      array: snapshot(),
+      stepType: 'divide',
+      activeSublistLeft,
+      activeSublistRight,
+      depth,
+      isMajorStep: true,
+      message: `Divide [${left}..${mid}] and [${mid + 1}..${right}] at depth ${depth}`,
+    })
+
+    mergeSortHelper(left, mid, depth + 1)
+    mergeSortHelper(mid + 1, right, depth + 1)
+
+    let i = left
+    let j = mid + 1
+    const temp: SortElement[] = []
+
+    while (i <= mid && j <= right) {
+      steps.push({
+        array: snapshot(),
+        stepType: 'comparison',
+        comparing: [i, j],
+        activeSublistLeft,
+        activeSublistRight,
+        depth,
+        message: `Depth ${depth}: compare ${arr[i].value} (pos ${i}) and ${arr[j].value} (pos ${j})`,
+      })
+
+      if (arr[i].value <= arr[j].value) {
+        temp.push({ ...arr[i] })
+        i++
+      } else {
+        temp.push({ ...arr[j] })
+        j++
+      }
+    }
+
+    while (i <= mid) { temp.push({ ...arr[i] }); i++ }
+    while (j <= right) { temp.push({ ...arr[j] }); j++ }
+
+    for (let k = 0; k < temp.length; k++) {
+      const idx = left + k
+      if (arr[idx].value !== temp[k].value) {
+        arr[idx] = { ...temp[k] }
+        steps.push({
+          array: snapshot(),
+          stepType: 'merge',
+          merging: [idx],
+          activeSublistLeft,
+          activeSublistRight,
+          depth,
+          message: `Depth ${depth}: place ${arr[idx].value} at position ${idx}`,
+        })
+      }
+    }
+
+    for (let k = left; k <= right; k++) sortedIndices.add(k)
+
+    steps.push({
+      array: snapshot(),
+      stepType: 'sorted',
+      sorted: [...sortedIndices],
+      activeSublistLeft,
+      activeSublistRight,
+      depth,
+      isMajorStep: true,
+      message: `Subarray [${left}..${right}] is sorted at depth ${depth}`,
+    })
+  }
+
+  mergeSortHelper(0, arr.length - 1, 0)
+
+  steps.push({
+    array: snapshot(),
+    stepType: 'complete',
+    sorted: Array.from({ length: arr.length }, (_, i) => i),
+    isMajorStep: true,
+    message: 'Sorting complete!',
+  })
+
+  return steps
+}
+
+export const mergeSortDefinition: SortingAlgorithmDefinition = {
+  key: 'merge',
+  name: 'Merge Sort',
+  func: mergeSort,
 }
