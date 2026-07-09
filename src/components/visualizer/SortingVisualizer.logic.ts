@@ -103,3 +103,66 @@ export const selectionSortDefinition: SortingAlgorithmDefinition = {
   name: 'Selection Sort',
   func: selectionSort,
 }
+
+const bubbleSort = (inputArr: SortElement[]): SortStep[] => {
+  const arr = inputArr.map((e) => ({ ...e }))
+  const steps: SortStep[] = []
+  const n = arr.length
+  const sorted: number[] = []
+
+  for (let i = 0; i < n - 1; i++) {
+    let swapped = false
+
+    for (let j = 0; j < n - i - 1; j++) {
+      steps.push({
+        array: arr.map((e) => ({ ...e })),
+        stepType: 'comparison',
+        comparing: [j, j + 1],
+        sorted: [...sorted],
+        message: `Comparing ${arr[j].value} and ${arr[j + 1].value}`,
+      })
+
+      if (arr[j].value > arr[j + 1].value) {
+        const [a, b] = [arr[j].value, arr[j + 1].value]
+        ;[arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
+        swapped = true
+
+        steps.push({
+          array: arr.map((e) => ({ ...e })),
+          stepType: 'swap',
+          swapping: [j, j + 1],
+          sorted: [...sorted],
+          message: `Swapping ${a} and ${b}`,
+        })
+      }
+    }
+
+    sorted.push(n - 1 - i)
+
+    steps.push({
+      array: arr.map((e) => ({ ...e })),
+      stepType: 'sorted',
+      sorted: [...sorted],
+      isMajorStep: true,
+      message: `Pass ${i + 1} complete — ${arr[n - 1 - i].value} is in its final position`,
+    })
+
+    if (!swapped) break
+  }
+
+  steps.push({
+    array: arr.map((e) => ({ ...e })),
+    stepType: 'complete',
+    sorted: Array.from({ length: n }, (_, i) => i),
+    isMajorStep: true,
+    message: 'Array sorted!',
+  })
+
+  return steps
+}
+
+export const bubbleSortDefinition: SortingAlgorithmDefinition = {
+  key: 'bubble',
+  name: 'Bubble Sort',
+  func: bubbleSort,
+}

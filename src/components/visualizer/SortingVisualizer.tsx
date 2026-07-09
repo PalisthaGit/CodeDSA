@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useRef, useMemo, useEffect } from 'react'
-import { selectionSortDefinition, SortStep, SortElement } from './SortingVisualizer.logic'
+import { selectionSortDefinition, bubbleSortDefinition, SortStep, SortElement } from './SortingVisualizer.logic'
 
 const REGISTRY: Record<string, typeof selectionSortDefinition> = {
   selection: selectionSortDefinition,
+  bubble: bubbleSortDefinition,
 }
 
 const SPEEDS = [700, 350, 150, 60]
