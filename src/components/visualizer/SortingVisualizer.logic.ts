@@ -3,7 +3,7 @@ export interface SortElement {
   id: number
 }
 
-export type StepType = 'comparison' | 'swap' | 'sorted' | 'complete' | 'divide' | 'merge' | 'partition'
+export type StepType = 'comparison' | 'swap' | 'sorted' | 'complete' | 'divide' | 'merge' | 'partition' | 'insert'
 
 export interface SortStep {
   array: SortElement[]
@@ -390,4 +390,73 @@ export const quickSortDefinition: SortingAlgorithmDefinition = {
   key: 'quick',
   name: 'Quick Sort',
   func: quickSort,
+}
+
+const insertionSort = (array: SortElement[]): SortStep[] => {
+  const arr = array.map((e) => ({ ...e }))
+  const steps: SortStep[] = []
+  const n = arr.length
+
+  for (let i = 1; i < n; i++) {
+    const key = { ...arr[i] }
+    let j = i - 1
+
+    steps.push({
+      array: arr.map((e) => ({ ...e })),
+      stepType: 'comparison',
+      comparing: [j, i],
+      sorted: Array.from({ length: i }, (_, k) => k),
+      isMajorStep: true,
+      message: `Inserting ${key.value} — comparing with sorted region`,
+    })
+
+    while (j >= 0 && arr[j].value > key.value) {
+      steps.push({
+        array: arr.map((e) => ({ ...e })),
+        stepType: 'comparison',
+        comparing: [j, j + 1],
+        sorted: Array.from({ length: i }, (_, k) => k),
+        message: `${arr[j].value} > ${key.value} — shifting ${arr[j].value} right`,
+      })
+
+      arr[j + 1] = { ...arr[j] }
+
+      steps.push({
+        array: arr.map((e) => ({ ...e })),
+        stepType: 'insert',
+        comparing: [j, j + 1],
+        sorted: Array.from({ length: i }, (_, k) => k),
+        message: `Shifted ${arr[j + 1].value} from position ${j} to ${j + 1}`,
+      })
+
+      j--
+    }
+
+    arr[j + 1] = { ...key }
+
+    steps.push({
+      array: arr.map((e) => ({ ...e })),
+      stepType: 'insert',
+      comparing: [j + 1],
+      sorted: Array.from({ length: i + 1 }, (_, k) => k),
+      isMajorStep: true,
+      message: `Inserted ${key.value} at position ${j + 1}`,
+    })
+  }
+
+  steps.push({
+    array: arr.map((e) => ({ ...e })),
+    stepType: 'complete',
+    sorted: Array.from({ length: n }, (_, i) => i),
+    isMajorStep: true,
+    message: 'Sorting complete!',
+  })
+
+  return steps
+}
+
+export const insertionSortDefinition: SortingAlgorithmDefinition = {
+  key: 'insertion',
+  name: 'Insertion Sort',
+  func: insertionSort,
 }

@@ -1,13 +1,14 @@
 'use client'
 
 import { useState, useRef, useMemo, useEffect } from 'react'
-import { selectionSortDefinition, bubbleSortDefinition, mergeSortDefinition, quickSortDefinition, SortStep, SortElement } from './SortingVisualizer.logic'
+import { selectionSortDefinition, bubbleSortDefinition, mergeSortDefinition, quickSortDefinition, insertionSortDefinition, SortStep, SortElement } from './SortingVisualizer.logic'
 
 const REGISTRY: Record<string, typeof selectionSortDefinition> = {
   selection: selectionSortDefinition,
   bubble: bubbleSortDefinition,
   merge: mergeSortDefinition,
   quick: quickSortDefinition,
+  insertion: insertionSortDefinition,
 }
 
 const SPEEDS = [700, 350, 150, 60]
@@ -29,6 +30,9 @@ function getBarClass(idx: number, step: SortStep | null): string {
   if (stepType === 'complete' || sorted.includes(idx)) return 'svBarSorted'
   if (merging.includes(idx)) return 'svBarSwapping'
   if (swapping.includes(idx)) return 'svBarSwapping'
+  if (stepType === 'insert' && comparing.includes(idx)) {
+    return step.isMajorStep && comparing.length === 1 ? 'svBarMin' : 'svBarSwapping'
+  }
   if (idx === pivot) return 'svBarPivot'
   if (comparing.includes(idx)) {
     return comparing.length === 1 && step.isMajorStep ? 'svBarMin' : 'svBarComparing'
