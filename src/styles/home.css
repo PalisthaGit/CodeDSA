@@ -88,7 +88,7 @@
 }
 
 .emailInput {
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-family: "Comic Sans MS", "Comic Sans", var(--font-nunito), sans-serif;
   font-size: 14px;
   letter-spacing: 0.05em;
   padding: 8px 14px;
@@ -109,7 +109,7 @@
 }
 
 .emailBtn {
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-family: "Comic Sans MS", "Comic Sans", var(--font-nunito), sans-serif;
   font-size: 14px;
   letter-spacing: 0.05em;
   padding: 8px 18px;

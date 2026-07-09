@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Patrick_Hand, Pacifico } from "next/font/google";
+import { Patrick_Hand, Pacifico, Nunito } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
@@ -19,6 +19,13 @@ const pacifico = Pacifico({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-pacifico",
+  display: "swap",
+});
+
+const nunito = Nunito({
+  weight: ["400", "600"],
+  subsets: ["latin"],
+  variable: "--font-nunito",
   display: "swap",
 });
 
@@ -72,7 +79,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${patrickHand.variable} ${pacifico.variable}`}>
+    <html lang="en" className={`${patrickHand.variable} ${pacifico.variable} ${nunito.variable}`}>
       <body className="min-h-screen flex flex-col bg-background text-text-primary">
         <script
           type="application/ld+json"

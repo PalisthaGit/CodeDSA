@@ -7,7 +7,7 @@
 html,
 body,
 * {
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-family: "Comic Sans MS", "Comic Sans", var(--font-nunito), sans-serif;
   letter-spacing: 0.05em;
 }
 
