@@ -10,6 +10,7 @@ import { StackVisualizer } from './StackVisualizer'
 import { GraphVisualizer } from './GraphVisualizer'
 import { SortingVisualizer } from './SortingVisualizer'
 import { KMPVisualizer } from './KMPVisualizer'
+import { RabinKarpVisualizer } from './RabinKarpVisualizer'
 
 interface Props {
   active: Visualizer
@@ -69,6 +70,8 @@ export function VisualizerLayout({ active, articleSlugs }: Props) {
             <GraphVisualizer algorithm={active.id} />
           ) : active.id === 'kmp' ? (
             <KMPVisualizer />
+          ) : active.id === 'rabin-karp' ? (
+            <RabinKarpVisualizer />
           ) : (
             <div className="visualizerCard">
               <p className="visualizerCardLabel">{active.title.toLowerCase()}</p>

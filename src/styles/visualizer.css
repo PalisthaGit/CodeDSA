@@ -1266,6 +1266,73 @@
   font-style: normal;
 }
 
+/* ===== RABIN-KARP HASH PANEL ===== */
+
+.rkHashPanel {
+  margin: 4px 0 16px;
+}
+
+.rkHashLabel {
+  font-family: monospace;
+  font-size: 10px;
+  color: var(--color-purple-text);
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.rkHashGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: fit-content;
+  border: 1.5px solid var(--color-code-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--color-code-bg);
+}
+
+.rkHashRow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 5px 14px;
+  border-bottom: 1px solid var(--color-code-border);
+}
+
+.rkHashRow:last-child {
+  border-bottom: none;
+}
+
+.rkHashKey {
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--color-purple-text);
+  width: 120px;
+  flex-shrink: 0;
+}
+
+.rkHashVal {
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-code-text);
+  transition: color 0.25s;
+}
+
+.rkHashVal.rkHashMatch {
+  color: #27500A;
+}
+
+.rkHashVal.rkHashNoMatch {
+  color: var(--color-text-secondary);
+}
+
+.rkHashVal.rkHashSpurious {
+  color: #803030;
+}
+
+/* ===== END RABIN-KARP ===== */
+
 /* ===== END KMP ===== */
 
 /* ===== END LINEAR SEARCH ===== */
