@@ -62,7 +62,7 @@ export function VisualizerLayout({ active, articleSlugs }: Props) {
             <LinearSearchVisualizer />
           ) : active.id === 'binary-search' ? (
             <BinarySearchVisualizer />
-          ) : active.id === 'selection-sort' ? (
+          ) : active.category === 'Sorting' ? (
             <SortingVisualizer algorithmId={active.id} />
           ) : active.category === 'Graph algorithms' ? (
             <GraphVisualizer algorithm={active.id} />
