@@ -5,6 +5,7 @@ import { definition as dfs } from './graph-algos/dfs'
 import { definition as dijkstras } from './graph-algos/dijkstra'
 import { definition as kruskals } from './graph-algos/kruskal'
 import { definition as prims } from './graph-algos/prim'
+import { definition as tarjans } from './graph-algos/tarjan'
 
 export const graphRegistry: Record<string, GraphAlgorithmDefinition> = {
   [astar.key]: astar,
@@ -13,4 +14,5 @@ export const graphRegistry: Record<string, GraphAlgorithmDefinition> = {
   [dijkstras.key]: dijkstras,
   [kruskals.key]: kruskals,
   [prims.key]: prims,
+  [tarjans.key]: tarjans,
 }
