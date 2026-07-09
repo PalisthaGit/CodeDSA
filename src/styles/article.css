@@ -411,7 +411,16 @@
   margin: 24px 0;
 }
 
-.articleProse ol,
+.articleProse ol {
+  font-size: 16.5px !important;
+  line-height: 1.85 !important;
+  letter-spacing: 0.02em;
+  color: var(--color-text-primary);
+  margin: 0 0 16px !important;
+  padding-left: 26px;
+  list-style-type: decimal;
+}
+
 .articleProse ul {
   font-size: 16.5px !important;
   line-height: 1.85 !important;
@@ -419,6 +428,7 @@
   color: var(--color-text-primary);
   margin: 0 0 16px !important;
   padding-left: 26px;
+  list-style-type: disc;
 }
 
 .articleProse ol li,

@@ -28,8 +28,8 @@ export const arraysArticle: Article = {
     { id: 'adding-at-specific-index', text: 'Adding an element at a specific index' },
   ],
   content,
-  prevSlug: 'why-learn-dsa',
-  prevTitle: 'Why do you even need DSA?',
+  prevSlug: 'frequency-count',
+  prevTitle: 'Frequency Count Method',
   nextSlug: 'linked-lists',
   nextTitle: "Linked Lists — when arrays aren't enough",
 }

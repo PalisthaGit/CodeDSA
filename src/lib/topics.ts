@@ -22,6 +22,7 @@ export const sections: Section[] = [
       { title: 'What is DSA and why does it matter?', slug: 'what-is-dsa', readTime: '5 min', hasVisualizer: false, comingSoon: false },
       { title: 'Why do you even need DSA?', slug: 'why-learn-dsa', readTime: '4 min', hasVisualizer: false, comingSoon: false },
       { title: 'What is Time Complexity?', slug: 'time-complexity', readTime: '8 min', hasVisualizer: false, comingSoon: false },
+      { title: 'Frequency Count Method', slug: 'frequency-count', readTime: '7 min', hasVisualizer: false, comingSoon: false },
       { title: 'How to think like a programmer', slug: 'think-like-programmer', readTime: '6 min', hasVisualizer: false, comingSoon: true },
       { title: 'Big O Notation', slug: 'big-o-notation', readTime: '8 min', hasVisualizer: false, comingSoon: true },
     ],

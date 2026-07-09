@@ -1708,3 +1708,258 @@
     max-width: 340px;
   }
 }
+
+/* ===== GRAPH VISUALIZER ===== */
+
+.gvCard {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gvCanvasWrap {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 12px;
+}
+
+.gvSvg {
+  width: 100%;
+  max-width: 560px;
+  min-width: 360px;
+  height: auto;
+  display: block;
+}
+
+.gvLegend {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.gvLegendItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.gvDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid;
+  flex-shrink: 0;
+}
+
+.gvDotCurrent   { background: #FFF9C4; border-color: #F0D060; }
+.gvDotVisited   { background: #EFF8FF; border-color: #90C8F0; }
+.gvDotCandidate { background: #F5F0FF; border-color: #B8A0E8; }
+.gvDotPath      { background: #C8F0D8; border-color: #80D0A0; }
+
+.gvEdgeLine {
+  width: 22px;
+  height: 3px;
+  border-radius: 2px;
+  background: #80D0A0;
+  flex-shrink: 0;
+}
+
+.visStatusBox.gvStatus {
+  flex-direction: column;
+  align-items: flex-start;
+  height: auto;
+  font-style: normal;
+}
+
+.gvStatusMessage {
+  font-size: 14px;
+  font-family: var(--font-patrick-hand), cursive;
+}
+
+.gvStatusSub {
+  font-size: 11px;
+  margin-top: 3px;
+  opacity: 0.7;
+  font-family: monospace;
+}
+
+.gvControls {
+  flex-wrap: wrap;
+}
+
+.gvLabel {
+  font-family: var(--font-patrick-hand), cursive;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.gvSelect {
+  font-family: var(--font-patrick-hand), cursive;
+  font-size: 15px;
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-purple-border);
+  border-radius: 8px;
+  padding: 7px 10px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.gvSelect:focus {
+  border-color: var(--color-purple-text);
+}
+
+.gvSelect:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.gvProgress {
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin-left: auto;
+  align-self: center;
+}
+
+/* ===== SORTING VISUALIZER ===== */
+
+.svOuter {
+  width: 100%;
+  max-width: 620px;
+}
+
+.svLegend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.svLegendItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.svLegendDot {
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* Bar container: fixed height, bars align to bottom */
+.svBarsContainer {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 180px;
+  border-bottom: 2px solid var(--color-purple-border);
+}
+
+.svBar {
+  flex: 1;
+  min-width: 18px;
+  border-radius: 4px 4px 0 0;
+  min-height: 4px;
+  transition: height 0.22s ease, background-color 0.15s ease, border-color 0.15s ease;
+  border-width: 1.5px;
+  border-style: solid;
+  box-sizing: border-box;
+}
+
+/* Bar color states */
+.svBarDefault {
+  background: var(--color-purple-light);
+  border-color: var(--color-purple-border);
+}
+
+.svBarComparing {
+  background: var(--color-yellow-light);
+  border-color: var(--color-yellow-border);
+}
+
+.svBarMin {
+  background: var(--color-blue-section);
+  border-color: var(--color-blue-border);
+}
+
+.svBarSwapping {
+  background: #FFE0E0;
+  border-color: #F4A7A7;
+}
+
+.svBarSorted {
+  background: var(--color-green-light);
+  border-color: var(--color-green-border);
+}
+
+/* Value labels row under the bars */
+.svBarLabels {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  margin-top: 4px;
+}
+
+.svBarLabel {
+  flex: 1;
+  min-width: 18px;
+  text-align: center;
+  font-family: monospace;
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+
+/* Controls row overrides */
+.svControls {
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+/* Speed buttons */
+.svSpeedRow {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.svSpeedBtn {
+  font-family: monospace;
+  font-size: 11px;
+  padding: 5px 9px;
+  border: 1px solid var(--color-purple-border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.svSpeedBtn:hover {
+  background: var(--color-purple-light);
+  border-color: var(--color-purple-text);
+}
+
+.svSpeedBtnActive {
+  background: var(--color-purple-light);
+  border-color: var(--color-purple-text);
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
+
+.svProgress {
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  text-align: right;
+  margin-top: 8px;
+}

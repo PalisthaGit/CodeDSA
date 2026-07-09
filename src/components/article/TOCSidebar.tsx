@@ -16,7 +16,7 @@ export function TOCSidebar({ activeSlug }: TOCSidebarProps) {
       {sections.map((section, index) => (
         <div key={section.id} className="tocSection">
           {index > 0 && <div className="tocDivider" aria-hidden="true" />}
-          <p className="tocSectionTitle">{section.title}</p>
+          {section.title !== 'Start here' && <p className="tocSectionTitle">{section.title}</p>}
           <ul className="tocList">
             {section.topics.map(topic => {
               const isActive = topic.slug === activeSlug

@@ -24,6 +24,6 @@ export const timeComplexityArticle: Article = {
   content,
   prevSlug: 'why-learn-dsa',
   prevTitle: 'Why do you even need DSA?',
-  nextSlug: 'arrays',
-  nextTitle: 'What is an Array in Programming',
+  nextSlug: 'frequency-count',
+  nextTitle: 'Frequency Count Method',
 }

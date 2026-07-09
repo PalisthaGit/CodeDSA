@@ -7,6 +7,8 @@ import { ArrayVisualizer } from './ArrayVisualizer'
 import { LinearSearchVisualizer } from './LinearSearchVisualizer'
 import { BinarySearchVisualizer } from './BinarySearchVisualizer'
 import { StackVisualizer } from './StackVisualizer'
+import { GraphVisualizer } from './GraphVisualizer'
+import { SortingVisualizer } from './SortingVisualizer'
 
 interface Props {
   active: Visualizer
@@ -60,6 +62,10 @@ export function VisualizerLayout({ active, articleSlugs }: Props) {
             <LinearSearchVisualizer />
           ) : active.id === 'binary-search' ? (
             <BinarySearchVisualizer />
+          ) : active.id === 'selection-sort' ? (
+            <SortingVisualizer algorithmId={active.id} />
+          ) : active.category === 'Graph algorithms' ? (
+            <GraphVisualizer algorithm={active.id} />
           ) : (
             <div className="visualizerCard">
               <p className="visualizerCardLabel">{active.title.toLowerCase()}</p>

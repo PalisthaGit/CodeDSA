@@ -10,6 +10,8 @@ import { LinkedListVisualizer } from '@/components/visualizer/LinkedListVisualiz
 import { LinearSearchVisualizer } from '@/components/visualizer/LinearSearchVisualizer'
 import { BinarySearchVisualizer } from '@/components/visualizer/BinarySearchVisualizer'
 import { DSRunner } from '@/components/visualizer/DSRunner'
+import { GraphVisualizer } from '@/components/visualizer/GraphVisualizer'
+import { graphRegistry } from '@/components/visualizer/graph.registry'
 
 type VisualizerOperation = 'all' | 'access' | 'update' | 'add' | 'remove' | 'traverse'
 
@@ -61,7 +63,9 @@ function ArticleContent({ content }: { content: string }) {
                       ? <LinkedListVisualizer key={match.index} op="removeEnd" />
                       : vizId === 'linked-list-remove-pos'
                         ? <LinkedListVisualizer key={match.index} op="removePos" />
-                        : <ArrayVisualizer key={match.index} operation={vizId as VisualizerOperation} />
+                        : vizId in graphRegistry
+                          ? <GraphVisualizer key={match.index} algorithm={vizId} />
+                          : <ArrayVisualizer key={match.index} operation={vizId as VisualizerOperation} />
     )
     last = match.index + match[0].length
   }
@@ -140,14 +144,18 @@ export default async function ArticlePage({ params }: Props) {
           <div className="breadcrumbRow">
             <nav className="breadcrumb" aria-label="Breadcrumb">
               <Link href="/learn" className="breadcrumbLink">Learn</Link>
-              <span className="breadcrumbSep">·</span>
-              <span className="breadcrumbSection">{article.chapter}</span>
+              {article.chapter !== 'Start here' && (
+                <>
+                  <span className="breadcrumbSep">·</span>
+                  <span className="breadcrumbSection">{article.chapter}</span>
+                </>
+              )}
               <span className="breadcrumbSep">·</span>
               <span className="breadcrumbCurrent">{article.title}</span>
             </nav>
             <MobileTOCToggle headings={article.headings} />
           </div>
-          <p className="articleTag">{article.chapter}</p>
+          {article.chapter !== 'Start here' && <p className="articleTag">{article.chapter}</p>}
           <h1 className="articleTitle">{article.title}</h1>
         </div>
 
