@@ -1,4 +1,8 @@
+'use client'
+
 import Link from 'next/link'
+import { useState } from 'react'
+import { FeedbackForm } from "../FeedbackForm"
 
 const FOOTER_LINKS = [
   { label: 'About', href: '/about' },
@@ -8,6 +12,8 @@ const FOOTER_LINKS = [
 ]
 
 export function Footer() {
+  const [feedbackOpen, setFeedbackOpen] = useState(false)
+
   return (
     <footer className="footer">
       <div className="flex flex-col items-center gap-3 md:flex-row md:justify-between">
@@ -21,10 +27,29 @@ export function Footer() {
               {label}
             </Link>
           ))}
+
+          <button
+            onClick={() => setFeedbackOpen(true)}
+            aria-label="Open feedback form"
+            className="
+               text-[13px] text-text-muted border border-text-muted rounded px-2 py-1
+            "
+          >
+            Send Feedback
+          </button>
         </div>
+
+          
 
         <span className="text-text-muted">free, always.</span>
       </div>
+
+          
+
+      <FeedbackForm
+        isOpen={feedbackOpen}
+        onClose={() => setFeedbackOpen(false)}
+      />
     </footer>
   )
 }
