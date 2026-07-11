@@ -29,6 +29,16 @@ button {
   cursor: pointer;
 }
 
+:not(pre) > code {
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-code-border);
+  color: var(--color-code-text);
+  border-radius: 4px;
+  padding: 0.15em 0.4em;
+  font-size: 0.875em;
+  font-family: 'Courier New', Courier, monospace;
+}
+
 .gridHint {
   background-image:
     linear-gradient(rgba(180, 210, 255, 0.09) 1px, transparent 1px),

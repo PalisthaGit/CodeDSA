@@ -26,8 +26,8 @@ export const frequencyCountArticle: Article = {
     { id: 'key-takeaways', text: 'Key Takeaways' },
   ],
   content,
-  prevSlug: 'time-complexity',
-  prevTitle: 'What is Time Complexity?',
+  prevSlug: 'asymptotic-notation',
+  prevTitle: 'Asymptotic Notation: Big O, Omega, and Theta',
   nextSlug: 'arrays',
   nextTitle: 'What is an Array in Programming',
 }

@@ -19,13 +19,14 @@
 <p class="articleP">Does anything change? Not at all. You still open the box and pick the first chocolate. Even though the number of chocolates increased from 10 to 100, the number of steps stayed exactly the same.</p>
 <p class="articleP">What if the box had 1,000 chocolates? You'd still perform the same one step — pick the first chocolate.</p>
 <p class="articleP">This is called <strong>constant time</strong>, written as O(1). In O(1), the input size can grow, but the number of steps always stays the same.</p>
+<img src="/o1-constant-time-graph.png" alt="O(1) Constant Time Complexity graph showing steps remain flat as input grows" class="articleImg" />
 <p class="articleP">In this example, the algorithm always performs 3 steps, no matter what. So f(n) = 3.</p>
 <p class="articleP">Now let's write the time complexity using <strong>Big O notation</strong>.</p>
 <p class="articleP">In <strong>Big O notation</strong>, we write <strong>O</strong>, and inside the brackets we write <strong>how the number of steps grows as the input size grows</strong>.</p>
 <p class="articleP">Since the algorithm always takes <strong>3 steps</strong>, the number of steps never changes, no matter how large the input is.</p>
-<p class="articleP">So, for constant time complexity, we write <strong>O(1)</strong>.</p>
+<p class="articleP">So, for constant time complexity, we write <code>O(1)</code>.</p>
 <p class="articleP">The <strong>1</strong> doesn't mean the algorithm takes <strong>1 step</strong>. It simply means the algorithm takes a <strong>constant number of steps</strong>.</p>
-<p class="articleP">For example, an algorithm might take <strong>3 steps, 100 steps, or even 10,000 steps</strong>. As long as the number of steps never changes with the input size, its time complexity is still <strong>O(1)</strong>.</p>
+<p class="articleP">For example, an algorithm might take <strong>3 steps, 100 steps, or even 10,000 steps</strong>. As long as the number of steps never changes with the input size, its time complexity is still <code>O(1)</code>.</p>
 <div class="infoBox infoBoxBlue">
 <span class="infoBoxLabel">Remember</span>
 <div class="infoBoxText">
@@ -47,10 +48,7 @@ In O(1), no matter how large the input becomes, the number of steps never change
 <p class="articleP">Notice something interesting. As the number of customers increases, the number of steps increases at the same rate. If the number of customers doubles, the number of steps also doubles.</p>
 <p class="articleP">In Big O notation, we're not interested in the exact number of steps. We're interested in how the number of steps grows. Since 3n grows at the same rate as n, we ignore the constant 3 and simply write the time complexity as O(n).</p>
 <p class="articleP">This is called <strong>linear time</strong> because the number of steps grows linearly with the input size.</p>
-<div style="display:flex;flex-direction:column;gap:16px;margin:0 0 24px;">
-  <img src="/on-linear-time.png" alt="O(n) Linear Time — coffee shop example showing 3 steps per customer" style="width:100%;border-radius:12px;" />
-  <img src="/on-linear-growth.png" alt="O(n) Linear Growth graph showing steps increasing at a constant rate" style="width:100%;border-radius:12px;" />
-</div>
+<img src="/on-linear-time-graph.png" alt="O(n) Linear Time Complexity graph showing steps grow linearly with input" class="articleImg" />
 <div class="infoBox infoBoxBlue">
 <span class="infoBoxLabel">Remember</span>
 <div class="infoBoxText">
@@ -73,6 +71,7 @@ In O(n), as the input size increases, the number of steps also increases at the 
 <p class="articleP">Notice that every time the number of possible places doubles, the number of steps increases by only one.</p>
 <p class="articleP">Now imagine there are 1,000 possible places where your glasses could be. Would it take 1,000 steps to find them? Not at all. By eliminating half of the remaining places in every step, you would find your glasses in only about 10 steps.</p>
 <p class="articleP">That's why O(log n) is considered one of the fastest time complexities. Even when the input becomes much larger, the number of steps grows very slowly.</p>
+<img src="/ologn-logarithmic-time-graph.png" alt="O(log n) Logarithmic Time Complexity graph showing steps grow very slowly as input increases" class="articleImg" />
 <div class="infoBox infoBoxBlue">
 <span class="infoBoxLabel">Remember</span>
 <div class="infoBoxText">
@@ -93,6 +92,7 @@ In O(log n), we eliminate a large portion of the remaining data in every step, s
   <li>100 chests → up to 10,000 attempts</li>
 </ul>
 <p class="articleP">Notice how quickly the number of attempts increases. When the number of chests doubles, the amount of work becomes much more than double. That's why algorithms with O(n²) work well for small inputs but can become very slow as the input size grows.</p>
+<img src="/on2-quadratic-time-graph.png" alt="O(n²) Quadratic Time Complexity graph showing steps grow very quickly as input increases" class="articleImg" />
 <div class="infoBox infoBoxBlue">
 <span class="infoBoxLabel">Remember</span>
 <div class="infoBoxText">
@@ -112,22 +112,22 @@ In O(n²), for every input, you go through all the inputs again. As the input si
   </thead>
   <tbody>
     <tr>
-      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code style="font-family:'Courier New',monospace;color:var(--color-code-text);">O(1)</code></td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code>O(1)</code></td>
       <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">Constant Time</td>
       <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-secondary);">Picking the first chocolate from a box</td>
     </tr>
     <tr style="background:var(--color-sidebar-bg);">
-      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code style="font-family:'Courier New',monospace;color:var(--color-code-text);">O(log n)</code></td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code>O(log n)</code></td>
       <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">Logarithmic Time</td>
       <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-secondary);">Finding your glasses by eliminating half the search area each time</td>
     </tr>
     <tr>
-      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code style="font-family:'Courier New',monospace;color:var(--color-code-text);">O(n)</code></td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code>O(n)</code></td>
       <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">Linear Time</td>
       <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-secondary);">Serving customers in a coffee shop</td>
     </tr>
     <tr style="background:var(--color-sidebar-bg);">
-      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code style="font-family:'Courier New',monospace;color:var(--color-code-text);">O(n²)</code></td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code>O(n²)</code></td>
       <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">Quadratic Time</td>
       <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-secondary);">Trying every key on every treasure chest</td>
     </tr>

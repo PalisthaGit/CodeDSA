@@ -1,0 +1,241 @@
+<p class="articleP">Okay so here's the tea ☕ — these three symbols LOOK scary because they're Greek letters and math-y, but honestly they're just three lazy nicknames for "how fast does my code get slow." That's genuinely it. Let's demystify them together.</p>
+
+<h2 id="what-is-asymptotic-notation" class="articleH2 articleH2First">What Is Asymptotic Notation?</h2>
+<p class="articleP">When we run code, we don't really care about the exact number of steps it takes. What we care about is: as the input gets bigger and bigger, how does the running time behave?</p>
+<p class="articleP">That question — "how does it behave as input grows" — is called <strong>asymptotic behavior</strong>. And <strong>asymptotic notation</strong> is just the set of symbols we use to write that behavior down in a short, standard way.</p>
+<p class="articleP">So asymptotic notation is just a shorthand language for describing growth. Nothing more mysterious than that. Think of it like a nickname system — instead of describing your friend's exact height every time ("5'9, brown hair, size 10 shoe"), you just say "he's tall." Same energy.</p>
+
+<h2 id="the-3-types" class="articleH2">The 3 Types: Big O, Omega, and Theta</h2>
+<p class="articleP">Meet the trio 👋 — three different vibes, same job:</p>
+<table style="width:100%;border-collapse:collapse;margin:0 0 28px;font-size:16px;line-height:1.7;">
+  <thead>
+    <tr style="background:var(--color-purple-light);">
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">Symbol</th>
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">Meaning</th>
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">Also called</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code>O</code> — Big O</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">grows <strong>at most</strong> this fast</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-secondary);">ceiling / upper bound</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code>Ω</code> — Omega</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">grows <strong>at least</strong> this fast</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-secondary);">floor / lower bound</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code>Θ</code> — Theta</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">grows <strong>exactly</strong> this fast</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-secondary);">tight bound</td>
+    </tr>
+  </tbody>
+</table>
+<p class="articleP">Same question every time — "how fast does this grow?" — just answered from a different angle. We'll start with Big O since it's the most commonly used one, and once that clicks, Omega and Theta will feel like the same thing with a small twist.</p>
+
+<h2 id="the-growth-rate-ladder" class="articleH2">The Growth Rate Ladder</h2>
+<p class="articleP">Before jumping into Big O, let's meet the whole growth-speed family lined up on one ladder, from the chillest to the most unhinged:</p>
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:18px 20px;margin:0 0 24px;overflow-x:auto;">
+  <p style="margin:0;font-family:'Courier New',Courier,monospace;font-size:15px;color:var(--color-text-primary);white-space:nowrap;letter-spacing:0.03em;">1 &lt; log n &lt; √n &lt; n &lt; n log n &lt; n² &lt; n³ &lt; ... &lt; 2ⁿ &lt; 3ⁿ &lt; ... &lt; nⁿ</p>
+</div>
+<p class="articleP">Read this left to right as "grows slower than." So a constant (1) grows slower than log n, log n grows slower than √n, and so on — all the way up to nⁿ, which explodes the fastest.</p>
+<p class="articleP">You don't need to memorize why each one is faster than the next right now — just get comfortable with the fact that this ladder exists, and every function you'll ever analyze sits somewhere on it. Once you're comfortable with this ladder, Big O, Omega, and Theta are just about figuring out where on this ladder your function sits, and picking the closest rung.</p>
+
+<h2 id="n-vs-fn" class="articleH2">n vs f(n): The #1 Confusion To Clear Up First</h2>
+<p class="articleP">This trips a lot of people up, so let's squash it before it causes drama later.</p>
+<ul style="font-size:16.5px;line-height:1.85;color:var(--color-text-primary);margin:0 0 16px;padding-left:28px;">
+  <li><strong>n</strong> is just a plain number — the size of the input (like "how many items in the array"). You pick it: 1, 2, 3, 100, 1000...</li>
+  <li><strong>f(n)</strong> is the answer you get after plugging that number into your formula — it's your actual function.</li>
+</ul>
+<p class="articleP">Example: if f(n) = 3n + 5 — when n = 2, then f(n) = 3(2)+5 = 11. When n = 10, then f(n) = 3(10)+5 = 35.</p>
+<p class="articleP">So n is what you put in, f(n) is what comes out. Two different numbers.</p>
+<p class="articleP">Here's the confusing part: when you see something like O(n), that lonely n inside the parentheses is not your input variable — it's just reusing the letter n as a name for a growth shape (straight-line growth). Your real function is f(n); the n inside O( ) is just the shape we're comparing it to.</p>
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Remember</span>
+<div class="infoBoxText">
+<strong>f(n)</strong> is your actual function (e.g. 3n + 5). The <strong>n</strong> inside O( ) is just a name for a growth pattern — not literally your function. They share the same letter, which is exactly what causes the confusion.
+</div>
+</div>
+
+<p class="articleP">To keep things simple, we'll use one function the whole way through:</p>
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:16px 20px;margin:0 0 24px;text-align:center;">
+  <p style="margin:0;font-family:'Courier New',Courier,monospace;font-size:18px;color:var(--color-text-primary);letter-spacing:0.03em;">f(n) = 3n + 5</p>
+</div>
+<p class="articleP">Every time you see "f(n)" below, it means this. That's the only formula in this whole section.</p>
+
+<h2 id="big-o" class="articleH2">Big O — The Upper Bound (Ceiling)</h2>
+<p class="articleP">Question: does something simple stay <strong>above</strong> 3n+5, always? Try 10n:</p>
+<table style="width:100%;border-collapse:collapse;margin:0 0 24px;font-size:16px;line-height:1.7;">
+  <thead>
+    <tr style="background:var(--color-purple-light);">
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">n</th>
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">f(n) = 3n + 5</th>
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">10n</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">1</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">8</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">10</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">2</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">11</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">20</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">3</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">14</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">30</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">4</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">17</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">40</td>
+    </tr>
+  </tbody>
+</table>
+<p class="articleP">10n is always bigger. So 10n works as a ceiling. But here's the thing — the "10" doesn't matter. We could've used 8n, or 4n, or 100n. All of them stay above 3n+5 if n is big enough. The number in front is just a detail we ignore.</p>
+<p class="articleP">What matters is the <strong>shape</strong>: n. So we say:</p>
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:16px 20px;margin:0 0 24px;text-align:center;">
+  <p style="margin:0;font-family:'Courier New',Courier,monospace;font-size:18px;color:var(--color-text-primary);letter-spacing:0.03em;">f(n) is O(n)</p>
+</div>
+<p class="articleP">What this really means: even as n keeps growing bigger and bigger, f(n) will never outgrow n — it stays permanently capped by it, no matter how large n gets.</p>
+<p class="articleP">You could also say f(n) is O(n²), or O(n³) — those are technically true too (n² is also above 3n+5). But that's like describing your height as "under 100 feet" — true, but not useful. Always give the smallest, closest-fitting one. For us, that's O(n).</p>
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Remember</span>
+<div class="infoBoxText">
+Big O is a <strong>ceiling</strong>. It tells you your function will never grow faster than this shape. Always pick the tightest (smallest) ceiling that still works.
+</div>
+</div>
+
+<h2 id="omega" class="articleH2">Omega — The Lower Bound (Floor)</h2>
+<p class="articleP">Same exact idea, just flipped. Now we ask: does something simple stay <strong>below</strong> 3n+5, always? Try just n:</p>
+<table style="width:100%;border-collapse:collapse;margin:0 0 24px;font-size:16px;line-height:1.7;">
+  <thead>
+    <tr style="background:var(--color-purple-light);">
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">n</th>
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">f(n) = 3n + 5</th>
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">n</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">1</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">8</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">1</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">2</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">11</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">2</td>
+    </tr>
+  </tbody>
+</table>
+<p class="articleP">Yes, n always stays below 3n+5. So n works as a floor. We write:</p>
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:16px 20px;margin:0 0 24px;text-align:center;">
+  <p style="margin:0;font-family:'Courier New',Courier,monospace;font-size:18px;color:var(--color-text-primary);letter-spacing:0.03em;">f(n) is Ω(n)</p>
+</div>
+<p class="articleP">What this really means: even as n keeps growing, f(n) will never fall below n — it's permanently held up by it. Smaller things like log n or even 1 also stay below — but we want the closest one: n.</p>
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Remember</span>
+<div class="infoBoxText">
+Omega is a <strong>floor</strong>. It tells you your function will never grow slower than this shape. Always pick the tightest (largest) floor that still works.
+</div>
+</div>
+
+<h2 id="theta" class="articleH2">Theta — The Tight Bound (Exact Fit)</h2>
+<p class="articleP">Look at what we just found:</p>
+<ul style="font-size:16.5px;line-height:1.85;color:var(--color-text-primary);margin:0 0 16px;padding-left:28px;">
+  <li>n works as the <strong>floor</strong> (Omega)</li>
+  <li>10n works as the <strong>ceiling</strong> (Big O)</li>
+</ul>
+<p class="articleP">Both of those have the same shape: <strong>n</strong>. Only the number in front differs, and we already said the number in front doesn't matter.</p>
+<p class="articleP">When the floor-shape and the ceiling-shape are the <strong>same word</strong>, we get to use the strongest, most precise label:</p>
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:16px 20px;margin:0 0 24px;text-align:center;">
+  <p style="margin:0;font-family:'Courier New',Courier,monospace;font-size:18px;color:var(--color-text-primary);letter-spacing:0.03em;">f(n) is Θ(n)</p>
+</div>
+<p class="articleP">What this really means: no matter how large n grows, f(n) will always grow exactly like n — never faster, never slower. This is the best possible answer when it's available, because it pins the function down on both sides, not just one.</p>
+<p class="articleP">We can <strong>not</strong> say Θ(n²), because n² only works as a ceiling — it does not work as a floor. Theta needs <strong>both sides</strong> to match.</p>
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Remember</span>
+<div class="infoBoxText">
+Theta is a <strong>tight bound</strong>. You can only use it when the ceiling-shape and floor-shape are the same. It's the most precise answer when available.
+</div>
+</div>
+
+<h2 id="quick-reference" class="articleH2">Quick Reference</h2>
+<table style="width:100%;border-collapse:collapse;margin:0 0 28px;font-size:16px;line-height:1.7;">
+  <thead>
+    <tr style="background:var(--color-purple-light);">
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">Symbol</th>
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">Say it like</th>
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">Meaning</th>
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">Also called</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code>O(n)</code></td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">"at most n"</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">ceiling</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-secondary);">upper bound</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code>Ω(n)</code></td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">"at least n"</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">floor</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-secondary);">lower bound</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);"><code>Θ(n)</code></td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">"exactly n"</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">both</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-secondary);">tight bound</td>
+    </tr>
+  </tbody>
+</table>
+<p class="articleP">Rule to always follow: many answers are technically true — always pick the closest, simplest one. Most used in real life: O and Θ.</p>
+
+<h2 id="common-mistake" class="articleH2">Common Mistake: "Big O Means Worst Case"</h2>
+<p class="articleP">People assume: O = worst case, Ω = best case. That's wrong. These are two totally different questions:</p>
+<ul style="font-size:16.5px;line-height:1.85;color:var(--color-text-primary);margin:0 0 16px;padding-left:28px;">
+  <li><strong>Which situation are we in?</strong> → best case / worst case / average case</li>
+  <li><strong>How do we describe the growth in that situation?</strong> → O / Ω / Θ</li>
+</ul>
+<p class="articleP">You can mix any of these freely. "The best case is O(n)" is a completely normal sentence. So is "the worst case is Θ(n²)." The word O or Ω never tells you which case you're in — that's a separate thing entirely.</p>
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Remember</span>
+<div class="infoBoxText">
+O / Ω / Θ describe <strong>growth shape</strong>, not which scenario (best/worst/average) you're in. Those are two independent axes.
+</div>
+</div>
+
+<h2 id="quick-quiz" class="articleH2">Quick Quiz</h2>
+<ol style="font-size:16.5px;line-height:1.85;color:var(--color-text-primary);margin:0 0 24px;padding-left:28px;">
+  <li>If f(n) = 7n + 2, what's the tightest Big O?</li>
+  <li>True or False: writing f(n) = O(n³) when O(n) also works is mathematically wrong.</li>
+  <li>True or False: Big O always means "worst case."</li>
+  <li>f(n) = 4n + 1 — is n a valid floor (Ω) for it?</li>
+</ol>
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Answers</span>
+<div class="infoBoxText">
+<ol style="margin:0;padding-left:20px;line-height:2;">
+  <li><strong>O(n)</strong> — it's still a straight line, just with different numbers in front.</li>
+  <li><strong>False</strong> — technically true, just not tight or useful.</li>
+  <li><strong>False</strong> — O/Ω/Θ describe growth shape, not which case (best/worst/average) you're in.</li>
+  <li><strong>Yes</strong> — 4n+1 never dips below n, so Ω(n) holds.</li>
+</ol>
+</div>
+</div>
+
+<h2 id="summary" class="articleH2">Summary</h2>
+<p class="articleP">If you remember only one line from this whole lesson, remember this:</p>
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:18px 20px;margin:0 0 24px;">
+  <p style="margin:0;font-size:16.5px;line-height:1.8;color:var(--color-text-primary);">O = at most this fast. Ω = at least this fast. Θ = exactly this fast. Always pick the closest match, not just any true one.</p>
+</div>
+<p class="articleP">That's genuinely the whole thing. You survived Greek letters. Now every time you see Big O in the wild, you'll know exactly what it's saying — and you'll also know the two siblings it's not telling you about.</p>

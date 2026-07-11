@@ -24,6 +24,6 @@ export const timeComplexityArticle: Article = {
   content,
   prevSlug: 'why-learn-dsa',
   prevTitle: 'Why do you even need DSA?',
-  nextSlug: 'frequency-count',
-  nextTitle: 'Frequency Count Method',
+  nextSlug: 'asymptotic-notation',
+  nextTitle: 'Asymptotic Notation: Big O, Omega, and Theta',
 }
