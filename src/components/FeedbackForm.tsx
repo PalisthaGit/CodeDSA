@@ -55,7 +55,7 @@ export function FeedbackForm({ isOpen, onClose }: FeedbackFormProps) {
     type: FeedbackType = "general",
   ) {
     try {
-      const response = await fetch(`${FEEDBACK_URL}/api/feedback`, {
+      const response = await fetch(`https://function-bun-production-31a1.up.railway.app/api/feedback`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
