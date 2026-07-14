@@ -49,7 +49,7 @@ function buildStep(
     isMajorStep,
     nodeStates,
     edgeStates,
-    metadata: { distances: {}, previous: {}, path: [], frontier: [] },
+    metadata: { distances: {}, previous: {}, path: [], frontier: [], visitedOrder: [] },
   }
 }
 

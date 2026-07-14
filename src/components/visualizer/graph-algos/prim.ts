@@ -33,7 +33,7 @@ function buildStep(
   if (highlightEdge) edgeStates[highlightEdge.id] = 'exploring'
   if (highlightNodeId) nodeStates[highlightNodeId] = 'current'
 
-  const metadata: PathfindingStepMetadata = { distances: {}, previous: {}, path: [], frontier: [] }
+  const metadata: PathfindingStepMetadata = { distances: {}, previous: {}, path: [], frontier: [], visitedOrder: [] }
   return { stepType, message, subMessage, isMajorStep, nodeStates, edgeStates, metadata }
 }
 

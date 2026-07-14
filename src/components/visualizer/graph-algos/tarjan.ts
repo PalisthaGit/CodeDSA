@@ -37,7 +37,7 @@ function buildStep(
       Object.keys(disc).map(k => [k, String(disc[k])]),
     ) as Record<string, string | null>,
     path: [...currentSCC],
-    frontier: [...stack],
+    frontier: [...stack], visitedOrder: [],
   }
 
   return { stepType, message, subMessage, isMajorStep, nodeStates, edgeStates, metadata }

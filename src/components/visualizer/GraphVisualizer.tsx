@@ -56,7 +56,10 @@ export function GraphVisualizer({ algorithm }: Props) {
     fullReset,
     stepIdx,
     totalSteps,
+    currentStep,
   } = useGraphVisualizer(algorithm)
+
+  const isBFS = algorithm === 'bfs'
 
   const isMST = algorithmCategory === 'spanning-tree'
 
@@ -84,10 +87,14 @@ export function GraphVisualizer({ algorithm }: Props) {
                     stroke={stroke}
                     strokeWidth={state ? 2.5 : 1.5}
                   />
-                  <rect x={mx - 9} y={my - 9} width={18} height={16} rx={4} fill="#FEFEFE" stroke={stroke} strokeWidth={0.5} />
-                  <text x={mx} y={my + 3} textAnchor="middle" fontSize={10} fill="#888" fontFamily="monospace">
-                    {edge.weight}
-                  </text>
+                  {!isBFS && (
+                    <>
+                      <rect x={mx - 9} y={my - 9} width={18} height={16} rx={4} fill="#FEFEFE" stroke={stroke} strokeWidth={0.5} />
+                      <text x={mx} y={my + 3} textAnchor="middle" fontSize={10} fill="#888" fontFamily="monospace">
+                        {edge.weight}
+                      </text>
+                    </>
+                  )}
                 </g>
               )
             })}
@@ -96,7 +103,7 @@ export function GraphVisualizer({ algorithm }: Props) {
               const state = nodeStates[node.id]
               const { fill, stroke, text } = nodeColors(state)
               const isStart = node.id === startNodeId
-              const isEnd = !isMST && node.id === endNodeId
+              const isEnd = !isMST && !isBFS && node.id === endNodeId
               const dashed = isEnd && stepType !== 'path' && stepType !== 'complete'
               return (
                 <g key={node.id}>
@@ -130,19 +137,46 @@ export function GraphVisualizer({ algorithm }: Props) {
         ) : (
           <div className="gvLegend">
             <span className="gvLegendItem"><span className="gvDot gvDotCurrent" />current</span>
-            <span className="gvLegendItem"><span className="gvDot gvDotCandidate" />open set</span>
+            <span className="gvLegendItem"><span className="gvDot gvDotQueue" />{isBFS ? 'in queue' : 'open set'}</span>
             <span className="gvLegendItem"><span className="gvDot gvDotVisited" />visited</span>
-            <span className="gvLegendItem"><span className="gvDot gvDotPath" />path</span>
+            {!isBFS && <span className="gvLegendItem"><span className="gvDot gvDotPath" />path</span>}
           </div>
         )}
 
-        <div className={`visStatusBox gvStatus ${statusVariant(stepType)}`}>
+        {isBFS && (
+          <div className="bfsQueues">
+            <div className="bfsPanelSection">
+              <div className="bfsPanelLabel">Queue (front → back)</div>
+              <div className="bfsPanelNodes">
+                {(currentStep?.metadata.frontier ?? []).length === 0
+                  ? <span className="bfsPanelEmpty">empty</span>
+                  : (currentStep?.metadata.frontier ?? []).map((id, i) => (
+                      <span key={i} className="bfsQueueNode">{id}</span>
+                    ))
+                }
+              </div>
+            </div>
+            <div className="bfsPanelSection">
+              <div className="bfsPanelLabel">Visited (in order)</div>
+              <div className="bfsPanelNodes">
+                {(currentStep?.metadata.visitedOrder ?? []).length === 0
+                  ? <span className="bfsPanelEmpty">none yet</span>
+                  : (currentStep?.metadata.visitedOrder ?? []).map((id, i) => (
+                      <span key={i} className="bfsVisitedNode">{id}</span>
+                    ))
+                }
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className={`visStatusBox gvStatus ${isBFS && stepType === 'complete' ? 'info' : statusVariant(stepType)}`}>
           <div className="gvStatusMessage">{message}</div>
           {subMessage && <div className="gvStatusSub">{subMessage}</div>}
         </div>
 
         <div className="visLinearControls gvControls">
-          <span className="gvLabel">{isMST ? 'start' : 'from'}</span>
+          <span className="gvLabel">{isMST || isBFS ? 'start' : 'from'}</span>
           <select
             className="gvSelect"
             value={startNodeId}
@@ -151,7 +185,7 @@ export function GraphVisualizer({ algorithm }: Props) {
           >
             {graph.nodes.map(n => <option key={n.id} value={n.id}>{n.id}</option>)}
           </select>
-          {!isMST && (
+          {!isMST && !isBFS && (
             <>
               <span className="gvLabel">to</span>
               <select

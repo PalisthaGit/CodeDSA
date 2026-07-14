@@ -11,6 +11,7 @@ export type PathfindingStepMetadata = {
   previous: Record<string, string | null>
   path: string[]
   frontier: string[]
+  visitedOrder: string[]
 }
 
 export type GraphStep = {
@@ -33,4 +34,5 @@ export type GraphAlgorithmDefinition = {
   name: string
   category: 'pathfinding' | 'spanning-tree' | 'traversal'
   func: (graphData: GraphData, options?: GraphAlgorithmOptions) => GraphStep[]
+  graph?: GraphData
 }

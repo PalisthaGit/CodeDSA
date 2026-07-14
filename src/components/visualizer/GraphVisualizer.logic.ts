@@ -28,13 +28,18 @@ export const DEFAULT_GRAPH: GraphData = {
 }
 
 export function useGraphVisualizer(algorithmKey: string) {
+  const def = graphRegistry[algorithmKey]
+  const graph = def?.graph ?? DEFAULT_GRAPH
+  const defaultStart = graph.nodes[0]?.id ?? 'A'
+  const defaultEnd = graph.nodes.at(-1)?.id ?? 'G'
+
   const [steps, setSteps] = useState<GraphStep[]>([])
   const [stepIdx, setStepIdx] = useState(-1)
   const [playing, setPlaying] = useState(false)
   const [started, setStarted] = useState(false)
   const [done, setDone] = useState(false)
-  const [startNodeId, setStartNodeId] = useState('A')
-  const [endNodeId, setEndNodeId] = useState('G')
+  const [startNodeId, setStartNodeId] = useState(defaultStart)
+  const [endNodeId, setEndNodeId] = useState(defaultEnd)
 
   const playingRef = useRef(false)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -85,10 +90,9 @@ export function useGraphVisualizer(algorithmKey: string) {
 
   const kickoff = useCallback(() => {
     if (timerRef.current) clearTimeout(timerRef.current)
-    const def = graphRegistry[algorithmKey]
     if (!def) return
     const options: GraphAlgorithmOptions = { startNodeId, endNodeId }
-    const newSteps = def.func(DEFAULT_GRAPH, options)
+    const newSteps = def.func(graph, options)
     stepsRef.current = newSteps
     stepIdxRef.current = -1
     doneRef.current = false
@@ -129,20 +133,21 @@ export function useGraphVisualizer(algorithmKey: string) {
     setDone(false)
   }, [])
 
-  const algorithmCategory = graphRegistry[algorithmKey]?.category ?? 'pathfinding'
-  const idleMessage = algorithmCategory === 'spanning-tree'
+  const algorithmCategory = def?.category ?? 'pathfinding'
+  const idleMessage = algorithmCategory === 'spanning-tree' || algorithmCategory === 'traversal'
     ? 'choose a start node, then press ▶ play'
     : 'choose start and end nodes, then press ▶ play'
 
   return {
-    graph: DEFAULT_GRAPH,
-    algoName: graphRegistry[algorithmKey]?.name ?? algorithmKey,
+    graph,
+    algoName: def?.name ?? algorithmKey,
     algorithmCategory,
     nodeStates: displayNodeStates,
     edgeStates: currentStep?.edgeStates ?? {},
     message: currentStep?.message ?? idleMessage,
     subMessage: currentStep?.subMessage ?? '',
     stepType: currentStep?.stepType,
+    currentStep,
     playing,
     started,
     done,

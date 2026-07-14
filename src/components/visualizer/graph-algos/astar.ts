@@ -46,7 +46,7 @@ function buildStep(
     distances: { ...gScore },
     previous: { ...previous },
     path: [...path],
-    frontier: [...openSet],
+    frontier: [...openSet], visitedOrder: [],
   }
 
   return { stepType, message, subMessage, isMajorStep, nodeStates, edgeStates, metadata }

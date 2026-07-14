@@ -42,7 +42,7 @@ function buildStep(
       Object.keys(finishT).map(k => [k, String(finishT[k])]),
     ) as Record<string, string | null>,
     path: [...sccNodes],
-    frontier: [...finishStack],
+    frontier: [...finishStack], visitedOrder: [],
   }
 
   return { stepType, message, subMessage, isMajorStep, nodeStates, edgeStates, metadata }

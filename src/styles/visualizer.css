@@ -2036,6 +2036,7 @@
 .gvDotVisited   { background: #EFF8FF; border-color: #90C8F0; }
 .gvDotCandidate { background: #F5F0FF; border-color: #B8A0E8; }
 .gvDotPath      { background: #C8F0D8; border-color: #80D0A0; }
+.gvDotQueue     { background: transparent; border-color: #90C8F0; }
 
 .gvEdgeLine {
   width: 22px;
@@ -2102,6 +2103,71 @@
   color: var(--color-text-muted);
   margin-left: auto;
   align-self: center;
+}
+
+.bfsQueues {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.bfsPanelSection {
+  flex: 1;
+  min-width: 0;
+}
+
+.bfsPanelLabel {
+  font-family: var(--font-patrick-hand), cursive;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+}
+
+.bfsPanelNodes {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-height: 42px;
+  align-items: center;
+}
+
+.bfsPanelEmpty {
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.bfsQueueNode {
+  width: 42px;
+  height: 42px;
+  border: 1.5px solid var(--color-purple-border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-patrick-hand), cursive;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+  flex-shrink: 0;
+}
+
+.bfsVisitedNode {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-patrick-hand), cursive;
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  background: #2B4C9B;
+  flex-shrink: 0;
 }
 
 /* ===== SORTING VISUALIZER ===== */

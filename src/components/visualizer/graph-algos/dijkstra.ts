@@ -42,6 +42,7 @@ function buildStep(
     previous: { ...previous },
     path: [...path],
     frontier: [...frontier],
+    visitedOrder: [],
   }
 
   return { stepType, message, subMessage, isMajorStep, nodeStates, edgeStates, metadata }
