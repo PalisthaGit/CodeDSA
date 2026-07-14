@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { sections } from '@/lib/topics'
 import { getArticleData } from '@/lib/articles'
+import { findVisualizerByArticle } from '@/lib/visualizers'
 import { ArticleLayout } from '@/components/article/ArticleLayout'
 import { MobileTOCToggle } from '@/components/article/MobileTOCToggle'
 import { ArrayVisualizer } from '@/components/visualizer/ArrayVisualizer'
@@ -106,6 +107,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params
   const article = getArticleData(slug)
+  const linkedVisualizer = findVisualizerByArticle(slug)
 
   if (!article) notFound()
 
@@ -157,6 +159,15 @@ export default async function ArticlePage({ params }: Props) {
           </div>
           {article.chapter !== 'Start here' && <p className="articleTag">{article.chapter}</p>}
           <h1 className="articleTitle">{article.title}</h1>
+          {linkedVisualizer && (
+            <p className="articleVisualizerTeaser">
+              Before reading — explore the{' '}
+              <Link href={`/visualizer/${linkedVisualizer.id}`} className="articleVisualizerLink">
+                {linkedVisualizer.title} visualizer
+              </Link>{' '}
+              to see how the traversal algorithm works step by step.
+            </p>
+          )}
         </div>
 
         <div className="articleBody">

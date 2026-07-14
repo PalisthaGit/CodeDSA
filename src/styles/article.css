@@ -297,6 +297,23 @@
   line-height: 1.25;
 }
 
+.articleVisualizerTeaser {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin: 0 0 20px;
+  line-height: 1.6;
+}
+
+.articleVisualizerLink {
+  color: var(--color-purple-text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.articleVisualizerLink:hover {
+  color: var(--color-text-primary);
+}
+
 .articleTagline {
   font-size: 16px;
   line-height: 1.75;

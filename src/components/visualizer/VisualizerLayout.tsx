@@ -47,12 +47,15 @@ export function VisualizerLayout({ active, articleSlugs }: Props) {
             <p className="visualizerTag">{active.category}</p>
             <h1 className="visualizerTitle">{active.title}</h1>
             {hasArticle && (
-              <Link
-                href={`/learn/${active.articleSlug}`}
-                className="readArticleLink"
-              >
-                read the article on {active.title.toLowerCase()}
-              </Link>
+              <>
+                <p className="visualizerTeaser">Explore the {active.title.toLowerCase()} traversal algorithm — watch the visualization trace through each step.</p>
+                <Link
+                  href={`/learn/${active.articleSlug}`}
+                  className="readArticleLink"
+                >
+                  read the article on {active.title.toLowerCase()}
+                </Link>
+              </>
             )}
           </div>
 

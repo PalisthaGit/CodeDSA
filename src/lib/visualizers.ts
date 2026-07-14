@@ -66,3 +66,11 @@ export function findVisualizer(id: string): Visualizer | undefined {
   }
   return undefined
 }
+
+export function findVisualizerByArticle(articleSlug: string): Visualizer | undefined {
+  for (const cat of visualizerCategories) {
+    const item = cat.items.find(v => v.articleSlug === articleSlug)
+    if (item) return item
+  }
+  return undefined
+}
