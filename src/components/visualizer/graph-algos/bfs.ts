@@ -78,8 +78,8 @@ function bfs(graphData: GraphData, options?: GraphAlgorithmOptions): GraphStep[]
 
     steps.push(buildStep(
       'visit',
-      `Dequeued node ${currentId}`,
-      `Queue: [${queue.join(', ')}]`,
+      `Dequeued node ${currentId} — mark as visited`,
+      `Visited: ${visitedOrder.join(' → ')} | Queue: [${queue.join(', ')}]`,
       currentId, visited, queue, previous, visitedOrder, [], new Set(), graphData, true,
     ))
 
