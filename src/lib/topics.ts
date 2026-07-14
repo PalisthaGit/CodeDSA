@@ -62,8 +62,8 @@ export const sections: Section[] = [
     topics: [
       { title: 'Linear Search', slug: 'linear-search', readTime: '5 min', hasVisualizer: true, comingSoon: false },
       { title: 'Binary Search', slug: 'binary-search', readTime: '6 min', hasVisualizer: true, comingSoon: false },
-      { title: 'What is a graph?', slug: 'what-is-a-graph', readTime: '6 min', hasVisualizer: false, comingSoon: true },
-      { title: 'BFS', slug: 'bfs', readTime: '10 min', hasVisualizer: true, comingSoon: true },
+      { title: 'What is a graph?', slug: 'what-is-a-graph', readTime: '10 min', hasVisualizer: false, comingSoon: false },
+      { title: 'BFS', slug: 'bfs', readTime: '10 min', hasVisualizer: false, comingSoon: false },
       { title: 'DFS', slug: 'dfs', readTime: '10 min', hasVisualizer: true, comingSoon: true },
       { title: "Dijkstra's", slug: 'dijkstras', readTime: '12 min', hasVisualizer: true, comingSoon: true },
       { title: 'Bellman-Ford', slug: 'bellman-ford', readTime: '10 min', hasVisualizer: false, comingSoon: true },

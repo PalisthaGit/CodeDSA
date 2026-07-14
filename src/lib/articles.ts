@@ -9,6 +9,8 @@ import { stackArticle } from './articles/stack'
 import { queueArticle } from './articles/queue'
 import { linearSearchArticle } from './articles/linear-search'
 import { binarySearchArticle } from './articles/binary-search'
+import { whatIsAGraphArticle } from './articles/what-is-a-graph'
+import { bfsArticle } from './articles/bfs'
 
 export type ArticleHeading = {
   id: string
@@ -43,6 +45,8 @@ const articleRegistry: Record<string, Article> = {
 
   'linear-search': linearSearchArticle,
   'binary-search': binarySearchArticle,
+  'what-is-a-graph': whatIsAGraphArticle,
+  'bfs': bfsArticle,
 }
 
 export function getArticleData(slug: string): Article | null {

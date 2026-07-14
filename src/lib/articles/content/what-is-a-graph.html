@@ -1,0 +1,342 @@
+<p class="articleP">Graphs sound intimidating because of words like "articulation point" and "strongly connected" — but at the core, a graph is just dots connected by lines. That's it. Everything else is just describing how those dots and lines behave.</p>
+
+<p class="articleP">The dots are called <strong>vertices</strong> (one dot = a "vertex"), and the lines are called <strong>edges</strong>. So really, a graph is just "some vertices, and some edges connecting them."</p>
+
+<img src="/graph-vertices-edges.png" alt="Four circles labeled 1, 2, 3, 4 scattered on a page with a couple of plain lines connecting some of them, with labels pointing to a vertex and an edge" class="articleImg" />
+
+<p class="articleP">Once you're comfortable with that picture — dots and lines — here's the fancy math way people write it, just so it doesn't surprise you later:</p>
+
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:16px 20px;margin:0 0 24px;text-align:center;">
+  <p style="margin:0;font-family:'Courier New',Courier,monospace;font-size:18px;color:var(--color-text-primary);letter-spacing:0.03em;">G = (V, E)</p>
+</div>
+
+<p class="articleP">This just means: a graph <code>G</code> is made of two things — a set of vertices <code>V</code> (all the dots) and a set of edges <code>E</code> (all the lines). Nothing new, just notation for the same picture you already have in your head.</p>
+
+<h2 id="directed-vs-undirected" class="articleH2 articleH2First">Directed vs Undirected: Do the Lines Have Arrows?</h2>
+
+<p class="articleP">This is the very first fork in the road, and it decides everything else.</p>
+
+<h3 class="articleH3">Directed Graph (arrows point somewhere)</h3>
+
+<p class="articleP">If the lines have arrows, it's a <strong>Directed Graph</strong>. An arrow from 1 → 2 means you can go from 1 to 2, but that does NOT automatically mean you can go from 2 back to 1.</p>
+
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:12px 20px;margin:0 0 20px;font-family:'Courier New',Courier,monospace;font-size:16px;color:var(--color-text-primary);">
+  1 → 2
+</div>
+
+<p class="articleP">Think of it like a one-way street. You can drive from 1 to 2, but you can't just turn around and drive back unless there's a separate arrow pointing the other way.</p>
+
+<img src="/graph-directed.png" alt="Four circles labeled 1, 2, 3, 4 arranged in a square with arrows forming a directed cycle: 1→2, 2→3, 3→4, 4→1, titled Directed Graph" class="articleImg" />
+
+<h3 class="articleH3">Undirected Graph (no arrows, just lines)</h3>
+
+<p class="articleP">If the lines are plain, with no arrows, it's just called a <strong>Graph</strong> (or "undirected graph"). A line between 1 and 2 means you can move freely both ways — 1 to 2 AND 2 to 1.</p>
+
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:12px 20px;margin:0 0 20px;font-family:'Courier New',Courier,monospace;font-size:16px;color:var(--color-text-primary);">
+  1 — 2
+</div>
+
+<p class="articleP">Think of it like a regular two-way street.</p>
+
+<img src="/graph-undirected.png" alt="Four circles labeled 1, 2, 3, 4 arranged in a square connected by plain lines with no arrowheads, titled Undirected Graph" class="articleImg" />
+
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Quick rule</span>
+<div class="infoBoxText">Arrows = directed. No arrows = undirected. That's the whole distinction.</div>
+</div>
+
+<h2 id="self-loop" class="articleH2">Self Loop</h2>
+
+<p class="articleP">A self loop is exactly what it sounds like — an edge that starts and ends at the same vertex. It's a dot pointing back at itself, like a little loop-the-loop.</p>
+
+<img src="/graph-self-loop.png" alt="A single circle labeled 1 with a small curved loop coming out of the top and re-entering the same circle with an arrowhead, labeled Self Loop" class="articleImg" />
+
+<p class="articleP">Nothing connects to anything new here — the vertex is just connected to itself.</p>
+
+<h2 id="parallel-edges" class="articleH2">Parallel Edges</h2>
+
+<p class="articleP">Parallel edges are when there are two or more edges between the exact same pair of vertices.</p>
+
+<p class="articleP">Example: if there's an edge 4 → 3 AND another edge 3 → 4, both connecting the same two dots (just going opposite directions, or even the same direction twice), that's a parallel edge situation.</p>
+
+<img src="/graph-parallel-edges.png" alt="Two circles labeled 3 and 4 connected by two separate curved arrows — one curving above going from 4 to 3, one curving below going from 3 to 4, labeled Parallel Edges" class="articleImg" />
+
+<p class="articleP">Why does this matter? Because it changes what "type" of graph you have:</p>
+
+<ul>
+  <li>A graph <strong>with</strong> self loops and/or parallel edges → just called a <strong>Directed Graph</strong> (the general, "anything goes" version)</li>
+  <li>A graph <strong>without</strong> self loops and without parallel edges → called a <strong>Simple Digraph</strong> (the "clean" version)</li>
+</ul>
+
+<p class="articleP">So "simple" here doesn't mean "easy" — it means "no self loops, no parallel edges." Good to know, because it trips people up.</p>
+
+<img src="/graph-simple-digraph.png" alt="A clean directed graph labeled Simple Digraph with 4 circles labeled 1, 2, 3, 4, with arrows 1→2, 1→4, 1→3, 4→3, 3→2, no loops or parallel edges" class="articleImg" />
+
+<h2 id="degree-indegree-outdegree" class="articleH2">Degree, Indegree, and Outdegree — Counting the Lines</h2>
+
+<p class="articleP">This is just counting how many edges touch a vertex. But it's counted differently depending on directed vs undirected.</p>
+
+<h3 class="articleH3">For Undirected Graphs → just "Degree"</h3>
+
+<p class="articleP"><strong>Degree</strong> = how many edges are touching that vertex, full stop.</p>
+
+<p class="articleP">Example: if vertex 1 has 3 lines coming out of it (to vertices 2, 3, and 4), then:</p>
+
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:12px 20px;margin:0 0 20px;font-family:'Courier New',Courier,monospace;font-size:16px;color:var(--color-text-primary);">
+  degree of vertex 1 = 3
+</div>
+
+<img src="/graph-degree-undirected.png" alt="Vertex 1 at the top connected by three plain lines down to three circles labeled 2, 3, 4 spread below it, labeled degree 3" class="articleImg" />
+
+<h3 class="articleH3">For Directed Graphs → "Indegree" and "Outdegree" (two separate counts)</h3>
+
+<p class="articleP">Since directed edges have a direction, we split the counting into two:</p>
+
+<ul>
+  <li><strong>Indegree</strong> = how many arrows are pointing <strong>INTO</strong> the vertex</li>
+  <li><strong>Outdegree</strong> = how many arrows are pointing <strong>OUT OF</strong> the vertex</li>
+</ul>
+
+<p class="articleP">Example: vertex 4 has two arrows coming in (from vertex 1 and vertex 3) and one arrow going out (to vertex 3):</p>
+
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:12px 20px;margin:0 0 20px;font-family:'Courier New',Courier,monospace;font-size:16px;color:var(--color-text-primary);line-height:1.8;">
+  Indegree of 4 &nbsp;= 2<br/>
+  Outdegree of 4 = 1
+</div>
+
+<img src="/graph-degree-directed.png" alt="Vertex 4 in the middle with two arrows pointing into it from vertices 1 and 3, and one arrow pointing out toward vertex 3, labeled Indegree 2 and Outdegree 1" class="articleImg" />
+
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Easy way to remember</span>
+<div class="infoBoxText">"In" = arrows walking IN. "Out" = arrows walking OUT. The words are literally telling you what to count.</div>
+</div>
+
+<h2 id="path" class="articleH2">Path — Just a Route You Can Walk</h2>
+
+<p class="articleP">A path is simply a sequence of vertices you can travel through, one edge at a time, following the arrows (if directed).</p>
+
+<p class="articleP">Example: 1 → 2 → 5 is a path — you start at 1, walk the edge to 2, then walk the edge to 5.</p>
+
+<img src="/graph-path.png" alt="A directed graph with circles labeled 1, 2, 3, 4, 5 with arrows 1→2, 2→5, 3→4, 4→2, with the path 1→2→5 highlighted in red, labeled Path" class="articleImg" />
+
+<p class="articleP">Nothing fancier than "can I trace a route from here to there using existing edges?"</p>
+
+<h2 id="connected-vs-non-connected" class="articleH2">Connected vs Non-Connected — Can Everyone Reach Everyone?</h2>
+
+<h3 class="articleH3">Non-Connected Graph</h3>
+
+<p class="articleP">If the graph is split into separate "islands" — groups of vertices where you can't get from one island to another — it's called <strong>non-connected</strong>, and each island is called a <strong>component</strong>.</p>
+
+<p class="articleP">Example: if vertices {1,2,3,4} are all linked to each other, but {5,6,7} are linked only to each other and NOT to the first group, then this graph has 2 components.</p>
+
+<img src="/graph-connected-components.png" alt="An undirected graph split into two separate clusters — left cluster has circles 1, 2, 3, 4 connected together, right cluster has circles 5, 6, 7 connected together, with a visible gap between them, labeled 2 components in red" class="articleImg" />
+
+<h3 class="articleH3">Articulation Point</h3>
+
+<p class="articleP">An <strong>articulation point</strong> is a vertex that, if you removed it, would split the graph into more pieces — breaking the connection between other vertices.</p>
+
+<p class="articleP">Think of it like a bridge vertex — it's the one thing holding two parts of the graph together. Remove it, and the graph falls apart into more components.</p>
+
+<img src="/graph-articulation-point.png" alt="An undirected graph shaped like two clusters connected only through a single middle circle labeled 4 — left side has circles 1, 2, 3 connected to vertex 4, right side has circles 5, 6, 7 connected to vertex 4, with vertex 4 highlighted in red and labeled Articulation Point" class="articleImg" />
+
+<h2 id="strongly-connected" class="articleH2">Strongly Connected (Directed Graphs Only)</h2>
+
+<p class="articleP">A directed graph is <strong>strongly connected</strong> if, for every pair of vertices, you can get from one to the other AND back — following the arrows both ways.</p>
+
+<p class="articleP">So it's not enough to reach a vertex — you also need to be able to return. If every vertex can reach every other vertex (round trip, respecting arrow direction), the whole graph is strongly connected.</p>
+
+<img src="/graph-strongly-connected.png" alt="A small directed graph with circles labeled 1, 2, 3, 4, 5 with arrows forming a full directed cycle so every vertex can reach every other and return, titled Strongly Connected" class="articleImg" />
+
+<h2 id="directed-acyclic-graph" class="articleH2">Directed Acyclic Graph (DAG)</h2>
+
+<p class="articleP">A DAG is a directed graph with one special rule: <strong>no cycles allowed</strong>.</p>
+
+<p class="articleP">A "cycle" means a loop where you start at a vertex, follow arrows around, and end up back where you started. A DAG guarantees that can never happen — once you leave a vertex, there's no path of arrows that leads you back to it.</p>
+
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:12px 20px;margin:0 0 20px;font-family:'Courier New',Courier,monospace;font-size:15px;color:var(--color-text-primary);line-height:1.8;">
+  1 → 2 → 5<br/>
+  3 → 4 → 6<br/>
+  2 → 5 <span style="font-family:inherit;font-size:14px;color:var(--color-text-secondary);">(no way back from 5 to 1, 2, 3, or 4)</span>
+</div>
+
+<img src="/graph-dag.png" alt="A directed graph with 6 circles labeled 1, 2, 3, 4, 5, 6 in two rows with arrows 1→2, 2→5, 1→3, 3→4, 4→6, 4→5, all flowing left to right with none pointing backward, titled Directed Acyclic Graph (DAG)" class="articleImg" />
+
+<p class="articleP">DAGs show up everywhere — task scheduling, prerequisite chains (like course prerequisites), build systems — anywhere "this must happen before that" and nothing is allowed to loop back on itself.</p>
+
+<h2 id="topological-ordering" class="articleH2">Topological Ordering</h2>
+
+<p class="articleP">Topological ordering is just a way of lining up all the vertices of a DAG in a single row, such that every arrow points forward (left to right), never backward.</p>
+
+<p class="articleP">Example ordering: 1 → 3 → 2 → 4 → 5 → 6</p>
+
+<img src="/graph-topological-ordering.png" alt="Six circles labeled 1, 3, 2, 4, 5, 6 arranged in a single horizontal row with arrows all pointing rightward or in gentle forward arcs, titled Topological Ordering" class="articleImg" />
+
+<p class="articleP">This is basically a valid "order to do things in" — if vertex 1 must happen before vertex 3, and 3 before 2, this ordering respects all of that.</p>
+
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Key insight</span>
+<div class="infoBoxText">Only DAGs have topological orderings. If there's a cycle, you can never arrange everything left-to-right without an arrow pointing backward somewhere — that's actually one way to prove a graph is NOT a DAG.</div>
+</div>
+
+<h2 id="real-life-examples" class="articleH2">Where You'll Actually See This In Real Life</h2>
+
+<p class="articleP">All of this isn't just whiteboard theory — here's where each concept shows up in things you already use:</p>
+
+<table style="width:100%;border-collapse:collapse;margin:0 0 28px;font-size:16px;line-height:1.7;">
+  <thead>
+    <tr style="background:var(--color-purple-light);">
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">Concept</th>
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">Real-life example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Undirected Graph</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">Facebook/Instagram friendships — if you're friends with someone, they're friends with you too. Two-way, no arrows needed.</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Directed Graph</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">Instagram following (not friends) — you can follow someone without them following you back. One-way arrow.</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Self Loop</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">A flight that departs and lands at the same airport, or a function in code that calls itself.</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Parallel Edges</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">Multiple direct flights between the same two cities on different airlines — same two vertices (cities), multiple edges (flights).</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Degree / Indegree / Outdegree</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">On Twitter/X, your outdegree is how many people you follow, your indegree is how many followers you have.</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Path</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">Google Maps giving you turn-by-turn directions — literally a path traced through a graph of roads (vertices = intersections, edges = roads).</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Connected Components</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">A messaging app's "friend groups" — if group A has never interacted with group B at all, they're separate components.</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Articulation Point</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">A single server or router that, if it goes down, splits part of the internet off from the rest — a literal single point of failure.</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Strongly Connected</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">A subway system where every station can reach every other station, and you can always get back — round trips work everywhere.</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">DAG</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">Course prerequisites in college — you can't have "Course A requires Course B" and "Course B requires Course A" at the same time, or nobody could ever start.</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Topological Ordering</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">A recipe's step order, or a build system like make/CI pipelines — figuring out a valid sequence to do things in so nothing runs before its prerequisite.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="quick-reference" class="articleH2">Quick Reference Table</h2>
+
+<table style="width:100%;border-collapse:collapse;margin:0 0 28px;font-size:16px;line-height:1.7;">
+  <thead>
+    <tr style="background:var(--color-purple-light);">
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">Term</th>
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Vertex</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">a dot / node</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Edge</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">a line connecting two dots</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Directed Graph</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">edges have arrows (one-way)</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Undirected Graph</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">edges have no arrows (two-way)</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Self Loop</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">an edge from a vertex to itself</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Parallel Edges</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">2+ edges between the same pair of vertices</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Simple Digraph</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">directed graph with NO self loops or parallel edges</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Degree</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">(undirected) total edges touching a vertex</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Indegree</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">(directed) arrows coming IN</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Outdegree</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">(directed) arrows going OUT</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Path</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">a route from vertex to vertex along edges</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Component</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">a connected "island" of vertices</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Articulation Point</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">a vertex that, if removed, splits the graph further</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Strongly Connected</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">every vertex can reach every other vertex, both ways</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">DAG</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">directed graph with no cycles</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Topological Ordering</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">lining up vertices so every arrow points forward</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="quick-quiz" class="articleH2">Quick Quiz</h2>
+
+<ol>
+  <li>If an edge has an arrow, is the graph directed or undirected?</li>
+  <li>What do you call an edge that loops back to the same vertex it started from?</li>
+  <li>In a directed graph, does "indegree" count arrows coming in, or going out?</li>
+  <li>What's the key rule that makes a directed graph a DAG?</li>
+  <li>If removing a vertex splits the graph into more pieces, what is that vertex called?</li>
+</ol>
+
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Answers</span>
+<div class="infoBoxText">
+  <ol style="margin:0;padding-left:20px;line-height:2;">
+    <li>Directed.</li>
+    <li>A self loop.</li>
+    <li>Coming in.</li>
+    <li>No cycles — you can never follow arrows back to where you started.</li>
+    <li>An articulation point.</li>
+  </ol>
+</div>
+</div>
+
+<h2 id="one-line-summary" class="articleH2">One-Line Summary</h2>
+
+<p class="articleP">A graph is just dots and lines. Arrows or no arrows decides directed vs undirected. Degree/indegree/outdegree just count edges touching a vertex. Components tell you if everyone's connected. A DAG is a directed graph that never loops back on itself, and topological ordering lines it all up left to right.</p>

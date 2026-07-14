@@ -23,4 +23,7 @@ export const binarySearchArticle: Article = {
   content,
   prevSlug: 'linear-search',
   prevTitle: 'Linear Search — check everything one by one',
+
+  nextSlug: 'what-is-a-graph',
+  nextTitle: 'What is a Graph?',
 }

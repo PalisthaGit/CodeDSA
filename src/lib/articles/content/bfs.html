@@ -1,0 +1,348 @@
+<p class="articleP">BFS sounds like a scary algorithm name, but it's something you already do without thinking — like checking every room on your current floor before walking up the stairs to the next one.</p>
+
+<p class="articleP">The one rule that defines BFS: visit a vertex, then explore ALL of its neighbors before going any deeper. Only once the whole current level is done does BFS move one level deeper.</p>
+
+<img src="/bfs-graph-initial.png" alt="A tree-shaped graph: vertex 1 at the top, three lines going down to vertices 2, 3, 4, vertex 2 connecting further down to vertices 5 and 6, vertex 4 connecting down to vertex 7, and vertex 3 also connecting sideways to vertex 6, hand-drawn whiteboard marker style, black ink, simple numbered circles 1 through 7" class="articleImg" />
+
+<p class="articleP">We'll trace BFS through this graph, starting from vertex 1.</p>
+
+<h2 id="watching-bfs-work" class="articleH2 articleH2First">Watching BFS Work</h2>
+
+<img src="/bfs-step-1.png" alt="The same 7-vertex graph with vertex 1 filled solid green and all other vertices plain unfilled circles, hand-drawn whiteboard style" class="articleImg" />
+
+<p class="articleP">Visit 1. It connects to 2, 3, 4 — none visited yet, so visit all three now.</p>
+
+<img src="/bfs-step-2.png" alt="The same graph with vertices 1, 2, 3, 4 filled green and vertices 5, 6, 7 still plain unfilled, hand-drawn whiteboard style" class="articleImg" />
+
+<p class="articleP">We don't jump into exploring vertex 2 yet, even though we just found it — BFS finishes the whole current level (2, 3, 4) first. That's the entire heart of the algorithm.</p>
+
+<p class="articleP">Now explore 2. It connects to 1, 5, 6. 1 is already visited, so 5 and 6 are the new discoveries.</p>
+
+<img src="/bfs-step-3.png" alt="The same graph with vertices 1 through 6 filled green and only vertex 7 still plain unfilled, hand-drawn whiteboard style" class="articleImg" />
+
+<p class="articleP">Now explore 3. It connects to 1 and 6 — both already visited, so there's nothing new here.</p>
+
+<img src="/bfs-step-4.png" alt="The same graph with vertices 1 through 6 filled green as before, vertex 7 still unfilled, with a small red dashed circle around vertex 6 and a red label reading already visited — skip, hand-drawn whiteboard style" class="articleImg" />
+
+<p class="articleP">This is exactly why we track visited vertices — otherwise we'd keep revisiting 6 every time something else points at it.</p>
+
+<p class="articleP">Explore 4. It connects to 1 and 7. 1 is already visited, so 7 is the only new discovery — visit it and we're done.</p>
+
+<img src="/bfs-step-5.png" alt="The same 7-vertex graph with all vertices 1 through 7 filled solid green, hand-drawn whiteboard style" class="articleImg" />
+
+<h2 id="the-queue" class="articleH2">How Does the Computer Actually Remember What to Explore Next?</h2>
+
+<p class="articleP">Here's the real question: BFS says "finish the current level before going deeper" — but how does a computer know what counts as "the current level"?</p>
+
+<p class="articleP">The answer: a Queue.</p>
+
+<p class="articleP">A queue works on a simple rule called FIFO — First In, First Out. Whoever gets in line first, gets served first. Just like a real checkout line at a store — no cutting in line, no skipping ahead.</p>
+
+<img src="/bfs-queue-fifo.png" alt="A simple horizontal queue diagram: a row of 3 empty rectangular boxes connected left to right, with a label Front pointing to an arrow on the left side and a label Rear pointing to an arrow on the right side, hand-drawn whiteboard marker style, black ink, title reading A Queue: First In, First Out" class="articleImg" />
+
+<p class="articleP">Every time BFS discovers a new vertex, it gets placed at the back of the queue. Every time BFS needs to know what to explore next, it grabs whatever's at the front of the queue. That's the entire mechanism.</p>
+
+<h2 id="full-dry-run" class="articleH2">Full Dry Run — Watching the Queue Live</h2>
+
+<p class="articleP">Let's redo the same traversal, but this time we'll track exactly what's inside the queue at every step.</p>
+
+<h3 class="articleH3">Step 1: Visit the Starting Vertex</h3>
+
+<p class="articleP">Visit vertex 1, and place it in the queue.</p>
+
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:12px 20px;margin:0 0 20px;font-family:'Courier New',Courier,monospace;font-size:16px;color:var(--color-text-primary);">
+  Queue: &nbsp;Front → [1] ← Rear
+</div>
+
+<img src="/bfs-queue-step1.png" alt="A horizontal queue box containing just the number 1 inside a single rectangle, with Front labeled pointing at it from the left and Rear also pointing at it from the right, hand-drawn whiteboard style" class="articleImg" />
+
+<h3 class="articleH3">Step 2: Explore Vertex 1</h3>
+
+<p class="articleP">Remove 1 from the front of the queue (the queue is now empty), and explore it.</p>
+
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:12px 20px;margin:0 0 20px;font-family:'Courier New',Courier,monospace;font-size:16px;color:var(--color-text-primary);">
+  Queue: &nbsp;Front → [] ← Rear
+</div>
+
+<img src="/bfs-queue-step2-empty.png" alt="A horizontal queue with 6 empty rectangular boxes and no items inside, Front label on the left and Rear label on the right, hand-drawn whiteboard style" class="articleImg" />
+
+<p class="articleP">Vertex 1 connects to 2, 3, 4 — none visited yet, so we visit all three and place them at the back of the queue, in order.</p>
+
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:12px 20px;margin:0 0 20px;font-family:'Courier New',Courier,monospace;font-size:16px;color:var(--color-text-primary);">
+  Queue: &nbsp;Front → [2][3][4] ← Rear
+</div>
+
+<p class="articleP">Notice: even though 2 was discovered first, we don't explore it right away — we finish processing vertex 1 completely first, THEN move to whatever's next in line. That queue ordering is exactly what forces BFS to go level by level.</p>
+
+<h3 class="articleH3">Step 3: Explore Vertex 2</h3>
+
+<p class="articleP">Remove 2 from the front.</p>
+
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:12px 20px;margin:0 0 20px;font-family:'Courier New',Courier,monospace;font-size:16px;color:var(--color-text-primary);">
+  Queue: &nbsp;Front → [3][4] ← Rear
+</div>
+
+<img src="/bfs-queue-step3-dequeued.png" alt="A horizontal queue with 6 boxes, the first two containing 3 and 4, the rest empty, Front label above the box containing 3, Rear label above the box containing 4, hand-drawn whiteboard style" class="articleImg" />
+
+<p class="articleP">Vertex 2 connects to 1, 5, 6. We've already visited 1, so skip it. Visit 5 and 6, and add them to the back of the queue.</p>
+
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:12px 20px;margin:0 0 20px;font-family:'Courier New',Courier,monospace;font-size:16px;color:var(--color-text-primary);">
+  Queue: &nbsp;Front → [3][4][5][6] ← Rear
+</div>
+
+<img src="/bfs-queue-step3.png" alt="A horizontal queue with 4 rectangular boxes containing 3, 4, 5, 6 from left to right, Front pointing at box 3, Rear pointing at box 6, hand-drawn whiteboard style" class="articleImg" />
+
+<p class="articleP">Newly discovered vertices always join the back of the line — never cutting to the front.</p>
+
+<h3 class="articleH3">Step 4: Explore Vertex 3</h3>
+
+<p class="articleP">Remove 3 from the front.</p>
+
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:12px 20px;margin:0 0 20px;font-family:'Courier New',Courier,monospace;font-size:16px;color:var(--color-text-primary);">
+  Queue: &nbsp;Front → [4][5][6] ← Rear
+</div>
+
+<p class="articleP">Vertex 3 connects to 1 and 6 — both already visited. Nothing new gets added.</p>
+
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:12px 20px;margin:0 0 20px;font-family:'Courier New',Courier,monospace;font-size:16px;color:var(--color-text-primary);">
+  Queue: &nbsp;Front → [4][5][6] ← Rear &nbsp;(unchanged)
+</div>
+
+<h3 class="articleH3">Step 5: Explore Vertex 4</h3>
+
+<p class="articleP">Remove 4 from the front.</p>
+
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:12px 20px;margin:0 0 20px;font-family:'Courier New',Courier,monospace;font-size:16px;color:var(--color-text-primary);">
+  Queue: &nbsp;Front → [5][6] ← Rear
+</div>
+
+<p class="articleP">Vertex 4 connects to 1 and 7. 1 is already visited, but 7 is brand new — visit it and add it to the back.</p>
+
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:12px 20px;margin:0 0 20px;font-family:'Courier New',Courier,monospace;font-size:16px;color:var(--color-text-primary);">
+  Queue: &nbsp;Front → [5][6][7] ← Rear
+</div>
+
+<img src="/bfs-queue-step5.png" alt="A horizontal queue with 3 rectangular boxes containing 5, 6, 7 from left to right, Front pointing at box 5, Rear pointing at box 7, hand-drawn whiteboard style" class="articleImg" />
+
+<h3 class="articleH3">Step 6: Clean Up the Rest</h3>
+
+<p class="articleP">The queue still has 5, 6, 7 left. We remove and explore each one in turn — none of them discover anything new, since every vertex in this graph has already been visited by now.</p>
+
+<div style="background:var(--color-purple-light);border:1px solid var(--color-purple-border);border-radius:10px;padding:12px 20px;margin:0 0 20px;font-family:'Courier New',Courier,monospace;font-size:16px;color:var(--color-text-primary);">
+  Queue: &nbsp;[] &nbsp;(empty)
+</div>
+
+<p class="articleP">Once the queue is completely empty, there's nothing left to explore. BFS is done.</p>
+
+<h2 id="building-bfs-in-code" class="articleH2">Building BFS in Code</h2>
+
+<p class="articleP">Now let's actually write this. Thinking back to the dry run, the computer needed exactly 3 things the whole time:</p>
+
+<ul>
+  <li>A way to remember which vertices are already visited</li>
+  <li>A queue, to remember what to explore next</li>
+  <li>A way to find all the neighbors of whatever vertex it's currently exploring</li>
+</ul>
+
+<p class="articleP">Let's build each piece.</p>
+
+<h3 class="articleH3">Piece 1: Representing the Graph (Adjacency Matrix)</h3>
+
+<p class="articleP">We'll store our graph as an adjacency matrix — an n × n grid where a 1 means "these two vertices are connected."</p>
+
+<pre class="codeBlock"><code>int A[8][8] = {
+    {0,0,0,0,0,0,0,0},
+    {0,0,1,1,1,0,0,0},
+    {0,1,0,0,0,1,1,0},
+    {0,1,0,0,0,0,1,0},
+    {0,1,0,0,0,0,0,1},
+    {0,0,1,0,0,0,0,0},
+    {0,0,1,1,0,0,0,0},
+    {0,0,0,0,1,0,0,0}
+};</code></pre>
+
+<p class="articleP">It's sized 8×8 instead of 7×7 just to make index 0 unused, so vertex numbers line up naturally with array indices — vertex 1 lives at index 1, and so on.</p>
+
+<p class="articleP"><code>A[1][2] = 1</code> means vertex 1 and vertex 2 are connected. <code>A[3][5] = 0</code> means vertex 3 and vertex 5 are NOT connected.</p>
+
+<h3 class="articleH3">Piece 2: The Visited Array</h3>
+
+<p class="articleP">The golden rule of BFS: never visit the same vertex twice. To enforce that, keep a simple array that tracks visited status.</p>
+
+<pre class="codeBlock"><code>int visited[8] = {0};</code></pre>
+
+<ul>
+  <li><code>0</code> = not visited yet</li>
+  <li><code>1</code> = already visited</li>
+</ul>
+
+<p class="articleP">The moment we visit a vertex for the first time, we flip its value to 1 — so we never accidentally process it again.</p>
+
+<h3 class="articleH3">Piece 3: The Queue</h3>
+
+<p class="articleP">We already know exactly how this behaves — new discoveries go to the back, and we always process from the front. We'll use <code>enqueue()</code> to add to the back, and <code>dequeue()</code> to remove from the front.</p>
+
+<h3 class="articleH3">Putting It All Together</h3>
+
+<p class="articleP">Visit the starting vertex and print it:</p>
+
+<pre class="codeBlock"><code>printf("%d ", start);</code></pre>
+
+<p class="articleP">Mark it visited so we don't revisit it:</p>
+
+<pre class="codeBlock"><code>visited[start] = 1;</code></pre>
+
+<p class="articleP">Add it to the queue, since we still need to explore its neighbors later:</p>
+
+<pre class="codeBlock"><code>enqueue(q, start);</code></pre>
+
+<p class="articleP">Now the main loop — keep going as long as the queue has vertices waiting:</p>
+
+<pre class="codeBlock"><code>while (!isEmpty(q))
+{</code></pre>
+
+<p class="articleP">Grab whatever's at the front of the queue — that's our current vertex to explore:</p>
+
+<pre class="codeBlock"><code>    int u = dequeue(q);</code></pre>
+
+<p class="articleP">Scan through every possible vertex to check if it's a neighbor of <code>u</code>:</p>
+
+<pre class="codeBlock"><code>    for (int v = 1; v &lt;= n; v++)
+    {</code></pre>
+
+<p class="articleP">If <code>u</code> and <code>v</code> are connected AND <code>v</code> hasn't been visited yet, we've found something new:</p>
+
+<pre class="codeBlock"><code>        if (A[u][v] == 1 &amp;&amp; visited[v] == 0)
+        {
+            printf("%d ", v);
+            visited[v] = 1;
+            enqueue(q, v);
+        }
+    }
+}</code></pre>
+
+<h3 class="articleH3">The Complete Function</h3>
+
+<pre class="codeBlock"><code>void BFS(int start)
+{
+    printf("%d ", start);
+    visited[start] = 1;
+    enqueue(q, start);
+
+    while (!isEmpty(q))
+    {
+        int u = dequeue(q);
+
+        for (int v = 1; v &lt;= n; v++)
+        {
+            if (A[u][v] == 1 &amp;&amp; visited[v] == 0)
+            {
+                printf("%d ", v);
+                visited[v] = 1;
+                enqueue(q, v);
+            }
+        }
+    }
+}</code></pre>
+
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">The big picture</span>
+<div class="infoBoxText">This code is just automating the exact steps we did by hand during the dry run. Nothing new was invented here — we just taught the computer to repeat what we already did with a pencil and a piece of paper.</div>
+</div>
+
+<h2 id="real-life-examples" class="articleH2">Where You'll Actually See BFS In Real Life</h2>
+
+<table style="width:100%;border-collapse:collapse;margin:0 0 28px;font-size:16px;line-height:1.7;">
+  <thead>
+    <tr style="background:var(--color-purple-light);">
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">Situation</th>
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">How BFS shows up</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Social media "friends of friends"</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">LinkedIn/Facebook's "people you may know" — it explores your direct connections first (level 1), then their connections (level 2), before going any deeper.</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Shortest route in an unweighted map</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">Finding the fewest number of "hops" between two points — like the minimum number of connecting flights, ignoring cost or distance.</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Web crawlers</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">Search engines exploring links on a page before following links-within-links, to build an index level by level.</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Finding the nearest thing</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">GPS/maps apps finding the nearest hospital or gas station by expanding outward ring by ring from your location.</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Network broadcast</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">How a message floods through a network, reaching all directly connected devices before reaching devices two hops away.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="quick-reference" class="articleH2">Quick Reference Table</h2>
+
+<table style="width:100%;border-collapse:collapse;margin:0 0 28px;font-size:16px;line-height:1.7;">
+  <thead>
+    <tr style="background:var(--color-purple-light);">
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">Term</th>
+      <th style="padding:12px 16px;text-align:left;border:1px solid var(--color-purple-border);font-family:'Comic Sans MS','Comic Sans',cursive;font-weight:400;color:var(--color-text-primary);">Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">BFS</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">explore all neighbors before going deeper — level by level</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Queue</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">FIFO structure — first one in line is the first one served</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Enqueue</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">add something to the back of the queue</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Dequeue</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">remove something from the front of the queue</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Visited Array</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">tracks which vertices have already been processed, to avoid repeats</td>
+    </tr>
+    <tr style="background:var(--color-sidebar-bg);">
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);font-weight:600;">Adjacency Matrix</td>
+      <td style="padding:12px 16px;border:1px solid var(--color-purple-border);color:var(--color-text-primary);">n×n grid used here to find a vertex's neighbors</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="quick-quiz" class="articleH2">Quick Quiz</h2>
+
+<ol>
+  <li>What data structure does BFS use to decide what to explore next?</li>
+  <li>In a queue, does a newly discovered vertex go to the front or the back?</li>
+  <li>Why do we need a "visited" array at all?</li>
+  <li>True or False: BFS fully explores one path as deep as possible before backing up.</li>
+  <li>If vertex u is being explored and <code>A[u][v] == 1</code> but <code>visited[v] == 1</code>, do we add v to the queue?</li>
+</ol>
+
+<div class="infoBox infoBoxBlue">
+<span class="infoBoxLabel">Answers</span>
+<div class="infoBoxText">
+  <ol style="margin:0;padding-left:20px;line-height:2;">
+    <li>A Queue.</li>
+    <li>The back.</li>
+    <li>To make sure we never process the same vertex twice, which would cause infinite repeated work.</li>
+    <li>False — that's actually Depth First Search (DFS). BFS goes level by level, not deep first.</li>
+    <li>No — if it's already visited, we skip it, even if it's connected.</li>
+  </ol>
+</div>
+</div>
+
+<h2 id="one-line-summary" class="articleH2">One-Line Summary</h2>
+
+<p class="articleP">BFS visits a vertex, then explores ALL of its neighbors before going deeper — using a queue (first in, first out) to always process the oldest discovery first, and a visited array to make sure nothing gets processed twice.</p>
