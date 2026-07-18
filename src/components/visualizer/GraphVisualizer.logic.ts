@@ -105,6 +105,22 @@ export function useGraphVisualizer(algorithmKey: string) {
     runNext()
   }, [algorithmKey, startNodeId, endNodeId, runNext])
 
+  const kickoffStep = useCallback(() => {
+    if (timerRef.current) clearTimeout(timerRef.current)
+    if (!def) return
+    const options: GraphAlgorithmOptions = { startNodeId, endNodeId }
+    const newSteps = def.func(graph, options)
+    stepsRef.current = newSteps
+    stepIdxRef.current = -1
+    doneRef.current = false
+    setSteps(newSteps)
+    setStepIdx(-1)
+    setDone(false)
+    setStarted(true)
+    playingRef.current = false
+    setPlaying(false)
+  }, [algorithmKey, startNodeId, endNodeId, def, graph])
+
   const handleMain = useCallback(() => {
     if (!started || done) kickoff()
     else if (playingRef.current) stopPlay(false)
@@ -112,13 +128,20 @@ export function useGraphVisualizer(algorithmKey: string) {
   }, [started, done, kickoff, stopPlay, startPlay])
 
   const doStep = useCallback(() => {
-    if (!started || done || playingRef.current) return
+    if (done || playingRef.current) return
+    if (!started) {
+      kickoffStep()
+      const idx = 0
+      stepIdxRef.current = idx
+      setStepIdx(idx)
+      return
+    }
     const idx = stepIdxRef.current + 1
     if (idx >= stepsRef.current.length) return
     stepIdxRef.current = idx
     setStepIdx(idx)
     if (idx >= stepsRef.current.length - 1) { doneRef.current = true; setDone(true) }
-  }, [started, done])
+  }, [started, done, kickoffStep])
 
   const fullReset = useCallback(() => {
     if (timerRef.current) clearTimeout(timerRef.current)
@@ -135,8 +158,8 @@ export function useGraphVisualizer(algorithmKey: string) {
 
   const algorithmCategory = def?.category ?? 'pathfinding'
   const idleMessage = algorithmCategory === 'spanning-tree' || algorithmCategory === 'traversal'
-    ? 'choose a start node, then press ▶ play'
-    : 'choose start and end nodes, then press ▶ play'
+    ? 'choose a start node, then press ▶ play or step →'
+    : 'choose start and end nodes, then press ▶ play or step →'
 
   return {
     graph,
@@ -156,7 +179,7 @@ export function useGraphVisualizer(algorithmKey: string) {
     setStartNodeId,
     setEndNodeId,
     mainBtnLabel: !started || done ? 'Play' : playing ? 'Pause' : 'Play',
-    stepDim: !started || done || playing,
+    stepDim: done || playing,
     resetDim: !started,
     handleMain,
     doStep,

@@ -8,8 +8,9 @@ const NODE_R = 20
 function nodeColors(state?: NodeState) {
   switch (state) {
     case 'current':   return { fill: '#FFF9C4', stroke: '#F0D060', text: '#5A5020' }
-    case 'visited':   return { fill: '#EFF8FF', stroke: '#90C8F0', text: '#185FA5' }
-    case 'candidate': return { fill: '#F5F0FF', stroke: '#B8A0E8', text: '#503080' }
+    case 'visited':   return { fill: '#D6EEFF', stroke: '#2E86C8', text: '#0D4E7A' }
+    case 'skip':      return { fill: '#D6EEFF', stroke: '#2E86C8', text: '#0D4E7A' }
+    case 'candidate': return { fill: '#FFF2D9', stroke: '#CC8800', text: '#7A4E00' }
     case 'path':      return { fill: '#C8F0D8', stroke: '#80D0A0', text: '#27500A' }
     default:          return { fill: '#F8F6FF', stroke: '#EDE8F8', text: '#2D2D2D' }
   }
@@ -105,13 +106,14 @@ export function GraphVisualizer({ algorithm }: Props) {
               const isStart = node.id === startNodeId
               const isEnd = !isMST && !isBFS && node.id === endNodeId
               const dashed = isEnd && stepType !== 'path' && stepType !== 'complete'
+              const dashArray = state === 'skip' ? '5 3' : (dashed ? '4 2' : undefined)
               return (
                 <g key={node.id}>
                   <circle
                     cx={node.x} cy={node.y} r={NODE_R}
                     fill={fill} stroke={stroke}
                     strokeWidth={isStart || isEnd ? 2.5 : 1.5}
-                    strokeDasharray={dashed ? '4 2' : undefined}
+                    strokeDasharray={dashArray}
                   />
                   <text x={node.x} y={node.y + 5} textAnchor="middle" fontSize={13} fontWeight="600" fill={text} fontFamily="'Patrick Hand', cursive">
                     {node.id}

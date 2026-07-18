@@ -19,6 +19,7 @@ function buildStep(
   pathEdgeIds: Set<string>,
   graph: GraphData,
   isMajorStep = false,
+  skipId: string | null = null,
 ): GraphStep {
   const nodeStates: GraphStep['nodeStates'] = {}
   const edgeStates: GraphStep['edgeStates'] = {}
@@ -26,6 +27,7 @@ function buildStep(
   for (const id of visited) nodeStates[id] = 'visited'
   for (const id of queue) nodeStates[id] ??= 'candidate'
   if (currentId) nodeStates[currentId] = 'current'
+  if (skipId) nodeStates[skipId] = 'skip'
   for (const id of path) {
     if (nodeStates[id] !== 'current') nodeStates[id] = 'visited'
   }
@@ -51,12 +53,10 @@ function bfs(graphData: GraphData, options?: GraphAlgorithmOptions): GraphStep[]
 
   const startId = options?.startNodeId ?? nodes[0].id
 
-  const visited = new Set<string>()
-  const previous: Record<string, string | null> = {}
-  const queue: string[] = [startId]
-  const visitedOrder: string[] = []
-  visited.add(startId)
-  previous[startId] = null
+  const visited = new Set<string>([startId])
+  const previous: Record<string, string | null> = { [startId]: null }
+  const queue: string[] = []
+  const visitedOrder: string[] = [startId]
 
   const adj: Record<string, { to: string; edgeId: string }[]> = {}
   for (const n of nodes) adj[n.id] = []
@@ -65,38 +65,64 @@ function bfs(graphData: GraphData, options?: GraphAlgorithmOptions): GraphStep[]
     adj[e.to].push({ to: e.from, edgeId: e.id })
   }
 
+  // Visit start node directly — no queue
   steps.push(buildStep(
     'initial',
-    `BFS: traversing from ${startId}`,
-    'Explores all neighbours at the current depth before moving deeper.',
-    null, visited, queue, previous, visitedOrder, [], new Set(), graphData, true,
+    `Visit node ${startId} — visited!`,
+    `Visited: [${visitedOrder.join(', ')}] | Queue: [empty]`,
+    startId, visited, queue, previous, visitedOrder, [], new Set(), graphData, true,
   ))
 
-  while (queue.length > 0) {
-    const currentId = queue.shift()!
-    visitedOrder.push(currentId)
+  let currentId: string | null = startId
+  let fromQueue = false
 
-    steps.push(buildStep(
-      'visit',
-      `Dequeued node ${currentId} — mark as visited`,
-      `Visited: ${visitedOrder.join(' → ')} | Queue: [${queue.join(', ')}]`,
-      currentId, visited, queue, previous, visitedOrder, [], new Set(), graphData, true,
-    ))
+  while (currentId !== null) {
+    if (fromQueue) {
+      steps.push(buildStep(
+        'visit',
+        `From queue → now exploring node ${currentId} — visiting its adjacent nodes`,
+        `Queue: [${queue.join(', ') || 'empty'}]`,
+        currentId, visited, queue, previous, visitedOrder, [], new Set(), graphData, true,
+      ))
+    }
 
+    let addedAny = false
     for (const { to } of adj[currentId]) {
-      if (visited.has(to)) continue
+      if (visited.has(to)) {
+        steps.push(buildStep(
+          'explore',
+          `Node ${to} is already visited — skip!`,
+          `Visited: [${visitedOrder.join(', ')}] | Queue: [${queue.join(', ') || 'empty'}]`,
+          currentId, visited, queue, previous, visitedOrder, [], new Set(), graphData, false, to,
+        ))
+        continue
+      }
 
       visited.add(to)
+      visitedOrder.push(to)
       previous[to] = currentId
       queue.push(to)
+      addedAny = true
 
       steps.push(buildStep(
         'explore',
-        `Discovered ${to} from ${currentId} — added to queue`,
-        `Queue: [${queue.join(', ')}]`,
-        currentId, visited, queue, previous, visitedOrder, [], new Set(), graphData,
+        `Visit ${to} — visited! Keep it in queue`,
+        `Visited: [${visitedOrder.join(', ')}] | Queue: [${queue.join(', ')}]`,
+        currentId, visited, queue, previous, visitedOrder, [], new Set(), graphData, false, null,
       ))
     }
+
+    if (addedAny || queue.length > 0) {
+      steps.push(buildStep(
+        'visit',
+        `All adjacent of ${currentId} checked — now let's visit from the queue`,
+        `Queue: [${queue.join(', ') || 'empty'}]`,
+        null, visited, queue, previous, visitedOrder, [], new Set(), graphData, true,
+      ))
+    }
+
+    currentId = queue.length > 0 ? queue.shift()! : null
+    fromQueue = true
   }
 
   steps.push(buildStep(
