@@ -1582,6 +1582,202 @@
   font-size: 13px;
 }
 
+/* ===== QUEUE VISUALIZER ===== */
+
+.qvTypeRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.qvTypeLabel {
+  font-family: var(--font-patrick-hand), cursive;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.qvCanvas {
+  min-height: 120px;
+  background: var(--color-code-bg);
+  border: 1.5px solid var(--color-code-border);
+  border-radius: 10px;
+  padding: 24px 16px 16px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.qvEmpty {
+  font-family: monospace;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.qvNodesScroll {
+  overflow-x: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qvCircularArcWrap {
+  margin-bottom: 2px;
+  overflow: visible;
+}
+
+.qvCircularArc {
+  display: block;
+  overflow: visible;
+}
+
+.qvNodes {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  min-width: max-content;
+  position: relative;
+}
+
+.qvNodeCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.qvFrontLabel {
+  font-family: monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #2A5070;
+  background: var(--color-blue-section);
+  border: 1px solid var(--color-blue-border);
+  border-radius: 20px;
+  padding: 1px 7px;
+  margin-bottom: 5px;
+  white-space: nowrap;
+}
+
+.qvRearLabel {
+  font-family: monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-text-secondary);
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-code-border);
+  border-radius: 20px;
+  padding: 1px 7px;
+  margin-top: 5px;
+  white-space: nowrap;
+}
+
+.qvNode {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--color-code-border);
+  border-radius: 8px;
+  background: var(--color-code-bg);
+  font-family: var(--font-patrick-hand), cursive;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  transition: background 0.25s, border-color 0.25s, color 0.25s, transform 0.25s;
+  flex-shrink: 0;
+}
+
+.qvNodeFront {
+  background: var(--color-blue-section);
+  border-color: var(--color-blue-border);
+  color: #2A5070;
+}
+
+.qvNodeRear {
+  background: var(--color-purple-light);
+  border-color: var(--color-purple-border);
+  color: #503080;
+}
+
+.qvNodeEnqueuing {
+  background: var(--color-green-light);
+  border-color: var(--color-green-border);
+  color: #27500A;
+  transform: scale(1.1);
+}
+
+.qvNodeDequeuing {
+  background: #FFE0E0;
+  border-color: #F4A7A7;
+  color: #803030;
+  transform: scale(1.1);
+}
+
+.qvNodePeeking {
+  background: var(--color-yellow-light);
+  border-color: var(--color-yellow-border);
+  color: var(--color-yellow-text);
+  transform: scale(1.05);
+}
+
+.qvArrow {
+  position: absolute;
+  right: -18px;
+  top: 50%;
+  transform: translateY(calc(-50% + 10px));
+  font-family: monospace;
+  font-size: 16px;
+  color: var(--color-text-muted);
+  width: 26px;
+  text-align: center;
+  pointer-events: none;
+  z-index: 1;
+  padding: 0 4px;
+}
+
+/* Spacing between node columns — account for arrow */
+.qvNodeCol + .qvNodeCol {
+  margin-left: 26px;
+}
+
+.qvLegend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.qvLegendItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.qvLegendDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1.5px solid;
+  flex-shrink: 0;
+}
+
+.qvLegendFront    { background: var(--color-blue-section);  border-color: var(--color-blue-border); }
+.qvLegendRear     { background: var(--color-purple-light);  border-color: var(--color-purple-border); }
+.qvLegendEnqueuing{ background: var(--color-green-light);   border-color: var(--color-green-border); }
+.qvLegendDequeuing{ background: #FFE0E0;                    border-color: #F4A7A7; }
+.qvLegendPeeking  { background: var(--color-yellow-light);  border-color: var(--color-yellow-border); }
+
 /* ===== STACK VISUALIZER ===== */
 
 .stackOpBtnActive {

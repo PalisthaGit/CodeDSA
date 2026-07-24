@@ -11,6 +11,7 @@ import { GraphVisualizer } from './GraphVisualizer'
 import { SortingVisualizer } from './SortingVisualizer'
 import { KMPVisualizer } from './KMPVisualizer'
 import { RabinKarpVisualizer } from './RabinKarpVisualizer'
+import { QueueVisualizer } from './QueueVisualizer'
 
 interface Props {
   active: Visualizer
@@ -63,6 +64,8 @@ export function VisualizerLayout({ active, articleSlugs }: Props) {
             <ArrayVisualizer />
           ) : active.id === 'stack' ? (
             <StackVisualizer />
+          ) : active.id === 'queue' ? (
+            <QueueVisualizer />
           ) : active.id === 'linear-search' ? (
             <LinearSearchVisualizer />
           ) : active.id === 'binary-search' ? (
