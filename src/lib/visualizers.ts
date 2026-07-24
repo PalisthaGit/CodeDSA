@@ -19,6 +19,7 @@ export const visualizerCategories: VisualizerCategory[] = [
       { id: 'queue', title: 'Queue', category: 'Data structures', articleSlug: 'queue' },
       { id: 'circular-queue', title: 'Circular Queue', category: 'Data structures', articleSlug: 'queue' },
       { id: 'deque', title: 'Deque', category: 'Data structures', articleSlug: 'queue' },
+      { id: 'binary-tree', title: 'Binary Tree', category: 'Data structures', articleSlug: 'binary-tree' },
     ],
   },
   {

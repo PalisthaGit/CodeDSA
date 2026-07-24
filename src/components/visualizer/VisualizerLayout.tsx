@@ -13,6 +13,7 @@ import { KMPVisualizer } from './KMPVisualizer'
 import { RabinKarpVisualizer } from './RabinKarpVisualizer'
 import { BoyerMooreVisualizer } from './BoyerMooreVisualizer'
 import { QueueVisualizer } from './QueueVisualizer'
+import { BinaryTreeVisualizer } from './BinaryTreeVisualizer'
 
 interface Props {
   active: Visualizer
@@ -71,6 +72,8 @@ export function VisualizerLayout({ active, articleSlugs }: Props) {
             <QueueVisualizer queueType="circular" />
           ) : active.id === 'deque' ? (
             <QueueVisualizer queueType="deque" />
+          ) : active.id === 'binary-tree' ? (
+            <BinaryTreeVisualizer />
           ) : active.id === 'linear-search' ? (
             <LinearSearchVisualizer />
           ) : active.id === 'binary-search' ? (
