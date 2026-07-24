@@ -20,6 +20,8 @@ function buildStep(
   graph: GraphData,
   isMajorStep = false,
   skipId: string | null = null,
+  exploringEdgeId: string | null = null,
+  codeOp?: string,
 ): GraphStep {
   const nodeStates: GraphStep['nodeStates'] = {}
   const edgeStates: GraphStep['edgeStates'] = {}
@@ -33,6 +35,7 @@ function buildStep(
   }
   for (const edge of graph.edges) {
     if (pathEdgeIds.has(edge.id)) edgeStates[edge.id] = 'tree'
+    if (edge.id === exploringEdgeId) edgeStates[edge.id] = 'exploring'
   }
 
   const metadata: PathfindingStepMetadata = {
@@ -43,7 +46,7 @@ function buildStep(
     visitedOrder: [...visitedOrder],
   }
 
-  return { stepType, message, subMessage, isMajorStep, nodeStates, edgeStates, metadata }
+  return { stepType, message, subMessage, isMajorStep, nodeStates, edgeStates, metadata, codeOp }
 }
 
 function bfs(graphData: GraphData, options?: GraphAlgorithmOptions): GraphStep[] {
@@ -55,7 +58,7 @@ function bfs(graphData: GraphData, options?: GraphAlgorithmOptions): GraphStep[]
 
   const visited = new Set<string>([startId])
   const previous: Record<string, string | null> = { [startId]: null }
-  const queue: string[] = []
+  const queue: string[] = [startId]
   const visitedOrder: string[] = [startId]
 
   const adj: Record<string, { to: string; edgeId: string }[]> = {}
@@ -65,14 +68,16 @@ function bfs(graphData: GraphData, options?: GraphAlgorithmOptions): GraphStep[]
     adj[e.to].push({ to: e.from, edgeId: e.id })
   }
 
-  // Visit start node directly — no queue
   steps.push(buildStep(
     'initial',
-    `Visit node ${startId} — visited!`,
-    `Visited: [${visitedOrder.join(', ')}] | Queue: [empty]`,
+    `Visit node ${startId} — visited! Add to queue`,
+    `Visited: [${visitedOrder.join(', ')}] | Queue: [${queue.join(', ')}]`,
     startId, visited, queue, previous, visitedOrder, [], new Set(), graphData, true,
+    null, null,
+    `visited.add(${startId})  |  queue.push(${startId})`,
   ))
 
+  queue.shift()
   let currentId: string | null = startId
   let fromQueue = false
 
@@ -83,17 +88,21 @@ function bfs(graphData: GraphData, options?: GraphAlgorithmOptions): GraphStep[]
         `From queue → now exploring node ${currentId} — visiting its adjacent nodes`,
         `Queue: [${queue.join(', ') || 'empty'}]`,
         currentId, visited, queue, previous, visitedOrder, [], new Set(), graphData, true,
+        null, null,
+        `current = queue.shift()  →  ${currentId}`,
       ))
     }
 
     let addedAny = false
-    for (const { to } of adj[currentId]) {
+    for (const { to, edgeId } of adj[currentId]) {
       if (visited.has(to)) {
         steps.push(buildStep(
           'explore',
           `Node ${to} is already visited — skip!`,
           `Visited: [${visitedOrder.join(', ')}] | Queue: [${queue.join(', ') || 'empty'}]`,
           currentId, visited, queue, previous, visitedOrder, [], new Set(), graphData, false, to,
+          edgeId,
+          `visited.has(${to})  →  true, skip`,
         ))
         continue
       }
@@ -109,6 +118,8 @@ function bfs(graphData: GraphData, options?: GraphAlgorithmOptions): GraphStep[]
         `Visit ${to} — visited! Keep it in queue`,
         `Visited: [${visitedOrder.join(', ')}] | Queue: [${queue.join(', ')}]`,
         currentId, visited, queue, previous, visitedOrder, [], new Set(), graphData, false, null,
+        edgeId,
+        `visited.add(${to})  |  queue.push(${to})`,
       ))
     }
 
@@ -118,6 +129,8 @@ function bfs(graphData: GraphData, options?: GraphAlgorithmOptions): GraphStep[]
         `All adjacent of ${currentId} checked — now let's visit from the queue`,
         `Queue: [${queue.join(', ') || 'empty'}]`,
         null, visited, queue, previous, visitedOrder, [], new Set(), graphData, true,
+        null, null,
+        `// done with ${currentId} → check queue`,
       ))
     }
 
@@ -130,6 +143,8 @@ function bfs(graphData: GraphData, options?: GraphAlgorithmOptions): GraphStep[]
     `BFS complete — visited: ${visitedOrder.join(' → ')}`,
     '',
     null, visited, [], previous, visitedOrder, [], new Set(), graphData, true,
+    null, null,
+    `queue is empty  →  BFS complete`,
   ))
 
   return steps

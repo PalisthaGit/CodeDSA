@@ -22,6 +22,7 @@ export type GraphStep = {
   nodeStates: Record<string, NodeState>
   edgeStates: Record<string, EdgeState>
   metadata: PathfindingStepMetadata
+  codeOp?: string
 }
 
 export type GraphAlgorithmOptions = {

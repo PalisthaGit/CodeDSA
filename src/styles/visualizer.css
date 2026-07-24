@@ -2044,6 +2044,7 @@
 .gvDotCandidate { background: #FFF2D9; border-color: #CC8800; }
 .gvDotPath      { background: #C8F0D8; border-color: #80D0A0; }
 .gvDotQueue     { background: #FFF2D9; border-color: #CC8800; border-style: dashed; }
+.gvDotSkip      { background: #D6EEFF; border-color: #2E86C8; border-style: dashed; }
 
 .gvEdgeLine {
   width: 22px;
@@ -2175,6 +2176,49 @@
   color: #fff;
   background: #2E86C8;
   flex-shrink: 0;
+}
+
+.bfsCodeOpSection {
+  flex: 2;
+  min-width: 160px;
+}
+
+.bfsCodeOp {
+  display: inline-block;
+  font-family: monospace;
+  font-size: 12px;
+  color: var(--color-text-primary);
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-code-border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  white-space: nowrap;
+}
+
+/* ===== ARTICLE RULE BOX ===== */
+
+.articleRuleBox {
+  background: var(--color-purple-light);
+  border: 2px solid var(--color-purple-border);
+  border-radius: 10px;
+  padding: 14px 20px;
+  margin: 0 0 20px;
+}
+
+.articleRuleBox .articleP {
+  margin: 0;
+  font-style: italic;
+}
+
+/* ===== BFS STEP 1 MINI VISUALIZER ===== */
+
+.bfsStep1Wrap {
+  margin: 20px 0 28px;
+}
+
+.bfsStep1Controls {
+  margin-top: 12px;
+  margin-bottom: 0;
 }
 
 /* ===== SORTING VISUALIZER ===== */

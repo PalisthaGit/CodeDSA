@@ -19,13 +19,14 @@ export const bfsArticle: Article = {
   readTime: '10 min',
 
   headings: [
-    { id: 'watching-bfs-work', text: 'Watching BFS Work' },
+    { id: 'visualizer', text: 'Interactive Visualizer' },
+    { id: 'the-one-rule', text: 'The One Rule of BFS' },
+    { id: 'lets-trace-it', text: "Let's Trace It" },
     { id: 'the-queue', text: 'How the Queue Works' },
     { id: 'full-dry-run', text: 'Full Dry Run' },
     { id: 'building-bfs-in-code', text: 'Building BFS in Code' },
-    { id: 'real-life-examples', text: 'Where You\'ll See BFS' },
-    { id: 'quick-reference', text: 'Quick Reference Table' },
-    { id: 'quick-quiz', text: 'Quick Quiz' },
+    { id: 'the-big-picture', text: 'The Big Picture' },
+    { id: 'time-complexity', text: 'Time Complexity' },
   ],
 
   content,

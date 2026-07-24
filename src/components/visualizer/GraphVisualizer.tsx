@@ -32,9 +32,10 @@ function statusVariant(stepType?: string): string {
 
 interface Props {
   algorithm: string
+  compact?: boolean
 }
 
-export function GraphVisualizer({ algorithm }: Props) {
+export function GraphVisualizer({ algorithm, compact = false }: Props) {
   const {
     graph,
     algoName,
@@ -80,6 +81,32 @@ export function GraphVisualizer({ algorithm }: Props) {
               const mx = (a.x + b.x) / 2
               const my = (a.y + b.y) / 2
               const state = edgeStates[edge.id]
+
+              if (isBFS && state === 'exploring') {
+                const sourceIsFrom = nodeStates[edge.from] === 'current'
+                const sx = sourceIsFrom ? a.x : b.x
+                const sy = sourceIsFrom ? a.y : b.y
+                const ex = sourceIsFrom ? b.x : a.x
+                const ey = sourceIsFrom ? b.y : a.y
+                return (
+                  <g key={`${edge.id}-${stepIdx}`}>
+                    <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="#D0C8F0" strokeWidth={1.5} />
+                    <path
+                      d={`M${sx},${sy} L${ex},${ey}`}
+                      pathLength="1"
+                      stroke="#7B4DCC"
+                      strokeWidth={2.5}
+                      strokeLinecap="round"
+                      strokeDasharray="1"
+                      strokeDashoffset="1"
+                      fill="none"
+                    >
+                      <animate attributeName="stroke-dashoffset" from="1" to="0" dur="0.4s" fill="freeze" />
+                    </path>
+                  </g>
+                )
+              }
+
               const stroke = edgeStroke(state)
               return (
                 <g key={edge.id}>
@@ -145,7 +172,7 @@ export function GraphVisualizer({ algorithm }: Props) {
           </div>
         )}
 
-        {isBFS && (
+        {isBFS && !compact && (
           <div className="bfsQueues">
             <div className="bfsPanelSection">
               <div className="bfsPanelLabel">Queue (front → back)</div>
@@ -172,10 +199,12 @@ export function GraphVisualizer({ algorithm }: Props) {
           </div>
         )}
 
-        <div className={`visStatusBox gvStatus ${isBFS && stepType === 'complete' ? 'info' : statusVariant(stepType)}`}>
-          <div className="gvStatusMessage">{message}</div>
-          {subMessage && <div className="gvStatusSub">{subMessage}</div>}
-        </div>
+        {!compact && (
+          <div className={`visStatusBox gvStatus ${isBFS && stepType === 'complete' ? 'info' : statusVariant(stepType)}`}>
+            <div className="gvStatusMessage">{message}</div>
+            {subMessage && <div className="gvStatusSub">{subMessage}</div>}
+          </div>
+        )}
 
         <div className="visLinearControls gvControls">
           <span className="gvLabel">{isMST || isBFS ? 'start' : 'from'}</span>

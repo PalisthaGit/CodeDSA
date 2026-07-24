@@ -75,7 +75,7 @@ export function useGraphVisualizer(algorithmKey: string) {
     setStepIdx(idx)
     const step = stepsRef.current[idx]
     if (idx + 1 < stepsRef.current.length) {
-      timerRef.current = setTimeout(runNext, step.isMajorStep ? 950 : 450)
+      timerRef.current = setTimeout(runNext, step.isMajorStep ? 1400 : 750)
     } else {
       stopPlay(true)
     }

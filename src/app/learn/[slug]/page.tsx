@@ -12,6 +12,7 @@ import { LinearSearchVisualizer } from '@/components/visualizer/LinearSearchVisu
 import { BinarySearchVisualizer } from '@/components/visualizer/BinarySearchVisualizer'
 import { DSRunner } from '@/components/visualizer/DSRunner'
 import { GraphVisualizer } from '@/components/visualizer/GraphVisualizer'
+import { BfsStepVisualizer } from '@/components/visualizer/BfsStep1Visualizer'
 import { graphRegistry } from '@/components/visualizer/graph.registry'
 
 type VisualizerOperation = 'all' | 'access' | 'update' | 'add' | 'remove' | 'traverse'
@@ -64,6 +65,30 @@ function ArticleContent({ content }: { content: string }) {
                       ? <LinkedListVisualizer key={match.index} op="removeEnd" />
                       : vizId === 'linked-list-remove-pos'
                         ? <LinkedListVisualizer key={match.index} op="removePos" />
+                        : vizId === 'bfs-step1'
+                          ? <BfsStepVisualizer key={match.index} vizKey="step1" />
+                        : vizId === 'bfs-step2'
+                          ? <BfsStepVisualizer key={match.index} vizKey="step2" />
+                        : vizId === 'bfs-step3'
+                          ? <BfsStepVisualizer key={match.index} vizKey="step3" />
+                        : vizId === 'bfs-step4'
+                          ? <BfsStepVisualizer key={match.index} vizKey="step4" />
+                        : vizId === 'bfs-step5'
+                          ? <BfsStepVisualizer key={match.index} vizKey="step5" />
+                        : vizId === 'bfs-dr1'
+                          ? <BfsStepVisualizer key={match.index} vizKey="dr1" />
+                        : vizId === 'bfs-dr2'
+                          ? <BfsStepVisualizer key={match.index} vizKey="dr2" />
+                        : vizId === 'bfs-dr3'
+                          ? <BfsStepVisualizer key={match.index} vizKey="dr3" />
+                        : vizId === 'bfs-dr4'
+                          ? <BfsStepVisualizer key={match.index} vizKey="dr4" />
+                        : vizId === 'bfs-dr5'
+                          ? <BfsStepVisualizer key={match.index} vizKey="dr5" />
+                        : vizId === 'bfs-dr6'
+                          ? <BfsStepVisualizer key={match.index} vizKey="dr6" />
+                        : vizId === 'bfs-compact'
+                          ? <GraphVisualizer key={match.index} algorithm="bfs" compact />
                         : vizId in graphRegistry
                           ? <GraphVisualizer key={match.index} algorithm={vizId} />
                           : <ArrayVisualizer key={match.index} operation={vizId as VisualizerOperation} />
