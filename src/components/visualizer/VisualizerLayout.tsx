@@ -11,6 +11,7 @@ import { GraphVisualizer } from './GraphVisualizer'
 import { SortingVisualizer } from './SortingVisualizer'
 import { KMPVisualizer } from './KMPVisualizer'
 import { RabinKarpVisualizer } from './RabinKarpVisualizer'
+import { BoyerMooreVisualizer } from './BoyerMooreVisualizer'
 import { QueueVisualizer } from './QueueVisualizer'
 
 interface Props {
@@ -82,6 +83,8 @@ export function VisualizerLayout({ active, articleSlugs }: Props) {
             <KMPVisualizer />
           ) : active.id === 'rabin-karp' ? (
             <RabinKarpVisualizer />
+          ) : active.id === 'boyer-moore' ? (
+            <BoyerMooreVisualizer />
           ) : (
             <div className="visualizerCard">
               <p className="visualizerCardLabel">{active.title.toLowerCase()}</p>

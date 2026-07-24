@@ -56,6 +56,7 @@ export const visualizerCategories: VisualizerCategory[] = [
     items: [
       { id: 'kmp', title: 'KMP', category: 'String matching', articleSlug: 'kmp' },
       { id: 'rabin-karp', title: 'Rabin-Karp', category: 'String matching', articleSlug: 'rabin-karp' },
+      { id: 'boyer-moore', title: 'Boyer-Moore', category: 'String matching', articleSlug: 'boyer-moore' },
     ],
   },
 ]
