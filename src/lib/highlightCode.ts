@@ -19,10 +19,10 @@ export function applyCodeHighlighting(html: string): string {
     (_, rawCode) => {
       const code = decodedEntities(rawCode)
       if (!CPP_PATTERN.test(code)) {
-        return `<pre class="codeBlock codeBlock--plain"><code>${rawCode}</code></pre>`
+        return `<div class="codeBlockWrapper"><pre class="codeBlock codeBlock--plain"><code>${rawCode}</code></pre></div>`
       }
       const highlighted = hljs.highlight(code, { language: 'cpp' }).value
-      return `<pre class="codeBlock codeBlock--cpp"><code class="hljs">${highlighted}</code></pre>`
+      return `<div class="codeBlockWrapper"><pre class="codeBlock codeBlock--cpp"><code class="hljs">${highlighted}</code></pre></div>`
     }
   )
 }

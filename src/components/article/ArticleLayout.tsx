@@ -3,6 +3,7 @@ import { TOCSidebar } from './TOCSidebar'
 import { StickySidebar } from './StickySidebar'
 import { NavButtons } from './NavButtons'
 import { MobileArticleSidebar } from './MobileArticleSidebar'
+import { CopyCodeBlocks } from './CopyCodeBlocks'
 
 interface ArticleLayoutProps {
   articleData: Article
@@ -21,6 +22,7 @@ export function ArticleLayout({ articleData, children }: ArticleLayoutProps) {
           <MobileArticleSidebar>
             <TOCSidebar activeSlug={articleData.slug} chapterSlug={articleData.chapterSlug} />
           </MobileArticleSidebar>
+          <CopyCodeBlocks />
           {children}
           <NavButtons
             prevSlug={articleData.prevSlug}

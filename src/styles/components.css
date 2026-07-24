@@ -231,6 +231,37 @@
 
 /* ===== CODE BLOCK ===== */
 
+.codeBlockWrapper {
+  position: relative;
+  margin: 0 0 20px;
+}
+
+.codeBlockWrapper .codeBlock {
+  margin: 0;
+}
+
+.copyCodeBtn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: #2a2c4a;
+  color: #89b4fa;
+  border: 1px solid #3a3c5a;
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+  transition: background 0.15s, color 0.15s;
+  z-index: 1;
+  line-height: 1.5;
+}
+
+.copyCodeBtn:hover {
+  background: #3a3c5a;
+  color: #cdd6f4;
+}
+
 .codeBlock {
   background: #1a1b2e;
   border: 1px solid #2a2c4a;
