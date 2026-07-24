@@ -14,6 +14,7 @@ import { RabinKarpVisualizer } from './RabinKarpVisualizer'
 import { BoyerMooreVisualizer } from './BoyerMooreVisualizer'
 import { QueueVisualizer } from './QueueVisualizer'
 import { BinaryTreeVisualizer } from './BinaryTreeVisualizer'
+import { HashTableVisualizer } from './HashTableVisualizer'
 
 interface Props {
   active: Visualizer
@@ -74,6 +75,8 @@ export function VisualizerLayout({ active, articleSlugs }: Props) {
             <QueueVisualizer queueType="deque" />
           ) : active.id === 'binary-tree' ? (
             <BinaryTreeVisualizer />
+          ) : active.id === 'hash-table' ? (
+            <HashTableVisualizer />
           ) : active.id === 'linear-search' ? (
             <LinearSearchVisualizer />
           ) : active.id === 'binary-search' ? (

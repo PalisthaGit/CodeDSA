@@ -2620,3 +2620,327 @@
   text-align: right;
   margin-top: 8px;
 }
+
+/* ===== HASH TABLE VISUALIZER ===== */
+
+.htTypeRow {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.htTypeBtn {
+  font-family: var(--font-patrick-hand), cursive;
+  font-size: 13px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--color-purple-border);
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.htTypeBtn:hover:not(:disabled) {
+  background: var(--color-purple-light);
+  color: var(--color-text-primary);
+}
+
+.htTypeBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.htTypeBtnActive {
+  background: var(--color-pink-active);
+  border-color: var(--color-pink-border);
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.htStatsRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-family: monospace;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  flex-wrap: wrap;
+}
+
+.htStat strong {
+  color: var(--color-text-primary);
+}
+
+.htStatSmall {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.htLoadBarOuter {
+  flex: 1;
+  min-width: 60px;
+  height: 6px;
+  background: var(--color-code-border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.htLoadFill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+.htLoadFillGood   { background: var(--color-green-border); }
+.htLoadFillWarn   { background: var(--color-yellow-border); }
+.htLoadFillDanger { background: #F4A7A7; }
+
+.htLoadGood   { color: #27500A; }
+.htLoadWarn   { color: var(--color-yellow-text); }
+.htLoadDanger { color: #803030; }
+
+.htCanvas {
+  background: var(--color-code-bg);
+  border: 1.5px solid var(--color-code-border);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 14px;
+  overflow: auto;
+  max-height: 420px;
+}
+
+.htTableScroll {
+  width: 100%;
+}
+
+.htTable {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: fit-content;
+  min-width: 260px;
+}
+
+.htRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.htRowChaining {
+  align-items: center;
+}
+
+.htIndex {
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  width: 22px;
+  text-align: right;
+  flex-shrink: 0;
+  transition: color 0.25s;
+}
+
+.htIndexHighlight {
+  color: var(--color-code-text);
+}
+
+.htArrow {
+  font-family: monospace;
+  font-size: 12px;
+  width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+  opacity: 0;
+  color: var(--color-code-text);
+  transition: opacity 0.25s;
+}
+
+.htArrowVisible {
+  opacity: 1;
+}
+
+.htCell {
+  min-width: 80px;
+  max-width: 140px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1.5px solid var(--color-code-border);
+  background: var(--color-bg);
+  font-family: var(--font-patrick-hand), cursive;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.htCellEmpty {
+  font-size: 10px;
+  font-family: monospace;
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.htCellDelMark {
+  font-size: 11px;
+  font-family: monospace;
+  font-weight: 400;
+  text-decoration: line-through;
+}
+
+.htCellOccupied {
+  background: var(--color-purple-light);
+  border-color: var(--color-purple-border);
+  color: #503080;
+}
+
+.htCellDeleted {
+  background: var(--color-pink-light);
+  border-color: var(--color-pink-border);
+  color: #72243E;
+}
+
+.htCellProbing {
+  background: var(--color-yellow-light);
+  border-color: var(--color-yellow-border);
+  color: var(--color-yellow-text);
+}
+
+.htCellFound {
+  background: var(--color-green-light);
+  border-color: var(--color-green-border);
+  color: #27500A;
+}
+
+.htCellNotFound {
+  background: #FFE0E0;
+  border-color: #F4A7A7;
+  color: #803030;
+}
+
+.htCellInserted {
+  background: var(--color-green-light);
+  border-color: var(--color-green-border);
+  color: #27500A;
+}
+
+.htCellRehashing {
+  background: var(--color-blue-light);
+  border-color: var(--color-blue-border);
+  color: #2A5070;
+}
+
+.htCellHashed {
+  background: var(--color-code-bg);
+  border-color: var(--color-code-text);
+  border-width: 2px;
+  color: var(--color-code-text);
+}
+
+/* Bucket head for chaining */
+.htBucketHead {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--color-purple-border);
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  background: var(--color-code-bg);
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.htChain {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.htChainNodeWrap {
+  display: flex;
+  align-items: center;
+}
+
+.htChainConnector {
+  font-family: monospace;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+
+.htChainNode {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1.5px solid var(--color-purple-border);
+  background: var(--color-purple-light);
+  font-family: var(--font-patrick-hand), cursive;
+  font-size: 14px;
+  font-weight: 600;
+  color: #503080;
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+  flex-shrink: 0;
+}
+
+.htChainNull {
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin-left: 6px;
+}
+
+/* Legend */
+.htLegend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.htLegendItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.htLegendDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1.5px solid;
+  flex-shrink: 0;
+}
+
+.htLegendDotOccupied  { background: var(--color-purple-light); border-color: var(--color-purple-border); }
+.htLegendDotProbing   { background: var(--color-yellow-light); border-color: var(--color-yellow-border); }
+.htLegendDotFound     { background: var(--color-green-light);  border-color: var(--color-green-border); }
+.htLegendDotNotFound  { background: #FFE0E0;                   border-color: #F4A7A7; }
+.htLegendDotInserted  { background: var(--color-green-light);  border-color: var(--color-green-border); }
+.htLegendDotDeleted   { background: var(--color-pink-light);   border-color: var(--color-pink-border); }
+.htLegendDotRehashing { background: var(--color-blue-light);   border-color: var(--color-blue-border); }
+
+.htArrowSmall {
+  font-family: monospace;
+  font-size: 13px;
+  color: var(--color-code-text);
+}
