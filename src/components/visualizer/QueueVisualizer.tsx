@@ -1,10 +1,17 @@
 'use client'
 
 import { useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { QueueSteps, type QueueNode, type QueueStep, QUEUE_EMPTY_STEP } from './QueueVisualizer.logic'
 
 type QueueType = 'linear' | 'circular' | 'deque'
 type QueueOp = 'enqueueRear' | 'enqueueFront' | 'dequeueFront' | 'dequeueRear' | 'peekFront' | 'peekRear'
+
+const TYPE_TO_SLUG: Record<QueueType, string> = {
+  linear: '/visualizer/queue',
+  circular: '/visualizer/circular-queue',
+  deque: '/visualizer/deque',
+}
 
 function sleep(ms: number) { return new Promise<void>(r => setTimeout(r, ms)) }
 
@@ -19,8 +26,8 @@ function nodeClass(state: QueueNode['state']): string {
   }
 }
 
-export function QueueVisualizer() {
-  const [queueType, setQueueType] = useState<QueueType>('linear')
+export function QueueVisualizer({ queueType }: { queueType: QueueType }) {
+  const router = useRouter()
   const queueRef = useRef<number[]>([])
   const [step, setStep] = useState<QueueStep>(QUEUE_EMPTY_STEP)
   const [inputVal, setInputVal] = useState('')
@@ -33,10 +40,7 @@ export function QueueVisualizer() {
   }
 
   function handleTypeChange(type: QueueType) {
-    setQueueType(type)
-    queueRef.current = []
-    setStep(QUEUE_EMPTY_STEP)
-    setInputVal('')
+    router.push(TYPE_TO_SLUG[type])
   }
 
   async function runSteps(steps: QueueStep[]) {

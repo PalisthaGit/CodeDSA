@@ -65,7 +65,11 @@ export function VisualizerLayout({ active, articleSlugs }: Props) {
           ) : active.id === 'stack' ? (
             <StackVisualizer />
           ) : active.id === 'queue' ? (
-            <QueueVisualizer />
+            <QueueVisualizer queueType="linear" />
+          ) : active.id === 'circular-queue' ? (
+            <QueueVisualizer queueType="circular" />
+          ) : active.id === 'deque' ? (
+            <QueueVisualizer queueType="deque" />
           ) : active.id === 'linear-search' ? (
             <LinearSearchVisualizer />
           ) : active.id === 'binary-search' ? (
